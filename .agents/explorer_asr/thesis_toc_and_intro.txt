@@ -1,0 +1,837 @@
+--- Page 1 ---
+  
+i 
+ 
+                                               
+ 
+ 
+Dagbani English 
+The Influence of Dagbani on the Use of English in Ghana 
+ 
+Dissertation submitted to the Bayreuth International Graduate School of African Studies 
+(BIGSAS), University of Bayreuth in partial fulfilment of the requirements for the award of 
+Doctor of Philosophy (Dr. Phil) degree In English Linguistics 
+ 
+By 
+ 
+Memunatu Sheini 
+ 
+Supervisor: PD Dr. Eric Anchimbe 
+Mentor: Prof. Dr. Adams Bodomo 
+Mentor: PD Dr. Klaudia Dombrowsky-Hahn 
+ 
+ 
+July 2021 
+ 
+
+
+--- Page 2 ---
+  
+ii 
+ 
+ 
+Dagbani English 
+The Influence of Dagbani on the Use of English in Ghana 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+--- Page 3 ---
+  
+iii 
+ 
+STATUTORY DECLARATION 
+“I hereby affirm that I have produced the thesis at hand without any inadmissible help from a 
+third party or the use of resources other than those cited; ideas incorporated directly or 
+indirectly from other sources are clearly marked as such. In addition, I affirm that I have neither 
+used the services of commercial consultants or intermediaries in the pa st nor will I use such 
+services in the future. The thesis in the same or similar form has hitherto not been presented to 
+another examining authority in Germany or abroad, nor has it been published.” 
+        
+July 8, 2021. Bayreuth      Memunatu Sheini  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+--- Page 4 ---
+  
+iv 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+DEDICATION 
+This dissertation is dedicated to Israel Suuk Somtua, Isabella Suuk Yennugan, Isidore Suuk 
+Tamabe, Fatawu Hidaaya, Dawuni Ibrahim, and Fatawu Shu-aib Baba for staying without a 
+Mummy for four years as I pursued this course in Germany. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+--- Page 5 ---
+  
+v 
+ 
+ABSTRACT 
+This study investigates the influence of the Dagbani language on the Dagomba’s use of English 
+in Ghana. Dagbani, one of the Mabia (Gur) languages spoken in Northern Ghana, and English 
+exhibit some differences grammatically and phonologically. Scholars have discussed Dagbani 
+grammar and phonology. However, its influence on English has not received scholarly 
+attention. In this study, I investigate how the Dagbani perfective, imperfective, and 
+phonological features influence Dagomba’s use of English. The study uses the Dynamic Model 
+of Postcolonial English (Schneider 2007) and the Grammatical Replication Theory (Heina and 
+Kuteva 2006) to explore the influence of Dagbani phonological features as well as the 
+perfective and imperfective aspects on the use of Engli sh by native speakers of this language. 
+Data were collected from 89 basic (30), secondary (30) and tertiary (29) level students in 
+Tamale and Yendi. The data were gathered through sentence translation, picture description, 
+and simple text reading tasks. Si mple sentence translation and picture description tasks were 
+used to gather data on the possible grammatical influence while the text reading task was for 
+data on phonological features. Descriptive statistical methods were used to analyse the data. 
+The Pra at software was employed to describe the phonological features. The analysis is 
+presented in graphs. The findings show that Dagbani English DagbE is heavily influenced by 
+Dagbani L1 features, which distinguish it from Ghanaian English (GhE) and British Eng lish 
+(BrE). 
+Key Words: Dagbani English, Mabia (Gur), Influence, Grammar, Phonology, and British and 
+Ghanaian Englishes 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- Page 6 ---
+  
+vi 
+ 
+TABLE OF CONTENTS 
+ 
+STATUTORY DECLARATION ................................................................................................ iii 
+DEDICATION ........................................................................................................................... iv 
+ABSTRACT ................................................................................................................................. v 
+TABLE OF CONTENTS ............................................................................................................ vi 
+LIST OF TABLES ..................................................................................................................... xii 
+LIST OF FIGURES ................................................................................................................. xiv 
+LIST OF ABBREVIATIONS .................................................................................................... xvi 
+ACKNOWLEDGEMENTS .................................................................................................... xviii 
+CHAPTER ONE ....................................................................................................................... 1 
+1. General Introduction ........................................................................................................ 1 
+1.1 Overview .......................................................................................................................... 1 
+1.2 Linguistic Affiliation of Dagbani..................................................................................... 3 
+1.3 Typological Characteristics of Dagbani........................................................................... 5 
+1.4 Aims of the Study ............................................................................................................ 8 
+1.5 Focus on Grammatical Features....................................................................................... 9 
+1.6 Focus on Phonological Features .................................................................................... 10 
+1.7 Sociolinguistic Background of Ghana ........................................................................... 11 
+1.8 Ethnolectal Variation in Englishes................................................................................. 15 
+1.9 Overview of Chapters .................................................................................................... 19 
+CHAPTER TWO ..................................................................................................................... 22 
+2 The Phonological and Grammatical Systems of Dagbani ................................................. 22 
+2.1 Introduction .................................................................................................................... 22 
+2.2 The Phonological System of Dagbani............................................................................ 23 
+2.2.1 The Dagbani Consonant System ............................................................................. 23 
+2.2.2 Consonant Clusters in Dagbani ............................................................................ 27 
+2.2.3 Sound Sequencing in Dagbani ............................................................................. 29 
+2.3 The Vowel System of Dagbani ...................................................................................... 38 
+2.3.1 Vowel Harmony ................................................................................................... 42 
+2.3.2 Phonotactic Restrictions on Some Sounds ........................................................... 48 
+2.3.3 Some Co-occurring Vowels and Diphthongs in Dagbani .................................... 49 
+
+--- Page 7 ---
+  
+vii 
+ 
+2.4 The Syntactic and Verbal Systems of Dagbani.............................................................. 50 
+2.4.1 The Syntactic System of Dagbani ........................................................................ 50 
+2.4.2 The Verb ‘Bé’ in the Dagbani Language ............................................................. 53 
+2.4.3 Dagbani Verb Forms ............................................................................................ 55 
+2.4.4 Dagbani Pre-Verbal Particles ............................................................................... 57 
+2.4.5 Dagbani Aspectual Modifiers .............................................................................. 60 
+2.4.6 Lexical Expressions and Lexically Composite Expression ................................. 66 
+2.4.7 Dagbani Aspectual Suffixes and Post-Verbal Particles ....................................... 68 
+2.4.8 The Post Verbal-Particles mí and lá..................................................................... 69 
+2.4.9 The Aspectual Suffixes -dá, -dí, and -yá ............................................................. 73 
+2.4.10 Dagbani Bare Infinitives (Zero Verbal Particles) ............................................ 79 
+CHAPTER THREE ................................................................................................................ 83 
+3 The Spread of English: Contacts and Approaches ............................................................. 83 
+3.1 Introduction .................................................................................................................... 83 
+3.2 The English Sound System ............................................................................................ 84 
+3.2.1 The English Vowel System .................................................................................. 85 
+3.3   The Concept of Tense and Aspect ............................................................................... 86 
+3.3.1 Comrie’s Conceptualisation of Tense .................................................................. 89 
+3.3.2 Absolute Tense..................................................................................................... 91 
+3.3.3 Relative Tense ...................................................................................................... 92 
+3.3.4 Degree of Remoteness ......................................................................................... 92 
+3.4 The  Theory of Aspect ................................................................................................... 95 
+3.4.1  Comrie’s Conceptualisation of Aspect .................................................................. 96 
+3.4. 2  The Perfective and the Imperfective ................................................................... 100 
+3.5  Difference between English and Dagbani................................................................... 107 
+3.5.1  Dagbani and English Consonants ........................................................................ 107 
+3.5.2  Dagbani and English Vowels ............................................................................... 108 
+3.6  The Expression of Time in English and Dagbani ....................................................... 110 
+3.7  The Spread of English around the World ................................................................... 112 
+3.8  From the History of English in Ghana to Ghanaian English ...................................... 115 
+3.8.1  A Brief History of English in Ghana ................................................................... 115 
+3.8.2  Ghanaian English (GhE) ...................................................................................... 117 
+
+--- Page 8 ---
+  
+viii 
+ 
+3.8.3  The ENL-ESL-EFL Categorisation of English .................................................... 121 
+3.9  Approaches to World Englishes.................................................................................. 123 
+3.10  The Three Concentric Circles ................................................................................... 125 
+3.11  The Dynamic Model of Postcolonial English ........................................................... 127 
+3.12  Homogeneity and Heterogeneity of World Englishes .............................................. 133 
+3.13  Grammatical Replication .......................................................................................... 136 
+CHAPTER FOUR ................................................................................................................. 141 
+4 Research Methodology .................................................................................................. 141 
+4.1  Introduction ................................................................................................................. 141 
+4.2  The Research Design .................................................................................................. 141 
+4.2.1  Study Area ............................................................................................................... 141 
+4.2.2  Sampling and Distribution of Respondents ............................................................. 142 
+4.2.3  Sample...................................................................................................................... 145 
+4.2.4  Methods for Selection .............................................................................................. 147 
+4.3  Data Collection Process .............................................................................................. 148 
+4.3.1  Data Collection Tools .......................................................................................... 149 
+4.3.1.1  The Progressive Activity Picture ‘A’ ................................................................ 150 
+4.3.1.2  The Progressive Activity Picture ‘B’ ................................................................ 151 
+4.3.1.3  The Progressive Activity Picture ‘C’ ................................................................ 152 
+4.3.1.4  Habitual Activity Pictures ‘D’ and ‘E’ ............................................................. 152 
+4.4  Data Analysis .............................................................................................................. 156 
+CHAPTER FIVE .................................................................................................................. 158 
+5. Influence of Dagbani Perfective Aspect on the Dagomba’s Use of English Tense ....... 158 
+5.1  Introduction ................................................................................................................. 158 
+5.2   The Influence of the Dagbani Simple Past of the Perfective Aspect on the Dagomba’s 
+Use of the English Tense ................................................................................................... 159 
+5.2.1 Results of Dagbani Simple Past Tense (SPT) Sentence One ............................. 161 
+5.2.2 Results of the Dagbani Simple Past Tense Sentence Two ................................. 163 
+5.2.3 Results of the Dagbani Simple Past Tense Sentence Three ............................... 166 
+5.2.4 The Influence of Dagbani Simple Marked Past (SMP) Sentences .................... 170 
+5.2.5 Results of the Dagbani Simple Marked Past Tense Sentence One .................... 171 
+5.2.6 Results of the Dagbani Simple Marked Past Tense (SMP) Sentence Two ........ 172 
+
+--- Page 9 ---
+  
+ix 
+ 
+5.2.7 Results of Dagbani Simple Marked Past (SMP) Sentence Three ...................... 174 
+5.3 Influence of the Dagbani Perfect of the Perfective Aspect on the Dagomba’s Use of 
+the English Tense ............................................................................................................... 179 
+5.3.1 Results of the Dagbani Simple Present Perfect (SPP) Sentence One ................ 181 
+5.3.2 Results of the Dagbani Simple Present Perfect (SPP) Sentence Two ............... 183 
+5.3.3 Results of the Dagbani Simple Present Perfect (SPP) Sentence Three ............. 184 
+5.3.4 Results of the Dagbani Simple Present Perfect (SPP) Sentence Four ............... 185 
+CHAPTER SIX ..................................................................................................................... 195 
+6 Influence of the Dagbani Imperfective Aspect on Dagomba’s Use of English Tense .... 195 
+6.1 Introduction ............................................................................................................ 195 
+6.2 Influence of the Dagbani Progressive of the Imperfective Aspect on the Dagomba’s 
+Use of the English Tense ................................................................................................... 196 
+6.2.1 Results of the Dagbani Simple Progressive (SProg) Sentence One .................. 198 
+6.2.2 Results of the Dagbani Simple Progressive (SProg) Sentence Two .................. 200 
+6.2.3 Results of the Dagbani Simple Progressive (SProg) Sentence Three ................ 201 
+6.2.4 Picture Description of the Progressive Aspect................................................... 204 
+6.3 Influence of the Dagbani Habitual Present of the Imperfective Aspect on 
+Dagomba’s Use of English Tense ...................................................................................... 212 
+6.3.1 Results of the Dagbani Simple Habitual Present (SHP) Sentence One ............. 212 
+6.3.2 Results of the Dagbani Simple Habitual Present (SHP) Sentence Two ............ 215 
+6.3.3 Results of the Dagbani Simple Habitual Present (SHP) Sentence Three .......... 217 
+6.3.4 Results of the Dagbani Simple Habitual Present (SHP) Sentence Four ............ 218 
+6.3.5 Picture Description of Dagbani Habitual Present .............................................. 225 
+6.3.5.1 Description of the Habitual Present Activity Picture ‘D’ .................................. 225 
+6.3.5.2 Description of Habitual Present Activity Picture ‘E’ ........................................ 229 
+CHAPTER SEVEN ............................................................................................................... 239 
+7 Influence of Dagbani Phonological Features on Dagomba’s Spoken English ......... 239 
+7.1 Introduction ............................................................................................................ 239 
+7.2 Realisation of /i:/ in leaders ................................................................................... 240 
+7.3 Realisation of /ɪ/ in conflict .................................................................................... 245 
+7.4 Realisation of /ɒ/ in honour ................................................................................... 247 
+7.5 Realisation of /ɜː/ in service ................................................................................... 249 
+
+--- Page 10 ---
+  
+x 
+ 
+7.6 Realisations of /ʌ/ in coming.................................................................................. 254 
+7.7 Realisations of /ɪ/ in kid ......................................................................................... 255 
+7.8 Realisation of /ɒ/ in quality .................................................................................... 259 
+7.9 Realisation of /ɔː/ as in also ................................................................................... 263 
+7.10     Realisations of /ɔː/ in pour ..................................................................................... 268 
+7.11 Realisations of /aʊə/ as in hour .............................................................................. 269 
+7.12 Realisations of /ɔɪ/ in oil ........................................................................................ 271 
+7.13 Realisations of /eɪ/ in table .................................................................................... 274 
+7.14 Realisations of /aɪ/ as in file ................................................................................... 276 
+7.15 Realisations of /ʌ/ in study ..................................................................................... 278 
+7.16 Realisations of /ə/ in surprise ................................................................................ 279 
+7.17 Realisation of /pl/ in people ................................................................................... 283 
+7.18 Realisation of /aʊə/ in power ................................................................................. 284 
+7.19 Realisations /e/ in bed ............................................................................................ 285 
+7.20 Realisations of /ʌ/ in couple ................................................................................... 286 
+CHAPTER EIGHT ............................................................................................................... 290 
+8 Findings, Conclusion, and Recommendations ............................................................ 290 
+8.1 Introduction ............................................................................................................ 290 
+8.2 Findings on the Grammatical Features of DagbE .................................................. 291 
+8.3 Functional Change of the Grammatical Categories in DagbE ............................... 295 
+8.4 The Replication in DagbE ...................................................................................... 296 
+8.5 Main Findings on the Phonological Features in DagbE ........................................ 298 
+8.6 DagbE as an Ethnolectal English ........................................................................... 300 
+8.7 The Future of the Ethnolectal English by the Dagomba ........................................ 301 
+8.8 Vowel Reduction, Raising and Lowering in DagbE .............................................. 303 
+8.9 Unique Features of DagbE and GhE ...................................................................... 305 
+8.10 Impact of Phonetic Environment on Ethnolectal Pronunciations .......................... 306 
+8.11 The Retention of Ethnolinguistic Features in DagbE ............................................ 307 
+8.12 Trace Elements....................................................................................................... 313 
+8.13 Implications of the Study ....................................................................................... 315 
+8.14 Recommendations .................................................................................................. 317 
+8.15 Conclusion ............................................................................................................. 317 
+
+--- Page 11 ---
+  
+xi 
+ 
+References .............................................................................................................................. 320 
+APPENDICES ........................................................................................................................ 336 
+Appendix A: The Simple Text ........................................................................................... 336 
+Appendix ‘B’: Pictures on the Progressive Aspect ............................................................ 338 
+Appendix ‘C’: Pictures on the Habitual Present ................................................................ 339 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+--- Page 12 ---
+  
+xii 
+ 
+LIST OF TABLES 
+Table 1.1 Language Groups and Dialects in Ghana ................................................................ 13 
+Table 1.2 Pronunciation of English Words Based on Speakers’ L1 ........................................ 16 
+Table 2.3 The Time-depth Particles of Dagaare and Dagbani ................................................. 58 
+Table 4.1 Selected Schools for the Study .............................................................................. 146 
+Table 5.1 Responses on the Simple Past Tense Sentence One .............................................. 162 
+Table 5.2 Responses on the Simple Past Tense Sentence Two ............................................. 164 
+Table 5.3 Responses on the Simple Past Tense Three ........................................................... 166 
+Table 5.4 Responses on Marked Past Sentence One ............................................................. 171 
+Table 5.5 Response on Dagbani Marked Past Tense Sentence Two ..................................... 173 
+Table 5.6 Responses on Dagbani Simple Marked Past Sentence Three ................................ 174 
+Table 5.7 Responses on the Dagbani Simple Present Perfect One ........................................ 181 
+Table 5.8 Responses on the Dagbani Present Perfect Sentence Two .................................... 183 
+Table 5.9  Responses on Dagbani Simple Present Perfect Sentence Three ........................... 184 
+Table 5.10 Responses on the Dagbani Simple Present Perfect Sentence Four ...................... 185 
+Table 6.1 Responses on the Dagbani Simple Progressive Sentence One .............................. 198 
+Table 6.2 Responses on the Dagbani Progressive Sentence Two .......................................... 200 
+Table 6.3 Responses on the Dagbani Progressive Sentence Three ........................................ 201 
+Table 6.4 Responses on Progressive Picture ‘A’ ................................................................... 205 
+Table 6.5 Responses on Progressive Picture ‘B’ ................................................................... 207 
+Table 6.6 Responses on Progressive Picture ‘C’ ................................................................... 210 
+Table 6.7 Responses of the Dagbani Simple Habitual Sentence One.................................... 213 
+Table 6.8 responses on Dagbani Habitual Sentence Two ...................................................... 216 
+Table 6.9 Responses on Dagbani Habitual Present Sentence Three ...................................... 217 
+Table 6.10 Responses on the Dagbani Habitual Present Sentence Four ................................ 219 
+Table 6.11 Responses on Habitual Picture ‘D’ ...................................................................... 226 
+Table 6.12 Responses on Habitual Picture ‘E’ ...................................................................... 230 
+Table 7.1 Interview_ DagbE _ /ɪ/ as in leaders ...................................................................... 240 
+Table 7.2 Interview_DagbE_ /ɛ or iː/ as in conflict ............................................................... 245 
+Table 7.3 Interview_DagbE _ /hɔ or ha/ as in honour ........................................................... 248 
+Table 7.4 Interview_DagbE_ /e/ as in service ....................................................................... 249 
+Table 7.5 Interview_DagbE_ /aː/ as in coming ..................................................................... 254 
+
+--- Page 13 ---
+  
+xiii 
+ 
+Table 7.6 Interview_ DagbE_ /iː/ as in kid ............................................................................ 256 
+Table 7.7 Interview_DagbE_ for /o/ as in quality .................................................................. 259 
+Table 7.8 Interview_DagbE _ /o/ as in also ........................................................................... 263 
+Table 7.9 Interview_DagbE_ /u/ as in pour ........................................................................... 268 
+Table 7.10 Interview_DagbE_ /a or ha/ as in hour ................................................................ 269 
+Table 7.11   Interview_DagbE_ /ɔya/ as in oil....................................................................... 271 
+Table 7.12 Interview_DagbE _ /eː/ as in table ....................................................................... 274 
+Table 7.13  Interview_DagbE_ /aː/ as in file ......................................................................... 276 
+Table 7.14  Interview_DagbE_ /e/ as in study ....................................................................... 278 
+Table 7.15  Interview_DagbE_ /ɔ/ as in surprise ................................................................... 279 
+Table 7.16  Interview_DagbE_ /ʊ or ɔ/ as in people ............................................................. 283 
+Table 7.17  Interview_DagbE_ /a or aː/ as in power ............................................................. 285 
+Table 7.18 Interview_DagbE _ /ɛː / as in bed ........................................................................ 285 
+Table 7.19 Interview_DagbE_ /ʊ/ as in couple ..................................................................... 286 
+Table 8.1 Phonetic Variation in DagbE, GhE, and RP .......................................................... 299 
+Table 8.2 Nativised RP Vowels in DagbE ............................................................................. 304 
+Table 8.3 Summary of Distinctive Features of RP, GhE, and DagbE ................................... 305 
+Table 8.4 Retained Ethnolectal Features in DagbE Pronunciation ........................................ 308 
+Table 8.5 Summary of Ethnic Features in DagbE Pronunciations ........................................ 309 
+Table 8.6 Ethnolectal Retention of Grammatical Features .................................................... 310 
+Table 8.7 Retention of the Ethnic Elements of the Perfective ............................................... 311 
+Table 8.8 Retention of the Ethnic Features of the Imperfective ............................................ 312 
+Table 8.9 Trace Elements ...................................................................................................... 314 
+Table 8.10 Level of Survival of the DagbE ........................................................................... 319 
+ 
+ 
+ 
+ 
+
+--- Page 14 ---
+  
+xiv 
+ 
+LIST OF FIGURES 
+ Figure 1.1 Genetic Affiliation of Dagbani ................................................................................ 4 
+Figure 3.1 The RP Vowel Chart .............................................................................................. 86 
+Figure 3.2 Classification of Aspectual Oppositions . ............................................................ 101 
+Figure 3.3 Kachru’s Concentric Circles ................................................................................. 125 
+Figure 3. 4 Grammatical Replication ..................................................................................... 139 
+Figure 4.1 Study Area ............................................................................................................ 142 
+Figure 4.2 Progressive Picture ‘A’......................................................................................... 151 
+Figure 4.3 Progressive Picture ‘B’ ......................................................................................... 151 
+Figure 4.4 Progressive Picture ‘C’ ......................................................................................... 152 
+Figure 4.5 Habitual Activity Picture ‘D’ ............................................................................... 153 
+Figure 4.6 Habitual Activity Picture ‘E’ ................................................................................ 153 
+Figure 5.1 Average Score of Dagbani Simple Past Tense Sentences according to Level of 
+Education ....................................................................................................................... 168 
+Figure 5.2 Average Score of the Dagbani Simple Marked Past Sentences according to 
+Educational Levels ......................................................................................................... 175 
+Figure 5.3 Average Score of the Simple Present Perfect according to Levels of Education . 186 
+Figure 6.1 Average Score of the Three Dagbani Simple Progressive Sentences According to 
+Educational Levels. ........................................................................................................ 202 
+Figure 6.2 Progress Picture ‘A’ ............................................................................................. 205 
+Figure 6.3 Responses for Progressive Picture ‘A’ According to Educational Level. ............ 206 
+Figure 6.4 Progressive Picture ‘B’ ......................................................................................... 207 
+Figure 6.5 Responses for Progressive Picture ‘B’ According to Educational Levels ........... 208 
+Figure 6.6 Progressive Picture ‘C’. ........................................................................................ 209 
+Figure 6.7 Responses for Progressive Picture ‘C’ According to Educational Levels ........... 210 
+Figure 6.8 Average Score of the Four Habitual Sentences According to Educational Levels
+........................................................................................................................................ 219 
+Figure 6.9 Habitual Picture ‘D’ ............................................................................................. 226 
+Figure 6.10 Responses for Habitual Picture ‘D’ According Educational Levels .................. 227 
+Figure 6.11 Habitual Picture ‘E’ ............................................................................................ 230 
+Figure 6.12 Responses for Habitual Picture ‘E’ According to Educational Levels ............... 231 
+Figure 7.1  DagbE /ɪ/ for RP /iː/ as in leaders ........................................................................ 242 
+
+--- Page 15 ---
+  
+xv 
+ 
+Figure 7.2 GhE /i/ for RP /iː/ as in leaders ............................................................................ 244 
+Figure 7.3 RP /i:/ as in leaders............................................................................................... 244 
+Figure 7.4 DagbE /e/ for RP /ɜː/ as in service ........................................................................ 250 
+Figure 7.5 GhE /ɛ/ as in service ............................................................................................. 253 
+Figure 7.6 RP /ɜː/ as in Service .............................................................................................. 253 
+Figure 7.7 DagbE /iː/ for RP /ɪ/ as in kid ............................................................................... 257 
+Figure 7.8 RP /ɪ/ as in kid ...................................................................................................... 258 
+Figure 7.9 GhE /i/ for RP /ɪ/ as in kid .................................................................................... 259 
+Figure 7.10 DagbE /o/ for RP /kwɒ/ as in quality ................................................................. 260 
+Figure 7.11 GhE /ɔ/ for RP /kwɒ/ as in quality ..................................................................... 262 
+Figure 7.12 RP /kwɒ/ as in quality ........................................................................................ 262 
+Figure 7.13 DagbE /o/ for RP /ɔː/ as in also.......................................................................... 264 
+Figure 7.14  GhE /ɔ/ for RP /ɔː/ as in also ............................................................................. 266 
+Figure 7.15 RP /ɔː/ as in also ................................................................................................. 267 
+Figure 7.16 DagbE /ɔya/ for RP /ɔɪ/ as in oil ......................................................................... 271 
+Figure 7.17 GhE /ɔ:yɛ/ for RP /ɔɪ/ as in oil ............................................................................ 272 
+Figure 7.18 RP /ɔɪ/ as in oil ................................................................................................... 272 
+Figure 7.19 DagbE /ɔ/ for RP /ə/ as in surprise ..................................................................... 281 
+Figure 7.20 GhE /a/ for RP /ə/ as in surprise ......................................................................... 281 
+Figure 7.21 RP /ə/ as in surprise ............................................................................................ 281 
+Figure 8.1 Average Score Ethnic Feature Retention in Pronunciation .................................. 309 
+Figure 8.2 Ethnic Retention of Perfective Aspect ................................................................. 311 
+Figure 8.3 Ethnic Retention of Imperfective Aspect ............................................................. 313 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+--- Page 16 ---
+  
+xvi 
+ 
+LIST OF ABBREVIATIONS 
+TRMRK     Transitive marker 
+PFV      Perfective  
+IMPFV     Imperfective 
+PFT     Present perfect 
+PST     Past tense  
+N     Noun 
+PROG     Progressive 
+HAB     Habitual  
+FOC     Focus marker 
+3SG     Third person singular 
+1SG     First person singular 
+2SG     Second person singular 
+2PL     Second person plural  
+3PL     Third person plural  
+1PL     First person plural 
+1ST.OBJ    First person pronoun object 
+3SG.INAM     Third person singular (Inanimate) 
+SLOC     Stative locative verb 
+SOLOC     Source locative verb 
+ST/CON    State of condition 
+ADV.PROG.    Adverbial function as progressive marker 
+AVD.PS    Adverbial functioning as past marker 
+ADV.FUT.    Adverbial functioning as future marker 
+TAdv.     Time adverbial 
+PAdv.      Adverb of place 
+V     Verb  
+PAdv     Place adverbial 
+TAdv     Time adverbial 
+
+--- Page 17 ---
+  
+xvii 
+ 
+TDP     Time depth particle (di, sa, daa) 
+DF     Definite article 
+GLOC      Goal locative  
+EMP     Emphatic maker 
+DEM        Determiner 
+PCEs      Post-Colonial Englishes  
+SHS     Senior High School 
+JHS     Junior High School 
+Rt       Root 
+Af      Affix 
+Suf     Suffix 
+Wrd     Word 
+SPT     Simple past tense 
+SMP     Simple marked past 
+SPP     Simple present perfect 
+SProg     Simpe progressive aspect 
+SHP     Simple habitual present 
+TL     Target language 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+--- Page 18 ---
+  
+xviii 
+ 
+ACKNOWLEDGEMENTS 
+ This study would not have been possible without the invisible hand of God from the 
+beginning to its completion. All glory and reverence go to God for being my source of power 
+and strength throughout the study.   
+I am indebted to my supervisor, PD Dr. Eric Anchimbe, for his selfless  and relentless 
+effort and contribution that have brought this project to a successful completion. He regularly 
+provided professional advice from the ‘nursery’ stage of my career definition to its ‘tertiary’ 
+stage. His professional ways of questioning issues arising from the thesis are a critical method 
+I appreciate, which I think gave this study an accelerated speed than I could imagine. He gave 
+me all the guidance I needed to carry me through.  I also owe it to my external mentor, Prof . 
+Dr. Adams Bodomo, for his informed advice and the professionalism he exhibited at the early 
+writing stage of this work, which gave me hope and brought back my courage. I cannot forget 
+to mention and acknowledge my internal mentor, Dr. Klaudia Dombrowsky-Hahn, for bringing 
+light to this project when it was gloomy. This squad is one of the best mentoring team, and I 
+appreciate everyone in the group.  
+ Also, this study would not have been a success without the educational directors of the 
+study areas, Tamale metropolitan educati onal director, Sagnarigu district education director, 
+and Yendi district education director. I also owe words of gratitude to the headmasters, 
+teachers, and lecturers from the various schools and institutions for helping in the provision of 
+some data to the study. Above all, I thank all the respondents for making time and providing 
+me with relevant data that helped this study succeed. 
+ I am highly indebted to the Katholischer Akademischer Ausländer-Dienst (KAAD) for 
+giving me the opportunity to pursue my st udies in Germany. KAAD has been my scholarship 
+and source of social strength throughout my three -year study in Germany. I cannot forget to 
+show Bayreuth International Graduate School of African Studies (BIGSAS) my appreciation 
+for funding all field trips a nd conferences that sharpened my academic skills. Again, I thank 
+BIGSAS and the Graduate School of the University of Bayreuth for all the seminars they 
+organised that contributed to my professional growth.   
+ I cannot close the chapter of my study without acknowledging my social ambience. I 
+acknowledge my late parents (Sheini Yiribilla and Magdalina Ayishetu Issah) and my late 
+
+--- Page 19 ---
+  
+xix 
+ 
+brother, Peter Ibrahim Niendoo Sheini for going through the hustles of life to send me to school. 
+I appreciate my late husband, Emma nuel Kwame Suuk, who started this career business with 
+me but could not live to see me today. I cannot forget to appreciate late Fahima Smaila for once 
+sharing every moment with me. May their souls and all departed souls rest in peace. 
+ I thank my current husband, Fatawu Shaibu , for being my backbone, taking care of the 
+children in Ghana while I pursued my studies in Germany. I thank all friends who created a 
+good environment and nurtured my thoughts through hustles, and above all, the support they 
+gave me. I say thank you to my childhood friend, Grace Anda Adam Dokurugu; she will forever 
+remain that friend who shares my pain and success.  Thanks to Joel A kolgo for giv ing me  
+lessons on Praat software . I also appreciate David Sulley, Rebecca Sulley, Esther Atanga, 
+Roselyn Abas, Zeinab Mohammed, Gifty Vikuba Issah, Alhaji Ibrahim Salifu, and Catherine 
+Bosibori Nyebwengi for their support. I thank Dr. Samuel Alhassan Issah for the literature he 
+shared with me that impacted positively on this work.  My Deutsch cours e classmates Father 
+Michael Lieber Cobb, Fredrick Dun-Derry, Bethlehem Mekonne, Kris Omolo, Flavia Waiswa, 
+thank you for being part of my social life from Bonn and beyond.  To the Sheinis and 
+Dokurugus, w hat else will I say? A simple thank you is enough. To all those who have 
+contributed in one way or another to my work and my very existence today, I say thank you.  
+Thumbs up to Dr. Benedict Arko, Dr . Uchenna Oyal i and Dr. Ghadafi Shaibu and their 
+families, for raising my hopes any time we shared our experiences. I cannot mention names of 
+all who helped in diverse ways, yet I reach out with a word of appreciation to you. 
+ 
+ 
+ 
+ 
+ 
+
+--- Page 20 ---
+ 
+1 
+ 
+CHAPTER ONE 
+1. General Introduction 
+1.1 Overview 
+Through immigration, trade and colonialism English was (deliberately) introduced to 
+different parts of the world including some nations that now have English as a native language. 
+According to Brutt -Griffler (2002), Englis h did not precisely originate from Britain. It was 
+transported there by Anglo-Saxon immigrants to the island. However, it was from England that 
+English started spreading to other native English -speaking countries such as New Zealand, 
+Australia, Canada, Ireland, then to non -native English-speaking countries in Asia and Africa 
+(see also Brutt-Grifler 2002:2). The introduction of English in Africa occurred through 
+colonisation and Christian missions. T he Berlin conference, also known as the Congo 
+Conference in the years 1884-1885 facilitated it. The objective of the conference was to make 
+a deliberate attempt to regularise colonialism in Africa. The arrival of the British in Africa 
+marked the beginning of English in African countries such as , Cameroon, Gambia, Ghana,  
+Kenya, Nigeria, Tanzania, and Uganda, among many others. The spread of English  as an 
+additional language  to the above -mentioned countries was not in stigated by one factor. 
+According to Fishman, Cooper and Rosenbau (1977), the spread of English was similar to the 
+introduction and maintenance of Greek, Arabic and Spanish in other countries that speak these 
+languages as second la nguages. The spread  and maintenance of English was facilitated by 
+military conquest, the duration of military conquest in countries it was introduced to, linguistic 
+diversity in Africa, religion, and material benefits, among others. 
+In most African countries that were colonised, for instance, the introduction of English 
+to the indigenes of these countries became necessary since the colonisers (Native speakers  of 
+English), ‘traders’ needed to interact with the colonised (indigenous people). English gradually 
+became a medium of interaction even among the indigenous people. Today, English has 
+become an importa nt language in former British colonies and other parts of the world with 
+numerous varieties.  Missionary works were not excluded in the colonisers ’ ploy to make 
+English deeply rooted in Africa.  The linguistic diversity of Africa enhanced  the colonisers’ 
+plans, which later led to the emergence of more varieties of English. These varieties of English 
+are mainly Non-native varieties of English. Thus, they arise from areas where English is spoken 
+as a second language. These include national varieties of English like Nigerian, Kenyan, 
+
+--- Page 21 ---
+ 
+2 
+ 
+Ghanaian, and  Cameroon Englishes, among others. These different national varieties have 
+aroused research interests across the globe. For instance, many scholars have explored the 
+varieties of English spoken in Africa. Ghanaian English has been studied by scholars like Sey 
+(1973), Ahulu, (1994), Asante, (1995; 1996), Gyasi (1991), Adjaye (2005); Cameroon English 
+by Simo Bobda (1994; 2008), Anchimbe (2006); and Nigerian English by Bamiro (1994), 
+Adegbija (1998), Gut (2008). Furthermore,  national varieties also comprise smaller varieties 
+often referred to as micro varieties. Micro varieties  include varieties based on social class, 
+politics, age, sex, and ethnic varieties of English. Given this, there is a shift of focus and interest 
+of research to include the study of the micro varieties of English. An area of English varieties 
+on focus today is the ethnic varieties of English, including Dagbani English, (henceforth, 
+DagbE), which is the focus of this study. Ethnic varieties are “varieties of English that mark 
+speakers as members of an ethnic group who originally use another language or a distinctive 
+variety” (Clyne 200 0:86). This author explains the two prominent types of ethnolect s. One 
+peculiar to a specific group, and the other multiethnolect (spoken by many minority groups). 
+Hence, ethnic varieties are influenced varieties of English. Thus, the indigenous languages 
+determine which forms linguistic features of English (including phonological morphological, 
+and grammatical forms) should take. Given that, many English varieties continue to develop 
+today; they result from the influence of the indigenous languages that are in contact with the 
+superstrate language, English.  
+In this case, ethnic varieties of English are intranational  varieties with distinctive 
+linguistic features in phonology, grammar, morphology, and  other branches. Thus, African 
+nations being multi -ethnic have many varieties of English. This notion explains that the 
+national varieties of English like Cameroon Englis h, Ghanaian English, Kenyan English, and 
+Nigerian English, comprise ethnically marked Englishes. For this reason, “the predominant 
+view that English is a European language is steadily being eroded and seems likely to 
+disappear” (Kachru 1982:18). This is be cause English is being modelled to the structure of 
+those languages’ phonology , grammar, morphology, and syntax. The difference between the 
+indigenous languages and the English language makes possible the ethnic varieties of English 
+since there is an influence resulting from the differences.  Despite the difference between the 
+indigenous languages and English, studies like (Dolphyne 1988; Adjaye 2005) show evidence 
+of the varied pronunciations of English words in Ghana, and the description of ethnic varieties’ 
+remains in the periphery in some parts of Ghana. Therefore, this study is devoted to determining 
+the influence of the Dagbani phonological and grammatical features on the use of English. 
+
+--- Page 22 ---
+ 
+3 
+ 
+1.2 Linguistic Affiliation of Dagbani 
+Dagbani1 belongs to the Mabia group of languages, also referred to as Gur languages. 
+Mabia languages are part of the Niger -Congo phylum. Bodomo (2020)  notes that this 
+classification of the term Mabia is now used for all the “Gur” or “Voltaique”  languages (see 
+Bodomo 2020:10). These languages are spoken in many countries in the West African sub -
+region, including Ghana, C ôte d’Ivoire, Burkina Faso, Northern Benin, Northwest Nigeria, 
+Mali among others (see Bodomo 1994; 2020). Bodomo explains that Ma ‘mother’, bia ‘child’, 
+which together is Mabia, in literary terms, siblings. These lexical compositions, ma and bia, 
+(Mabia) appropriately represent this group of languages as  a family than Gur. Per Bodomo’s 
+(2020) submission, the Mabia g roup of languages together expresses the idea that these 
+languages are ‘offsprings’ of the same parents. 
+Dagbani is spoken by the Dagomba people in the Northern part of Ghana. Dagomba 
+are typically known and referred to as Dagbamba (plural) and its singula r form is Dagbana. 
+Given this, I prefer to use Dagomba for the plural form of Dagbana instead of Dagombas in 
+this study. Although Dagbani has four dialects2, there are two that are most important 
+particularly to this study. They are Tómó/Tòmòsílí (the Western dialect) and Nàyàhílí/Nàyàɣílí 
+(the Eastern dialect). Tómó is spoken in Tamale and its surroundings, while Nàyàhílí is spoken 
+in Yendi and its surrounding villages. The existence of these dialects eventually informed the 
+choice of the two areas for th is study since the difference between N àyàhílí and Tòmòsílí is 
+phonological. As a speaker of the Western dialect (Tòmòsílí , I use tone marking that is based 
+on Tòmòsílí to Mark tones in the entire dissertation. Consider the diagram of the linguistic 
+genetic affiliation of Dagbani in Figure 1.1 below. 
+ 
+1 Dagbani is closely related to Dagaare, Grune, Kusaal, and Talni. Grimes' (1996) observation suggests over 
+50% similarities between Dagbani, Talansi, and Kusaal. This indicates that these languages share some 
+phonological and grammatical similarities that make them similar. 
+2  Mampruli and Nanunli are considered as independent languages by their speakers, but they are linguistically 
+dialects of the same language since these three languages (Dagbani, Nanunli and Mampruli) only differ at the 
+level of phonology and are unique to particular groups of people in specific areas. 
+
+--- Page 23 ---
+ 
+4 
+ 
+ 
+Figure 1.1 Genetic Affiliation of Dagbani (Sourceː Bodomo 2020:11, emphasis added) 
+ 
+Dagbani is taught as a subject  from the basic level to the tertiary level and sometimes 
+used as medium of instruction  at the lower primary  in Ghana, specifically in Dagbon , where 
+Dagbani is spoken.  In view of this, many studies  have been carried out on its morphology, 
+grammar, and phonology. From close observation of the works of scholars like Dakubu (1997), 
+Olawsky (1999), Hudu (2010; 2014a; 2014b; 2016), Issah (2013; 2015), Bodomo (2001; 2018), 
+Mohammed (2006), and Yahaya (2012), one notices that scholars have done in-depth research 
+on the grammar and phonology, including tense expressions of the language. All these studies 
+reveal some features of the grammar and phonology of Dagbani that are different from English, 
+which could influence the use of English, leading to a non-native variety of English emerging 
+among Dagbani speakers. 
+ 
+
+
+--- Page 24 ---
+ 
+5 
+ 
+1.3 Typological Characteristics of Dagbani 
+This section presents an overview of the general typological features of Dagbani. The 
+Dagbani clause shows basic structure of SVO word order (cf  Olawsky 1999). Deviations from 
+the basic word order are possible in context, as in ASV, OSV. In noun phrases, adjectives and 
+determiners could occur after the noun, for example, 
+1. Báá  lá   dìm     bíá  lá 
+      Dog   DEM  bite.PFV   child   DEM 
+      The dog has bitten the child. / The dog bit the child. 
+Oblique arguments and satellites are marked  by adpositions. In Dagbani, adpositions include 
+postpositions or prepositions. The example dúú púúní ‘inside the room’ bears the postposition 
+púúní, whereas nì bɔ́ brí ‘with adornment’ bears the preposition nì.  
+According to Olawsky  (1999), tense is marked between future and non -future. This 
+phenomenon is expressed through the preverbal particles dì, sà and dáá, which also mark the 
+degree of remoteness.  Tense is expressed with the Dagbani main verbs and the time-depth 
+markers in the language  (see Olawsky 1999; Bodomo 200 1; 2018; Botne 2012). A detailed 
+illustration of how the preverbal particles operate is presented in chapter two of this study. 
+Mood is lexically marked and not marked morphologically. Aspect is presented as pe rfective 
+and imperfective. It accords every Dagbani verb with two forms through suffixation.  Time 
+(tense) expressions are done with perfective and imperfective forms  of the verb , preverbal 
+particles, and emphatic markers. 
+The perfective aspect of every verb represents all past situation (simple past and present 
+perfect). This phenomenon explains that no distinction is made between simple past and present 
+perfect when translated into English. In this case, the same verb form expresses both 
+subcategories in t he language. Thus, the concepts of  simple past and present perfect exist in 
+the deep me aning in Dagbani, but there is no verb form for such distinction in the surface 
+meaning, hence, the perfective aspect in the language, as demonstrated in sentence 2 below. 
+2.   Bɛ  duɣi   li. 
+   3PL  cook.PFV  it 
+   They have cooked it. Or, they cooked it. 
+The imperfective aspect explains uncompleted situations (progressive and present tense 
+or habitual present). This explanation again suggests that the same verbal form expresses the 
+two subcategories of grammar. Take German, for example, Sie arbeitet  - which can be 
+
+--- Page 25 ---
+ 
+6 
+ 
+translated in English as she works, or she is working. However, the distinction between habitual 
+and present progressive does not exist as a grammatical category in German. Of course, one 
+can make the distinction employing adverbials that is, Sie arbeitet von Montags bis Freitags  
+(habitual) ’She works from Monday to Friday’  and Sie arbeitet gerade in der Küche  (present 
+progressive) ‘She is working in the kitchen now; still, the verbal form will always be the same, 
+the same applies to Dagbani. This point suggests that the distinction of the subcategories exist 
+in the deep meaning; if not, adverbials would not occur to make this distinction.  Moreover, 
+Olawsky (1999) posits that the verb’s unmarked form is understood as past in Dagbani. 
+However, verb forms with -yá, the author indicates as present perfect. 
+In Dagbani, gender is not marked in constructions , but there is synchronically  an 
+animate and inanimate distinction of pronouns. Serial verb constructions are a common feature 
+of Dagbani sentences.  On the phonological level, vowel harmony is based on the feature of 
+advanced tongue root. Olawsky (1999), lists the prominent vowel phonemes of Dagbani as i, 
+u, ə e, o, and a. Except for [a], the rest of these vowel sounds have allophones. Hudu (2010 ; 
+2016) identifies ten short vowels, including i, ɨ, u, ʊ, e, ɛ, o, ɔ, a, and a̘  (see Hudu 2010; 
+2016ː63). Diphthongisation is also a possibility in Dagbani; they are, however, few.  They 
+include ia, ua, aai, eei, ooi, uui. The vowel system includes long vowels, aː, eː, iː, oː and uː. 
+The consonant sounds of Dagbani comprise: 
+Plosives: p, b, t, d, g, k  
+Fricatives: f, v, s, z, ʃ  
+Nasals: m, n, ɲ, ŋ  
+Lateral: l  
+Affricates: tç, dʑ  
+Labiovelars: kp, gb, ŋm 
+Glides: j, ʋ.  
+  (See Olawsky 1999:18). 
+Vowel harmony is another describing feature that impacts Dagomba’s pronunciation of 
+words. Dagbani is characterised by [+ATR] and [ -ATR] vowel sound assimilation.  “Vowel 
+harmony is an assimila tory process which involves both adjacent and non -contiguous vowel 
+

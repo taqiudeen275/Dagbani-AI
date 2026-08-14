@@ -1,0 +1,811 @@
+=== CELL 00 [markdown] ===
+# Dagbani Whisper ASR - Colab Fine-Tuning Notebook v2
+
+Fine-tunes Whisper for Dagbani ASR on a T4 GPU using 8-bit loading + LoRA.
+
+Improvements over the first draft:
+- quoted pip requirements so Colab shell parsing is safe
+- explicit Excel sheet/header parsing instead of positional assumptions only
+- UTF-8 Dagbani orthography checks (`ɛ`, `ɔ`, `ɣ`, `ŋ`, `ʒ`)
+- text normalization and suspicious-character reporting
+- duration filtering to avoid Whisper's 30-second truncation trap
+- speaker-disjoint train/validation/test split
+- pilot mode for a fast sanity run before the full overnight job
+- safer Hub/model-card publishing with license notes you must verify
+
+
+
+=== CELL 01 [markdown] ===
+## 1. Environment Setup
+
+
+
+=== CELL 02 [code] ===
+!pip install -q --upgrade pip
+!pip install -q \
+    "transformers>=4.41.0" \
+    "datasets[audio]>=2.19.0" \
+    "peft>=0.11.0" \
+    "bitsandbytes>=0.43.0" \
+    "accelerate>=0.30.0" \
+    "evaluate>=0.4.2" \
+    "jiwer>=3.0.4" \
+    "huggingface_hub>=0.23.0" \
+    "tensorboard" \
+    "gradio" \
+    "openpyxl" \
+    "soundfile" \
+    "librosa" \
+    "unidecode"
+
+
+
+=== CELL 03 [code] ===
+import gc
+import json
+import os
+import random
+import re
+import shutil
+import string
+import unicodedata
+import warnings
+import zipfile
+from collections import Counter, defaultdict
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any, Dict, List, Union
+
+import librosa
+import numpy as np
+import torch
+
+warnings.filterwarnings("ignore")
+
+if not torch.cuda.is_available():
+    raise RuntimeError("No GPU detected. In Colab, use Runtime -> Change runtime type -> T4 GPU.")
+
+GPU_NAME = torch.cuda.get_device_name(0)
+GPU_GB = torch.cuda.get_device_properties(0).total_memory / 1e9
+print(f"GPU: {GPU_NAME} ({GPU_GB:.1f} GB)")
+
+IS_T4 = "T4" in GPU_NAME
+if not IS_T4:
+    print("This notebook is tuned for T4. It should still run elsewhere, but batch settings may need adjustment.")
+
+
+
+=== CELL 04 [markdown] ===
+## 2. Configuration
+
+
+
+=== CELL 05 [code] ===
+# For a T4, `openai/whisper-medium` + 8-bit LoRA is a practical quality-oriented default.
+# For the first smoke test, set MODEL_NAME = "openai/whisper-small" or PILOT_MODE = True.
+MODEL_NAME = "openai/whisper-medium"
+HUB_MODEL_ID = "ats-tech/dagbani-whisper-asr"
+
+DATA_DIR = Path("/content/data")
+AUDIO_DIR = DATA_DIR / "audios"
+PROCESSED_DIR = DATA_DIR / "processed_whisper_v2"
+OUTPUT_DIR = Path("/content/dagbani-whisper-asr-v2")
+
+EXCEL_URL = "https://china.scidb.cn/download?fileId=89b771a04caf2de7018866424945ac47&traceId=11882943-d056-4648-b166-9fcd932079b7"
+ZIP_URL = "https://china.scidb.cn/download?fileId=72da845ecdce7615b40a3e2aeba740fd&traceId=64d72f7b-99ab-4355-963b-a27be1b2ab42"
+
+EXCEL_PATH = DATA_DIR / "Dagbani.xlsx"
+ZIP_PATH = DATA_DIR / "Dagbani.zip"
+
+SHEET_NAME = "Transcribed"
+RANDOM_SEED = 42
+
+# Pilot mode lets you validate the full pipeline quickly before a long T4 run.
+PILOT_MODE = False
+PILOT_TRAIN_SAMPLES = 800
+PILOT_EVAL_SAMPLES = 120
+
+MIN_DURATION_SEC = 0.5
+MAX_DURATION_SEC = 30.0
+
+PER_DEVICE_BATCH_SIZE = 4
+GRADIENT_ACCUMULATION_STEPS = 4
+NUM_TRAIN_EPOCHS = 1 if PILOT_MODE else 3
+LEARNING_RATE = 1e-4
+WARMUP_STEPS = 50 if PILOT_MODE else 500
+EVAL_STEPS = 100 if PILOT_MODE else 500
+SAVE_STEPS = 100 if PILOT_MODE else 500
+
+PUSH_TO_HUB = False if PILOT_MODE else True
+RUN_GRADIO_DEMO = False
+
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+AUDIO_DIR.mkdir(parents=True, exist_ok=True)
+
+print(json.dumps({
+    "model": MODEL_NAME,
+    "pilot_mode": PILOT_MODE,
+    "batch_size": PER_DEVICE_BATCH_SIZE,
+    "grad_accum": GRADIENT_ACCUMULATION_STEPS,
+    "effective_batch": PER_DEVICE_BATCH_SIZE * GRADIENT_ACCUMULATION_STEPS,
+    "epochs": NUM_TRAIN_EPOCHS,
+}, indent=2))
+
+
+
+=== CELL 06 [markdown] ===
+## 3. Hugging Face Login
+
+
+
+=== CELL 07 [code] ===
+HF_TOKEN = None
+try:
+    from google.colab import userdata
+    HF_TOKEN = userdata.get("HF_TOKEN")
+except Exception:
+    HF_TOKEN = None
+
+if HF_TOKEN:
+    from huggingface_hub import login
+    login(token=HF_TOKEN)
+    print("Logged in with HF_TOKEN from Colab Secrets.")
+elif PUSH_TO_HUB:
+    from huggingface_hub import notebook_login
+    print("No HF_TOKEN found in Colab Secrets. Log in before pushing to the Hub.")
+    notebook_login()
+else:
+    print("No HF_TOKEN found. Continuing without Hub login because PUSH_TO_HUB is False.")
+
+
+
+=== CELL 08 [markdown] ===
+## 4. Download and Extract Data
+
+If the SciDB URLs expire, upload `Dagbani.xlsx` and `Dagbani.zip` to Google Drive and copy them
+into `/content/data/`.
+
+
+
+=== CELL 09 [code] ===
+def download_if_missing(url: str, target: Path, label: str):
+    if target.exists() and target.stat().st_size > 0:
+        print(f"{label} already exists: {target} ({target.stat().st_size / 1e6:.1f} MB)")
+        return
+    print(f"Downloading {label}...")
+    !wget -q --show-progress -O "{target}" "{url}"
+    if not target.exists() or target.stat().st_size == 0:
+        raise RuntimeError(f"Download failed or produced an empty file: {target}")
+    print(f"Downloaded {label}: {target.stat().st_size / 1e6:.1f} MB")
+
+download_if_missing(EXCEL_URL, EXCEL_PATH, "Dagbani.xlsx")
+download_if_missing(ZIP_URL, ZIP_PATH, "Dagbani.zip")
+
+
+
+=== CELL 10 [code] ===
+def extract_audio_zip(zip_path: Path, audio_dir: Path):
+    existing = list(audio_dir.glob("*.mp3"))
+    if len(existing) > 100:
+        print(f"Audio already extracted: {len(existing):,} mp3 files")
+        return
+
+    print("Extracting audio files...")
+    extracted = 0
+    duplicates = 0
+    with zipfile.ZipFile(zip_path, "r") as zf:
+        for info in zf.infolist():
+            if info.is_dir() or not info.filename.lower().endswith(".mp3"):
+                continue
+            basename = Path(info.filename).name
+            target = audio_dir / basename
+            if target.exists():
+                duplicates += 1
+            else:
+                with zf.open(info) as src, open(target, "wb") as dst:
+                    shutil.copyfileobj(src, dst)
+                extracted += 1
+            if (extracted + duplicates) % 2000 == 0:
+                print(f"  seen {extracted + duplicates:,} mp3 files...")
+    print(f"Extracted {extracted:,}; skipped existing duplicates {duplicates:,}")
+
+extract_audio_zip(ZIP_PATH, AUDIO_DIR)
+
+
+
+=== CELL 11 [markdown] ===
+## 5. Parse Metadata Safely
+
+
+
+=== CELL 12 [code] ===
+import openpyxl
+
+REQUIRED_COLUMNS = {
+    "transcription": "TRANSCRIPTION",
+    "speaker_id": "SPEAKER_ID",
+    "full_filename": "Full Filename",
+}
+
+def parse_workbook(excel_path: Path, sheet_name: str):
+    wb = openpyxl.load_workbook(str(excel_path), read_only=True, data_only=True)
+    if sheet_name not in wb.sheetnames:
+        raise ValueError(f"Sheet {sheet_name!r} not found. Available sheets: {wb.sheetnames}")
+    ws = wb[sheet_name]
+
+    header_row = None
+    header_values = None
+    for row_idx, row in enumerate(ws.iter_rows(values_only=True), start=1):
+        values = [str(v).strip() if v is not None else "" for v in row]
+        if "TRANSCRIPTION" in values and "Full Filename" in values:
+            header_row = row_idx
+            header_values = values
+            break
+    if header_row is None:
+        raise ValueError("Could not find a header row containing TRANSCRIPTION and Full Filename.")
+
+    col = {name: idx for idx, name in enumerate(header_values) if name}
+    missing = [label for label in REQUIRED_COLUMNS.values() if label not in col]
+    if missing:
+        raise ValueError(f"Missing required columns: {missing}")
+
+    records = []
+    skipped = Counter()
+    for row in ws.iter_rows(min_row=header_row + 1, values_only=True):
+        transcription = row[col[REQUIRED_COLUMNS["transcription"]]]
+        speaker_id = row[col[REQUIRED_COLUMNS["speaker_id"]]]
+        full_filename = row[col[REQUIRED_COLUMNS["full_filename"]]]
+
+        if not transcription or not full_filename:
+            skipped["missing_text_or_filename"] += 1
+            continue
+
+        audio_path = AUDIO_DIR / str(full_filename).strip()
+        if not audio_path.exists():
+            skipped["missing_audio"] += 1
+            continue
+
+        speaker = "unknown" if speaker_id in (None, "") else str(speaker_id).replace(".0", "")
+        records.append({
+            "audio": str(audio_path),
+            "raw_transcription": str(transcription).strip(),
+            "speaker_id": speaker,
+            "filename": str(full_filename).strip(),
+        })
+
+    wb.close()
+    return records, skipped
+
+records, skipped = parse_workbook(EXCEL_PATH, SHEET_NAME)
+print(f"Parsed {len(records):,} usable metadata rows")
+print(f"Skipped: {dict(skipped)}")
+print(records[0])
+
+
+
+=== CELL 13 [markdown] ===
+## 6. Dagbani Text Normalization and Sanity Checks
+
+
+
+=== CELL 14 [code] ===
+DAGBANI_SPECIALS = set("ɛƐɔƆɣƔŋŊʒƷ")
+EXPECTED_SAMPLE = "N nyɛla dabba ni bɛ salima gbibu shɛli n paɣari ŋun ʒɛm."
+
+def normalize_dagbani_text(text: str) -> str:
+    text = unicodedata.normalize("NFC", str(text))
+    text = text.replace("’", "'").replace("‘", "'").replace("`", "'")
+    text = text.replace("“", '"').replace("”", '"')
+    text = text.lower()
+
+    # Keep letters, spaces, hyphens, and apostrophes. Drop punctuation that is not spoken.
+    cleaned = []
+    for ch in text:
+        cat = unicodedata.category(ch)
+        if ch.isspace():
+            cleaned.append(" ")
+        elif ch in {"-", "'"}:
+            cleaned.append(ch)
+        elif cat.startswith("L") or cat.startswith("M"):
+            cleaned.append(ch)
+        elif ch.isdigit():
+            cleaned.append(f" {ch} ")
+        else:
+            cleaned.append(" ")
+    text = "".join(cleaned)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+print("UTF-8 orthography check:", EXPECTED_SAMPLE)
+print("Normalized:", normalize_dagbani_text(EXPECTED_SAMPLE))
+
+for r in records:
+    r["sentence"] = normalize_dagbani_text(r["raw_transcription"])
+
+empty_after_norm = [r for r in records if not r["sentence"]]
+records = [r for r in records if r["sentence"]]
+print(f"Removed {len(empty_after_norm):,} rows that became empty after normalization.")
+
+char_counts = Counter("".join(r["sentence"] for r in records))
+print("Dagbani special letter counts:")
+for ch in sorted(DAGBANI_SPECIALS):
+    if char_counts[ch.lower()] or char_counts[ch]:
+        print(f"  {ch}: {char_counts[ch.lower()] + char_counts[ch]}")
+
+print("Sample normalized rows:")
+for r in records[:3]:
+    print("-", r["sentence"][:180])
+
+
+
+=== CELL 15 [markdown] ===
+## 7. Duration Filtering
+
+Whisper's feature extractor pads or truncates inputs to 30 seconds. Filtering long clips avoids
+training on text that belongs to audio the model never sees.
+
+
+
+=== CELL 16 [code] ===
+duration_cache_path = DATA_DIR / "duration_cache.json"
+if duration_cache_path.exists():
+    duration_cache = json.loads(duration_cache_path.read_text())
+else:
+    duration_cache = {}
+
+def get_duration_sec(path: str) -> float:
+    if path in duration_cache:
+        return float(duration_cache[path])
+    try:
+        dur = float(librosa.get_duration(path=path))
+    except Exception as exc:
+        print(f"Duration read failed for {path}: {exc}")
+        dur = -1.0
+    duration_cache[path] = dur
+    return dur
+
+filtered = []
+duration_skips = Counter()
+for i, r in enumerate(records):
+    dur = get_duration_sec(r["audio"])
+    r["duration"] = dur
+    if dur < 0:
+        duration_skips["decode_error"] += 1
+    elif dur < MIN_DURATION_SEC:
+        duration_skips["too_short"] += 1
+    elif dur > MAX_DURATION_SEC:
+        duration_skips["too_long"] += 1
+    else:
+        filtered.append(r)
+    if (i + 1) % 2000 == 0:
+        print(f"  checked {i + 1:,}/{len(records):,} durations")
+
+duration_cache_path.write_text(json.dumps(duration_cache), encoding="utf-8")
+records = filtered
+
+durations = np.array([r["duration"] for r in records])
+print(f"After duration filtering: {len(records):,} records")
+print(f"Duration skips: {dict(duration_skips)}")
+print(f"Duration p50/p90/max: {np.percentile(durations, 50):.1f}s / {np.percentile(durations, 90):.1f}s / {durations.max():.1f}s")
+
+metadata_path = DATA_DIR / "dagbani_asr_metadata_v2.jsonl"
+with open(metadata_path, "w", encoding="utf-8") as f:
+    for r in records:
+        f.write(json.dumps(r, ensure_ascii=False) + "\n")
+print(f"Saved cleaned metadata to {metadata_path}")
+
+
+
+=== CELL 17 [markdown] ===
+## 8. Speaker-Disjoint Splits
+
+
+
+=== CELL 18 [code] ===
+from datasets import Audio, Dataset, DatasetDict
+
+speaker_counts = Counter(r["speaker_id"] for r in records)
+speakers = list(speaker_counts)
+random.Random(RANDOM_SEED).shuffle(speakers)
+
+n_speakers = len(speakers)
+n_test = max(1, round(n_speakers * 0.05))
+n_val = max(1, round(n_speakers * 0.05))
+
+test_speakers = set(speakers[:n_test])
+val_speakers = set(speakers[n_test:n_test + n_val])
+train_speakers = set(speakers[n_test + n_val:])
+
+train_records = [r for r in records if r["speaker_id"] in train_speakers]
+val_records = [r for r in records if r["speaker_id"] in val_speakers]
+test_records = [r for r in records if r["speaker_id"] in test_speakers]
+
+if PILOT_MODE:
+    random.Random(RANDOM_SEED).shuffle(train_records)
+    random.Random(RANDOM_SEED).shuffle(val_records)
+    random.Random(RANDOM_SEED).shuffle(test_records)
+    train_records = train_records[:PILOT_TRAIN_SAMPLES]
+    val_records = val_records[:PILOT_EVAL_SAMPLES]
+    test_records = test_records[:PILOT_EVAL_SAMPLES]
+
+dataset = DatasetDict({
+    "train": Dataset.from_list(train_records),
+    "validation": Dataset.from_list(val_records),
+    "test": Dataset.from_list(test_records),
+})
+
+print(dataset)
+print(f"Speakers: train={len(train_speakers):,}, val={len(val_speakers):,}, test={len(test_speakers):,}")
+print(f"Hours: train={sum(r['duration'] for r in train_records)/3600:.1f}, val={sum(r['duration'] for r in val_records)/3600:.1f}, test={sum(r['duration'] for r in test_records)/3600:.1f}")
+
+dataset = dataset.cast_column("audio", Audio(sampling_rate=16000))
+
+
+
+=== CELL 19 [markdown] ===
+## 9. Processor and Tokenizer Checks
+
+Dagbani is not a built-in Whisper language token. We intentionally avoid setting a proxy language.
+The model learns Dagbani orthography from labels, while generation is configured for transcription
+with no forced language token.
+
+
+
+=== CELL 20 [code] ===
+from transformers import WhisperProcessor
+
+processor = WhisperProcessor.from_pretrained(MODEL_NAME, task="transcribe")
+
+tokenizer_test = "n nyɛla bɛ paɣaŋa mini ɔ ka ʒɛm shɛli"
+encoded = processor.tokenizer(tokenizer_test).input_ids
+decoded = processor.tokenizer.decode(encoded, skip_special_tokens=True)
+print("Tokenizer input:  ", tokenizer_test)
+print("Tokenizer decoded:", decoded)
+print("Exact match:", tokenizer_test == decoded)
+
+if tokenizer_test != decoded:
+    print("Warning: tokenizer round-trip mismatch. Inspect this before a full run.")
+
+
+
+=== CELL 21 [markdown] ===
+## 10. Lazy Feature Preparation
+
+For the full dataset, do **not** precompute `input_features` with `dataset.map`.
+Whisper features are large, and precomputing them for every clip can exhaust Colab RAM.
+Instead, the data collator below extracts features only for the current train/eval batch.
+
+
+
+=== CELL 22 [code] ===
+print("Using lazy batch-time feature extraction to keep RAM usage low.")
+print("Dataset columns remain available:", dataset["train"].column_names)
+
+
+
+=== CELL 23 [markdown] ===
+## 11. Model Setup: 8-bit LoRA
+
+
+
+=== CELL 24 [code] ===
+from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
+from transformers import BitsAndBytesConfig, WhisperForConditionalGeneration
+
+bnb_config = BitsAndBytesConfig(load_in_8bit=True)
+
+model = WhisperForConditionalGeneration.from_pretrained(
+    MODEL_NAME,
+    quantization_config=bnb_config,
+    device_map="auto",
+)
+
+model.generation_config.forced_decoder_ids = None
+model.generation_config.suppress_tokens = []
+model.generation_config.task = "transcribe"
+model.config.use_cache = False
+
+model = prepare_model_for_kbit_training(model)
+
+lora_config = LoraConfig(
+    r=16,
+    lora_alpha=32,
+    target_modules=["q_proj", "v_proj", "out_proj"],
+    lora_dropout=0.05,
+    bias="none",
+)
+model = get_peft_model(model, lora_config)
+model.print_trainable_parameters()
+
+
+
+=== CELL 25 [markdown] ===
+## 12. Collator and Metrics
+
+
+
+=== CELL 26 [code] ===
+import evaluate
+
+@dataclass
+class DataCollatorSpeechSeq2SeqWithPadding:
+    processor: Any
+    decoder_start_token_id: int
+
+    def __call__(self, features: List[Dict[str, Union[List[int], torch.Tensor]]]) -> Dict[str, torch.Tensor]:
+        audio_arrays = [feature["audio"]["array"] for feature in features]
+        sampling_rate = features[0]["audio"]["sampling_rate"]
+        batch = self.processor.feature_extractor(
+            audio_arrays,
+            sampling_rate=sampling_rate,
+            return_tensors="pt",
+        )
+
+        label_features = [
+            {"input_ids": self.processor.tokenizer(feature["sentence"]).input_ids}
+            for feature in features
+        ]
+        labels_batch = self.processor.tokenizer.pad(label_features, return_tensors="pt")
+
+        labels = labels_batch["input_ids"].masked_fill(labels_batch.attention_mask.ne(1), -100)
+        if (labels[:, 0] == self.decoder_start_token_id).all().cpu().item():
+            labels = labels[:, 1:]
+
+        batch["labels"] = labels
+        return batch
+
+data_collator = DataCollatorSpeechSeq2SeqWithPadding(
+    processor=processor,
+    decoder_start_token_id=model.config.decoder_start_token_id,
+)
+
+wer_metric = evaluate.load("wer")
+cer_metric = evaluate.load("cer")
+
+def normalize_for_metric(text: str) -> str:
+    return normalize_dagbani_text(text)
+
+def compute_metrics(pred):
+    pred_ids = pred.predictions
+    label_ids = pred.label_ids.copy()
+    label_ids[label_ids == -100] = processor.tokenizer.pad_token_id
+
+    pred_str = processor.tokenizer.batch_decode(pred_ids, skip_special_tokens=True)
+    label_str = processor.tokenizer.batch_decode(label_ids, skip_special_tokens=True)
+
+    pred_norm = [normalize_for_metric(s) for s in pred_str]
+    label_norm = [normalize_for_metric(s) for s in label_str]
+
+    wer = 100 * wer_metric.compute(predictions=pred_norm, references=label_norm)
+    cer = 100 * cer_metric.compute(predictions=pred_norm, references=label_norm)
+    return {"wer": wer, "cer": cer}
+
+
+
+=== CELL 27 [markdown] ===
+## 13. Training
+
+
+
+=== CELL 28 [code] ===
+from transformers import Seq2SeqTrainer, Seq2SeqTrainingArguments
+
+training_args = Seq2SeqTrainingArguments(
+    output_dir=str(OUTPUT_DIR),
+    hub_model_id=HUB_MODEL_ID,
+    per_device_train_batch_size=PER_DEVICE_BATCH_SIZE,
+    per_device_eval_batch_size=PER_DEVICE_BATCH_SIZE,
+    gradient_accumulation_steps=GRADIENT_ACCUMULATION_STEPS,
+    learning_rate=LEARNING_RATE,
+    warmup_steps=WARMUP_STEPS,
+    num_train_epochs=NUM_TRAIN_EPOCHS,
+    fp16=True,
+    eval_strategy="steps",
+    eval_steps=EVAL_STEPS,
+    predict_with_generate=True,
+    generation_max_length=225,
+    save_strategy="steps",
+    save_steps=SAVE_STEPS,
+    save_total_limit=3,
+    logging_steps=25 if PILOT_MODE else 50,
+    report_to=["tensorboard"],
+    push_to_hub=PUSH_TO_HUB,
+    hub_token=HF_TOKEN,
+    load_best_model_at_end=True,
+    metric_for_best_model="wer",
+    greater_is_better=False,
+    gradient_checkpointing=True,
+    dataloader_num_workers=0,
+    eval_accumulation_steps=4,
+    remove_unused_columns=False,
+)
+
+trainer = Seq2SeqTrainer(
+    args=training_args,
+    model=model,
+    train_dataset=dataset["train"],
+    eval_dataset=dataset["validation"],
+    data_collator=data_collator,
+    compute_metrics=compute_metrics,
+    processing_class=processor,
+)
+
+print(f"Training samples: {len(dataset['train']):,}")
+print(f"Validation samples: {len(dataset['validation']):,}")
+print(f"Output directory: {OUTPUT_DIR}")
+
+
+
+=== CELL 29 [code] ===
+last_checkpoint = None
+if OUTPUT_DIR.exists():
+    checkpoints = [p for p in OUTPUT_DIR.iterdir() if p.is_dir() and p.name.startswith("checkpoint-")]
+    if checkpoints:
+        last_checkpoint = str(sorted(checkpoints, key=lambda p: int(p.name.split("-")[-1]))[-1])
+        print(f"Resuming from checkpoint: {last_checkpoint}")
+
+train_result = trainer.train(resume_from_checkpoint=last_checkpoint)
+trainer.save_model()
+processor.save_pretrained(str(OUTPUT_DIR))
+
+print(f"Training complete. Final train loss: {train_result.training_loss:.4f}")
+
+
+
+=== CELL 30 [markdown] ===
+## 14. Evaluation
+
+
+
+=== CELL 31 [code] ===
+print("Evaluating on held-out test speakers...")
+eval_results = trainer.evaluate(dataset["test"])
+print(json.dumps(eval_results, indent=2))
+
+
+
+=== CELL 32 [code] ===
+from transformers import pipeline
+
+pipe = pipeline(
+    "automatic-speech-recognition",
+    model=model,
+    tokenizer=processor.tokenizer,
+    feature_extractor=processor.feature_extractor,
+    device=0,
+)
+
+sample_records = random.Random(RANDOM_SEED).sample(test_records, min(10, len(test_records)))
+
+print("\nSample predictions:")
+for i, rec in enumerate(sample_records, start=1):
+    pred = pipe(rec["audio"])["text"].strip()
+    truth = rec["sentence"].strip()
+    sample_wer = 100 * wer_metric.compute(
+        predictions=[normalize_for_metric(pred)],
+        references=[normalize_for_metric(truth)],
+    )
+    print(f"\nSample {i}")
+    print(f"TRUTH: {truth[:240]}")
+    print(f"PRED:  {pred[:240]}")
+    print(f"WER:   {sample_wer:.1f}%")
+
+
+
+=== CELL 33 [code] ===
+SPECIALS = ["ɛ", "ɔ", "ɣ", "ŋ", "ʒ"]
+char_stats = {ch: {"truth": 0, "pred": 0, "overlap": 0} for ch in SPECIALS}
+
+for rec in sample_records:
+    pred = normalize_for_metric(pipe(rec["audio"])["text"])
+    truth = normalize_for_metric(rec["sentence"])
+    for ch in SPECIALS:
+        truth_count = truth.count(ch)
+        pred_count = pred.count(ch)
+        char_stats[ch]["truth"] += truth_count
+        char_stats[ch]["pred"] += pred_count
+        char_stats[ch]["overlap"] += min(truth_count, pred_count)
+
+print("Special-letter count sanity check on samples:")
+for ch, stats in char_stats.items():
+    recall = 100 * stats["overlap"] / stats["truth"] if stats["truth"] else 0
+    precision = 100 * stats["overlap"] / stats["pred"] if stats["pred"] else 0
+    print(f"{ch}: truth={stats['truth']}, pred={stats['pred']}, rough_recall={recall:.1f}%, rough_precision={precision:.1f}%")
+
+
+
+=== CELL 34 [markdown] ===
+## 15. Push to Hub
+
+Do this only after:
+- the full run is complete
+- you have verified the training-data license
+- the model card accurately states allowed use
+
+
+
+=== CELL 35 [code] ===
+if PUSH_TO_HUB:
+    trainer.push_to_hub(
+        commit_message="Fine-tune Whisper for Dagbani ASR",
+        tags=["whisper", "dagbani", "asr", "speech-recognition", "ghana", "peft", "lora"],
+    )
+    processor.push_to_hub(HUB_MODEL_ID, token=HF_TOKEN)
+    print(f"Pushed model and processor to https://huggingface.co/{HUB_MODEL_ID}")
+else:
+    print("PUSH_TO_HUB is False. Skipping Hub push.")
+
+
+
+=== CELL 36 [code] ===
+MODEL_CARD = f"""---
+language:
+- dag
+tags:
+- whisper
+- dagbani
+- asr
+- speech-recognition
+- ghana
+- peft
+- lora
+metrics:
+- wer
+- cer
+---
+
+# Dagbani Whisper ASR
+
+Fine-tuned `{MODEL_NAME}` for Dagbani automatic speech recognition.
+
+## Important License Note
+
+Before public or commercial release, verify the license and redistribution terms for every training
+dataset used. Do not assume that model weights can be distributed commercially just because the code
+or base model is permissively licensed.
+
+## Training
+
+- Base model: `{MODEL_NAME}`
+- Hardware target: NVIDIA T4 16 GB
+- Method: 8-bit model loading plus LoRA adapters
+- Effective batch size: {PER_DEVICE_BATCH_SIZE * GRADIENT_ACCUMULATION_STEPS}
+- Pilot mode: {PILOT_MODE}
+- Text normalization: NFC Unicode, lowercase, punctuation removal, Dagbani letters preserved
+- Audio filtering: {MIN_DURATION_SEC}-{MAX_DURATION_SEC} seconds
+
+## Evaluation
+
+- WER: {eval_results.get("eval_wer", "N/A")}
+- CER: {eval_results.get("eval_cer", "N/A")}
+"""
+
+card_path = OUTPUT_DIR / "README.md"
+card_path.write_text(MODEL_CARD, encoding="utf-8")
+print(f"Wrote draft model card to {card_path}")
+
+
+
+=== CELL 37 [markdown] ===
+## 16. Optional Gradio Demo
+
+
+
+=== CELL 38 [code] ===
+if RUN_GRADIO_DEMO:
+    import gradio as gr
+
+    def transcribe(audio_path):
+        return pipe(audio_path)["text"]
+
+    demo = gr.Interface(
+        fn=transcribe,
+        inputs=gr.Audio(type="filepath", label="Dagbani audio"),
+        outputs=gr.Textbox(label="Transcription"),
+        title="Dagbani Speech Recognition",
+    )
+    demo.launch(share=True)
+else:
+    print("RUN_GRADIO_DEMO is False. Skipping demo.")
+
+

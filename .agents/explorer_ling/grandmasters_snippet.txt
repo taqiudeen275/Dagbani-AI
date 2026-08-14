@@ -1,0 +1,1773 @@
+
+--- [PAGE 1] ---
+Special Issue 6, June 2021
+Grandmasters of the Drum: A Literary Linguistic 
+Analysis of the Dagbamba Panegyrics
+--- [PAGE 2] ---
+Imprint
+Printed version of 
+The Mouth (Special Issue 6) 
+Grandmasters of the Drum: A Literary Linguistic Analysis of the 
+ Dagbamba Panegyrics
+Editors: 
+The Mouth
+Volume editor:
+Nico Nassenstein, Anne Storch & Janine Traber
+Author:
+Asangba Reginald Taluah
+Layout und Satz: 
+Frederik Weck
+Printing and binding: 
+Hundt Druck GmbH, Cologne 
+ISSN:  2513-101X
+--- [PAGE 3] ---
+Published with the generous support of 
+--- [PAGE 4] ---
+
+--- [PAGE 5] ---
+Dedication
+For Gloria Nibunu and Awedana Taluah, my wife and son, who 
+were denied the presence of a husband and father for most of the 
+time I spent in the cold warmth of Cologne, Germany.
+For Mr. Charles Patrice Taluah and Mrs. Victoria Navro Taluah, 
+my parents, who guided my steps from the cradle and through 
+many stages of the academic frontiers, but had to answer so quickly 
+to their call to Glory and for Roger Wepia Amipare, a cousin and 
+confidant, whose dedication to this research endeavour was phe -
+nomenal but was soon to join the ancestral roll-call.
+--- [PAGE 6] ---
+Acknowledgements
+It is because we live, that we have hope for a brighter tomorrow. 
+Yet, it is because of a good health, both mentally and physically that 
+we may have the pleasure to pursue ventures as enlightening and 
+delighting as a doctorate degree as this. As such, praise and glory 
+be to the Almighty God for the overwhelming grace, wisdom, 
+ knowledge and understanding that he has so freely bestowed on 
+me. I also thank all the divine hands known and unknown for the 
+support all over these years. May the glory be to the Almighty.
+I have often thought, and true to it, that I was in the right country, 
+the right city and institution and above all with the right person 
+at the right time in this my academic endeavour. I am most hum -
+bled and grateful to my lead supervisor, Prof. Dr. Anne Storch for 
+all her tremendous support and counsel all over the years. The crit-
+ical comments, corrections and general suggestions have forged the 
+successes of the research and my academic life in general. Indeed, 
+you are an epitome of a “Doktormutter” by all standards.
+My sincere gratitude also goes to the co-supervisor of the thesis, 
+Prof. Dr. Gerrit J. Dimmendaal, for his great insights and contribu-
+tions. To the entire faculty and colleagues at the Institute of African 
+Studies, my encounters with you during the diverse seminars and 
+conferences over the years have imbued me with more knowledge 
+and understanding. It has been a great pleasure having met you.
+I forever remain indebted to the Yaa Naa, king of Dagbon and 
+his entourage of elders. Yoo Naa, Abdulai Yakubu Andani who 
+was then the Kampakuya Naa, regent of Dagbon paved the way for 
+the success of my field research. The relentless support of Namoo 
+Naa Abdulai, the chief of all praise poets amongst the Dagbamba, 
+Dakpema Dema Naa Adam Musah and the diverse praise poets of 
+rank and file who dedicated their time to explain the art of praise 
+poetry and also granted me the permission to record diverse per -
+formances deserve commendation. In fact, the general support I 
+--- [PAGE 7] ---
+had from chiefs, elders and Dagbamba I encountered during my 
+research stays in Dagbon and beyond was overwhelming. To all the 
+lunsi, praise poets of Dagbon and the Naanima , chiefs of Dagbon, 
+I am humbled by your institutions and general insights. To all 
+my research assistants, especially Olivier Zakaria Abdulai and 
+Ringo Azumah, you have been very instrumental throughout this 
+research endeavour. I appreciate your support. 
+The late Prof. Kofi Awoonor enkindled in me the passion for oral 
+traditions. Prof. Kofi Anyidoho and Dr. Mawuli Adjei nurtured my 
+academic life. Dr. Samuel Atintono and Prof. Ephraim Avea Nsoh 
+have been great mentors over these past few years. I am grateful to 
+you all. 
+My research stay in Germany was made possible by a Deutscher 
+Akademischer Austauschdienst (DAAD) scholarship; and I am 
+most grateful for the opportunity. My sincere gratitude also goes to 
+University of Education, Winneba, Ghana Institute of Linguistics, 
+Literacy and Bible Translation (GILLBT) for their diverse contri -
+butions towards this research endeavour. My research stays at the 
+field were largely supported by the Institute of African Studies – 
+University of Cologne (DFG; Prof. Dr. Anne Storch); without which 
+an achievement of the research objectives would have been futile. 
+Lastly but not the least, my sincere thanks also go to Anthony 
+Agoswin Musah PhD, Chief Dr. Samuel Alhassan Issah and Mr. 
+Emmanuel Terkpetey, my Ghanaian expatriates in Germany and 
+their dear families, who supported my academic work and life 
+during my stay in Germany. To my family and friends, I thank you 
+for the prayers, encouragements and support throughout the years.
+--- [PAGE 8] ---
+Table of Contents
+Chapter 1
+1.1 Introduction       12
+1.2 The Dagbamba      16
+1.3 Demography      23
+1.4 Praise Poetry in Dagbon    26
+1.5 Socio-Cultural Activities     30
+1.6 Beliefs and Practices      32
+1.7 Dagbamba Musical Traditions   33
+1.8 Structure of the Study     35
+Chapter 2
+2.1 Introduction       37
+2.2 Significance of the Study    39
+2.3 Problem Statement      40
+2.4 Research Objectives     41
+2.5 Scope of the Research    43
+     2.5.1 Data Collection and Research Procedures 45
+     2.5.2 Choice of Texts in Appendice    49
+2.6 The Language: Dagbani    51
+2.7 Notes on Translation     54
+2.8 Limitations and Delimitations    56
+2.9 Definition of Concepts    57
+Chapter 3       
+3.1 Introduction       60
+3.2 The Praise Poem and the Panegyric   61
+3.3 Literature Review     65
+--- [PAGE 9] ---
+3.4 Theoretical Justifications and Methodologies   69
+     3.4.1 Performance Theory    81
+     3.4.2 Ethnopoetics Theory    88
+     3.4.3 Oral Formulaic Theory    90
+     3.4.4 Cognitive Poetics Theory    93
+     3.4.5 Text Linguistics and Discourse Analysis Theories 94
+3.5 Conclusion       97
+Chapter 4
+4.1 Introduction       99
+4.2 The Performance Contexts of the Dagbamba Panegyrics 104
+4.3 The Performer      108
+     4.3.1 The Process of Apprenticeship   113
+     4.3.2 Gender Roles versus the Art of Praise Poetry in Dagbon  117
+4.4 The Patron(s)     119
+4.5 The Audience      122
+4.6 The Texts      124
+     4.6.1 Orality versus Literacy: The Praise Poet in Recent Times 130
+4.7 Setting and the Pragmatics of Costumes  131
+     4.7.1 The Events of Performance of Dagbamba Panegyrics 133
+     4.7.2 The Drum and other Accompaniments  135
+     4.7.3 Dress Codes in Silent Communication    140
+4.8 Emerging Verbal and Non-verbal Cues at the Event of  
+     Performance       148
+     4.8.1 Verbal Cues     149
+     4.8.2 The Semantics of Sound and Silence  150
+     4.8.3 Non-verbal Cues     154
+4.9 Conclusion       159
+--- [PAGE 10] ---
+Chapter 5 
+5.1 Introduction       161
+5.2 Typology and Classification     165
+5.3 Purpose and Function    166
+5.4 Subjects of Praise      168
+5.5 Recurrent Motifs and Themes   171
+     5.5.1 The “Ancestor” Yaba Motif and its translation to the 
+      First Son, Zuu      172
+     5.5.2 Themes      177
+5.6 Content and Style of Composition   180
+5.7 Point of View     190
+5.8 Tone and Mood     191
+5.9 Linguistic Conventions    193
+     5.9.1 Syntax: Structure of the Dagbamba Panegyric 194
+      5.9.2 Diction: The Morphology of the Dagbamba Panegyric  195
+5.10 Prosodic Features     200
+     5.10.1 Rhythm      201
+     5.10.2 Ideophones and Interpolations   203
+     5.10.3 Formula, Repetition and Parallelism   205
+     5.10.4 Call-and-Response Patterns   210
+     5.10.5 Consonance, Alliteration and Assonance   211
+5. 11 Figurative Conventions     213
+     5.11.1 Imagery and Symbolism    214
+     5.11.2 Allusions      218
+     5.11.3 Hyperbole, Irony and Rhetorical Questions  220
+     5.11.4 Aphorisms      222
+5. 12 Conclusion       224
+Chapter 6 
+6.1 Introduction       227
+6.2 Conclusions       227
+6.3 Recommendations      232
+--- [PAGE 11] ---
+Appendix 
+Appendix A 
+Dagbamba Panegyrics (Salima)      249
+     Text I       249
+     Text II       258
+     Text III       275
+     Text IV       284
+     Text V       302
+Appendix B 
+Excerpts of Dagbamba Panegyrics    307
+     Excerpt I       307
+     Excerpt II       307
+     Excerpt III       309
+Appendix C 
+Kings of Dagbon (Naanima) – From Naa Gbewaa to Yaa 
+Naa Bukari II        313
+--- [PAGE 12] ---
+12
+Background of the Dagbamba 
+and their Art of Poetry
+CHAPTER 1
+1. 1 Introduction
+Language is novel, and more novel are the products of language, 
+and even most novel is the employment of language in artistic enter-
+prises. Human creativity abounds in diverse fields, and language 
+is no exception. It could be said, and true to it, that the artistic use 
+of language is as old as language itself. It is well acknowledged 
+linguistically that even usual conversations in some languages in 
+particular often employ unique creative innovations to express 
+concepts and ideas. No doubt Otto Jefferson in his profound quote 
+maintains that “the genesis of language is not to be sought in the 
+prosaic, but the poetic side of life [...]” (Yule 1996: 1).
+Since time immemorial, virtually all known cultures found 
+it worthwhile or perhaps gratifying to express their beliefs and 
+thoughts in diverse artistic forms. Most artistic creations were 
+mostly meant to commemorate some socio-cultural and religious 
+--- [PAGE 13] ---
+13
+functions. Artistic creations in languages were intended purposely 
+to teach, delight or move people into action and in some cases, a com-
+bination of the three as maintained by Horace as per the classical 
+Roman view of the verbal arts in particular.
+Prior to the invention of writing, the artistic products of lan -
+guage were generally passed down from one generation to the other 
+by word of mouth: usually memorised and performed repeatedly 
+on many occasions and gradually gets ingrained in the minds of the 
+participants or the budding generations. In traditional African com-
+munities, one fertile ground for the propagation of oral traditions 
+was by storytelling sessions usually referred to as “by the fireside.” 
+Apart from this popular performance situation, other oral tradi -
+tions, as is the case of Dagbamba panegyrics, were formally taught 
+by renowned experts in the art of praise poetry and performance 
+as a whole. Some apprentices could stay with their masters and or 
+serve their masters for quite a considerable number of years. In some 
+cases, apprentices remained with their masters throughout their 
+lives. Quite apart from these settings, there are other known oral tra-
+ditions that were deemed secret or taboo and needed to be taught in 
+unique settings or situations. Typical cases in point are dirges and 
+war songs amongst some particular cultures.
+In the wake of globalisation, factors such as formal education, 
+rural-urban migration, information communication technology, 
+and their associate currents as manifested in trends in the moderni-
+sation process, the crave for oral traditions especially in developing 
+communities of which Dagbon is no exception leaves much to be 
+desired. While older generations die with their songs, the younger 
+generations are being drawn to other cultural artistic forms through 
+the mediums of radio, television and the cinema: wherein they are 
+influenced by foreign musical forms such as hip-hop and their con-
+sequent adaptation into a synthesis of diverse musical forms such 
+as hip-life in Ghana, to the disregard of their oral traditions. Sig -
+nificantly however, the oral traditions as the verbal arts that are not 
+--- [PAGE 14] ---
+14
+given the necessary attention by the youth possess far better novel-
+ties than the coming generations can envisage.
+It should be noted that though the acolytes of the praise poetry 
+tradition in Dagbon may be declining, the tradition is nonetheless 
+vibrant as it occupies a central stage in Dagbamba culture. Ojaide’s 
+observations of the Udje poetic performance may be likened to the 
+case of Dagbamba praise poetry principally. Writing on the oral 
+poetic performance of Udje in recent times, Ojaide (2015: 237) points 
+out that: “One may feel that the condition of traditional African lit-
+erature in contemporary times has been exacerbated by the forces of 
+globalization which threaten its very existence.” He however con -
+tends that: “The new literature that arose from literacy did not stop 
+the composition and performance of traditional literature.”
+By far, the greatest creative achievement of the Dagbamba to say 
+the least, is their praise poetry. Praise poetry is synonymous with 
+the Dagbamba because they have a long history of conquests and 
+kings passed on from one generation to the other; spanning centu-
+ries of their establishment of the Dagbon state in the 15 th cent ury. 
+The Dagbamba praise poetry or panegyrics to be specific are orally 
+composed texts that were constructed purposely to glorify Dag -
+bamba kings or chiefs and also uphold historical accounts of the 
+royals and the happenings in the annals of Dagbon in general. 
+This research is therefore focused on the panegyrics amongst 
+the Dagbamba of Northern Ghana. It explores the beliefs, values 
+and ideas that surround the texts and examines the diverse dis -
+tinctions and adaptations that pertain in the renditions of the 
+panegyrics and the general contexts as a whole. There are some 
+linguistic or literary elements that are limited to the written word. 
+However, the spoken word entails quite overwhelming diverse 
+and unique paralinguistic figurative elements as well as linguistic 
+elements as the texts are conceived and performed orally.
+For a better appreciation of the creative inventiveness of the 
+Dagbamba praise poets as manifested in their panegyrics, this 
+--- [PAGE 15] ---
+15
+study adopts an interdisciplinary approach in its examinations. 
+A deeper understanding of oral forms as Dagbamba panegyrics 
+require an in-depth understanding of the world-view that shapes 
+such a tradition. An examination of the general and situational 
+contexts of the Dagbamba as a people and of the panegyrics in par-
+ticular offer deeper insights into the world-view and circumstances 
+that shape the texts. In his essay titled “The discipline of literary 
+studies” , Olsen (2016: 50) is quite emphatic that “[...] while some 
+kind of information about the attitudes, beliefs, and generally the 
+personal situation of the author will be irrelevant, some such infor-
+mation will be illuminating.”
+This study therefore begins with the premise that a study of oral 
+traditions as Dagbamba panegyrics requires a deeper understanding 
+of the world-view and situational contexts in which the texts are per-
+formed. For the purposes of our discussions consequently, it will be 
+significant to trace if only briefly some historical events that relate 
+to Dagbamba kings or chiefs and lunsi as maintained in Dagbamba 
+historical accounts and some other documented accounts as well. 
+Originally, praise songs or panegyrics for that matter were meant to 
+accompany chiefs in public hearings. In recent times, however, praise 
+poetry has scaled over the walls of royal courts and lurks in public 
+squares in solicitation of reward or money, and quite recently, to 
+praise some other public or political figures.
+Dagbamba praise songs are embroidered in figurative language 
+and are especially laden with epithets, metaphors and allusions. They 
+are also proverbial with idioms and sayings rooted in Dagbamba 
+world-view and cultural environment. The novelty of technique in 
+this cannot be overemphasised. To ascertain the literary merits of 
+the Dagbamba panegyrics, it becomes crucial for a study as this to 
+examine both linguistic and literary features of the Dagbamba pane-
+gyrics as unique poetic renditions. Literary analysis or poetic analyses 
+for that matter normally hinge on the figurative use of language, 
+which is generally linguistic or expressed in words for that matter. 
+--- [PAGE 16] ---
+16
+1.2 The Dagbamba
+Dagbon was originally occupied by the Tinbihi , indigenes, before 
+the arrival of the Nabihi , royals; the Dagbamba proper. In Dagbon 
+today, both the Tinbihi and Nabihi have become one and the same 
+people known as the Dagbamba. Dagbamba (Dagbana SG.) are often 
+referred to by many writers or people in general as Dagomba(s) . 
+However, no Dagbana in the strictest sense ever refers to himself or 
+herself as a Dagomba or his or her people as Dagombas. These are 
+anglicised forms of Dagbana and Dagbamba respectively.
+The Dagbamba consist of diverse clans, who assume some 
+respective socio-cultural, economic, and political roles in Dagbon. 
+Essentially, these respective clans trace their origins from one 
+or more ancestors related by blood, the clans are based on some 
+respective expertise and there is mutual respect within the diverse 
+clans and for all clans. Amongst these main clans, there are further 
+classifications which are based on ranks, roles, sex, or age amongst 
+some other factors. Hence, quite apart from the main chief who 
+hails from the royal clan, all other clans have a chief, elders and rep-
+resentatives in matters of the Dagbon state as a whole.
+The royal clan is known amongst the Dagbamba as Naanima, the 
+drummer clan is known as Lunsi, the warrior clan is known as the 
+Sapashinima, the butchers are known as Nakohanima, the blacksmiths 
+are known as Machelenima , the hunters are known as Tohanima , 
+the undertakers are known as Kasikribanima , the Moslem clerics 
+are known as Afanima, and the barbers are known as Wanzamnima 
+amongst other clans. In fact, most, if not every socio-cultural role 
+vital to the day to day activities and well-being of the Dagbamba 
+belongs to such categories as mentioned above. In some instances, 
+some roles or duties that do not necessarily belong to some spe -
+cific categories are entailed in some of the stated clans. Apart from 
+farming that cuts across all the clans in Dagbon virtually all known 
+occupations are the prerogative of some respective clans. Perhaps, 
+--- [PAGE 17] ---
+17
+one known occupation that is common with many societies but is 
+non-existent amongst the Dagbamba known clans is fishing. Rea-
+sons for the non-inclusion of the fishing occupation amongst the 
+Dagbamba could be attributed to their geographical setting. The 
+Dagbamba communities are generally not located around water 
+bodies to have made fishing a viable occupation. 
+In the cultural Dagbamba settings, these clan systems are 
+strictly adhered to by the people (Oppong 1973). In fact, there is no 
+ horizontal mobility from one clan to the other. Once one is born into 
+a clan, he or she remains in the clan for his or her entire life. Vertical 
+mobility within the clan is, however, the norm. For instance, based 
+on the clan and the community one finds himself or herself in, one 
+can rise in diverse ranks within the set roles identified by the clan in 
+question.
+It is significant to note that in the wake of globalisation, how -
+ever, some Dagbamba from the diverse castes as stated above have 
+rolled into modern positions as managers, directors, lawyers, doc-
+tors, nurses amongst the host of other fields available for those who 
+have had formal education. Formal education has therefore eased 
+the movement of some Dagbamba from one field or occupation to 
+the other. However, in most instances, when you meet a Dagbana  
+in any part of the country with the profession of a butcher, then he 
+is indeed from the butcher clan just as when a Dagbana drummer 
+is found in any part of the country, the probability of him being 
+from the drummer clan is nearly a hundred percent. That is to say, 
+ Dagbamba are somewhat stark to their clans unless where or what 
+they are switching to is not constituted by the Dagbamba ancestors.
+With respect to the origin of the Dagbamba, they trace their 
+ancestry from Tohajie, which translates as ‘red hunter’. It is from 
+Tohajie that the Mole-Dagbani as a people spring. The story is told 
+that Tohajie migrated from the East of Chad and moved through 
+to Zamfara in Northern Nigeria, after which he further migrated 
+to Mali through to Burkina Faso, where he settled. Tohajie begot 
+--- [PAGE 18] ---
+18
+ Kpogonumbo who ruled in Biun, Burkina Faso. Kpogonumbo 
+begot Gbewaa from one of his wives, the princess of Grumah. It 
+is from Gbewaa that the ruling class of the Dagbamba trace their 
+latter descent. It is therefore of little doubt or no doubt at all that the 
+palace of the Yaa Naa, the overlord of Dagbon, is referred to as the 
+Gbewaa Palace.
+As a result of disputes after the death of Kpogonumbo, history 
+maintains that Gbewaa migrated to Ghana, where he set up the 
+foundation of Dagbon Kingdom in Pusiga, in the northeastern part 
+of Ghana. Zirili, Tohagu and Sitobo, the first, third and youngest 
+sons of Gbewaa all respectively succeeded their father in succes -
+sion after his demise. It was during the reign of Tohagu that the 
+capital of the then Dagbon was moved from Pusiga to Gambaga. 
+History also has it that the grandson from the only daughter 
+(Yaniega) of Tohagu established the Mossi state in Burkina Faso. 
+Specifically, however, Tohagu, Mantambo and Sitobo, all sons of 
+Naa Gbewaa founded the Mamprusi, Nanumba and Dagbamba 
+States respectively.
+It was Sitobo who established the new Dagbon state. Sitobo 
+is therefore credited not only as the founder of Dagbon state, but 
+also as the originator of the title Yaa Naa , which loosely translates 
+as ‘king of power’ or ‘king of all’ , and the functions ascribed to the 
+skin. While some kings or chiefs are either enthroned or enstooled, 
+Dagbamba kings or chiefs and that of their northern neighbours are 
+enskinned (Macgaffey 2013).
+Subsequently, Yaa Naa Nyagse, son of Sitobo, later built the 
+new capital of Dagbon at Diari. Yaa Naa Nyagse reined between 
+1416 and 1432. After Yaa Naa Nyagse came an array of other kings. 
+There are notably about thirty-nine (39) kings to have ascended the 
+Yendi Skin, Yaa Naa Sitobo being the first. For the purposes of our 
+study, some of these kings, as with respects to their contributions 
+to Dagbon in one way or the other, as far as Dagbamba cultural her-
+itage or Dagbon principally is concerned, crave for attention. 
+--- [PAGE 19] ---
+19
+Yaa Naa Zangina, who reigned between 1648 and 1677 , is cred-
+ited as the initiator of diverse cultural practices of the Dagbamba 
+(Mahama 2004). The way and manner in which Dagbamba festivals 
+and funerals are celebrated are from his initiatives. Several other 
+socio-cultural celebrations are said to have been initiated by Yaa 
+Naa Zangina. Perhaps, the most significant and palpable initiation 
+by Yaa Naa Zangina that has woven into the cultural and religious 
+fabrics of the Dagbamba was Islam.
+Islam was introduced to the Dagbamba in the 17 th century 
+under the reign and conversion of the then Dagbon Yaa Naa Zan -
+gina. Since the 17 th century, Islam has been well entrenched 
+amongst the Dagbamba and it has gained a strong influence from 
+their traditional belief systems. This is evident in their festivals; 
+especially the Damba festival and other day to day activities. Islam 
+is so entrenched in Dagbon to the extent that Afanima, the Moslem 
+clerics, play significant roles in Dagbon courts and Dagbon as a 
+whole. The Afar  is revered to the extent that he sits in state with 
+the Yana and other chiefs. Prayers and intercessions as far as the 
+skin and people are concerned are the prerogative of the Afanima . 
+In fact, Islam and traditional Dagbamba religious practices have 
+become closely knit in most respects that it becomes difficult to tell 
+where one begins and ends.
+It should be noted that chieftaincy remains one of the most 
+revered institutions in Dagbon amidst infiltrations of modern 
+democracy and its currents. Perhaps if any institution should be 
+noted as standing its grounds amidst globalisation and its atten -
+dant currents in Dagbon, then it is the chieftaincy institution. 
+Dagbon chieftaincy still maintains an influential role in the lives of 
+the Dagbamba, partly on grounds that the chieftaincy institution 
+is well revered by all and sundry. There are diverse other reasons 
+that may account for the high degree reverence of the chieftaincy 
+institution amongst the Dagbamba. Salifu (2010: 39) for example 
+maintains that:
+--- [PAGE 20] ---
+20
+The chief is an incarnation of the gods and ancestral spirits, and as such 
+is accorded the utmost reverence. The ruler is both andunia naawuni 
+‘earth’s god’and buɣa siɣilana “reincarnate of the ancestral shrines”. 
+This reflects in all spheres of the people’s lives, so that whoever wishes 
+to prosper would do well not to incur the wrath of these deities or their 
+representative.
+One other significant thing worthy of mention is that quite apart 
+from a well-set lineage or clan, for that matter, to occupy Dagbamba 
+skins, chieftaincy skins are generally rotational. It implies that one 
+who occupies a skin may rise to another skin or chieftaincy position 
+of more prominence. More so, there are some skins meant for those 
+known traditionally to be fathers of the Yaa Naa. As an example, 
+the chieftaincy of Kuga, Kuga Nam, is reserved particularly for Naa 
+Yabsi, fathers of the Yaa Naa. Other skins are also meant for the 
+sons of the Yaa Naa, known as Naa Piriba . It should be noted that 
+these father and son relationships between the Yaa Naas are based 
+on Dagbamba cultural prescriptions and dictates as with descent, 
+rather than mere age differences. More so, about five skins can 
+only be occupied by daughters of the Yaa Naa and one other skin 
+or chieftaincy position occupied by both male and female chiefs in 
+succession. Staniland’s (1975: 17 , original emphasis) assertions of 
+Dagbamba chieftaincy are worth quoting at length:
+Perhaps the most distinctive feature of Dagbamba chieftaincy was its 
+system of promotion. Young men of the blood royal usually started 
+on the ladder of promotion by appointment to small villages, moving 
+upwards until they reached divisional capitals and ultimately, if they 
+were qualified and fortunate, the paramount chieftaincy itself. Promo-
+tion and competition for office were limited above all by one rule: 
+that no man could rise higher than his own father. The most impor -
+tant implication of this rule was that only the sons of a Yaa Naa could 
+become Yaa Naa. But, of course, this provision did not eliminate 
+--- [PAGE 21] ---
+21
+competition: it merely structured the field. There were always several 
+qualified candidates, even for Yendi. For all chieftaincies under Yendi 
+the choice ultimately lay in the discretion of the paramount: even the 
+highest degree of eligibility did not confer the right to a skin.
+The Yaa Naa, chief of Yendi is the overlord of Dagbon, the king or 
+paramount chief of the Dagbamba. Other notable chiefs include the 
+Mion/Sambu Lana, Savulugu/Yoo Naa, Karaga Naa, Kumbungu 
+Naa, Tolon Naa, Gushegu Naa and Gukpegu Naa. Other custodian 
+chiefs are Tugere Naa, Gomli Naa, Kpatihi Naa, Ballo Naa, Boga 
+Naa, Kumlana, Kuga Naa and Zohi Naa. The skins that are occu -
+pied by women precisely, the daughters of the Yaa Naa are Gundo 
+Naa, Kpatui Naa, Kogulugo Naa, Shailim Naa and Tuya Naa in a 
+descending order of ranks or seniority.
+There are some particular chieftains that cannot rise from the 
+chieftaincy they occupy. However, for one to ascend to the paramount 
+skin in Yendi, one necessarily must have been the Gbon lana, that is 
+the direct son of the chief who normally acts as the regent. The other 
+three royals who can compete with the Gbon lana must be chiefs of 
+Savulugu, Karaga or Mion/Sambu. These are the only four persons 
+or positions that can ascend Yani (the Yendi/paramount skin).
+Generations on, the royal class has grown in number. The 
+contestations for chieftaincy titles grow fierce with the coming gen-
+erations. Chieftaincy disputes become the order of the day with the 
+most contested being the position of the Yaa Naa (Staniland 1975, 
+Ladouceur 1972). Ladouceur (1972: 98) is quite certain that “[t]he 
+Dagbamba are strongly attached to the institution of chieftaincy, 
+which partly accounts for the intensity with which conflicts over 
+chieftaincy are carried out. It is considered particularly disgraceful, 
+for example to allow a chieftaincy to pass away from one’s family or 
+to be lost to one’s “gate”.”
+Two step brothers of the late Yaa Naa Yakubu, popularly known 
+by the appellate “Yakubu Nantoo” , who reigned between 1824 and 
+--- [PAGE 22] ---
+22
+1849, annexed the paramount skin in Dagbon. They are Yaa Naa 
+Abdulai and Yaa Naa Andani, hence the known gates of the Andani 
+and Abudu. Abdulai (Abudu) was the elder and reigned between 
+1847 and 1876. After the demise of Abdulai, Andani reigned between 
+1876 and 1899. With respect to chieftaincy disputes in Dagbon, the 
+most recent one is a case in point. It is worth noting that chieftaincy 
+disputes also rare their ugly heads amongst other people in Ghana 
+as a whole and amongst some of the immediate neighbours of the 
+Dagbamba in particular (Awedoba 2012, Mahama 2003).
+Dagbon was divided for so long a time after the decapitation of 
+the Yaa Naa, Yakubu Andani and the murder of some notable elders 
+on the 27th March 2002. The dispute, as to who murdered the Yaa 
+Naa and some of his elders and who should be enskinned as the 
+next Yaa Naa after the late Yaa Naa, Yakubu Andani was between 
+the Andani and Abudu gates – the sole lineages that can ascend 
+the paramount skin. Upon several disputes and the consequent 
+failures of governments to resolve the chieftaincy dispute, the late 
+king’s son, Kampakuya Naa Abdulai Yakubu Andani was made the 
+regent in the year 2006 (Mahama 2009b).
+On Friday, the 18th of January 2019, Ghana witnessed a historic 
+coronation of the king of Dagbon, Yaa Naa Abubakari Mahama 
+II. This coronation or enskinment for that matter in the traditional 
+parlance is historic for some notable reasons. The last of such a cor-
+onation in Dagbon dates back to 31 st May 197 4, which marked the 
+coronation of the former king, Yaa Naa Yakubu Andani. Hence, 
+very few Dagbamba were present at the last grand coronation of the 
+king of Dagbon. The mere sight of the multitudes of people flooding 
+in from all walks of life and parading the streets of Dagbon, most 
+especially the crowds that joined the chief of Kumbungu on horse-
+back and his entourage of elders on their journey to Yendi was an 
+amazing spectacle. This act is very symbolic and mandated by the 
+customs of Dagbamba in as far as the coronation of a new king is 
+involved. Considering the diverse cultural practices that were 
+--- [PAGE 23] ---
+23
+enacted during the coronation of the king of Dagbon, there is no 
+slightest doubt that indeed the Dagbamba had invented a magnif -
+icent tradition that baffles human imagination. Power therefore as 
+vested in the Dagbamba chiefs and elders is manifested diversely. 
+For instance, the regalia and general adornments of chiefs and that 
+of horses in most respects exude power and authority. Here, even 
+hats as with respect to their type, colour, posture and general amu-
+lets speak volumes. Hobsbawm (1983: 1) opines that:
+Invented tradition is taken to mean a set of practices, normally governed 
+by overtly or tacitly accepted rules and of a ritual or symbolic nature, 
+which seek to inculcate certain values and norms of behaviour by repe-
+tition, which automatically implies continuity with the past. In fact, 
+where possible, they normally attempt to establish continuity with a 
+suitable historic past.
+Cannadine (1983) offers insightful descriptions and explanations of 
+the changes in the nature and context of English royal ceremonies, 
+which general pageantry and monarchy may be likened to the case 
+of Dagbamba ceremonies.
+1.3 Demography
+Dagbon, the land of the Dagbamba as it is affectionately called by the 
+natives is found in the northern part of Ghana; located particularly  
+in the northern region of Ghana. The people are known as the Dagbamba, 
+the anglicised form of Dagbamba as the natives refer to themselves. 
+They speak Dagbani or Dagbanli, depending on the speaker. 
+Yendi is the paramount town and capital of the Dagbamba and 
+importantly, the spiritual and cultural heart of the Dagbamba. 
+The once ten regions of Ghana were further divided in 2018 by 
+the National Patriotic Party government to constitute sixteen (16) 
+--- [PAGE 24] ---
+24
+regions. A referendum on the creation of the six additional regions 
+was held on the 27 th of December 2018. In this referendum, votes 
+were in favour of the creation of the six new regions. Dagbon still 
+remains under the erstwhile northern region, with its regional cap-
+ital being Tamale as before.
+The Dagbamba are said to number about one million, one hun-
+dred and sixty thousand (1,160,000) (UNSD 2013). Dagbon covers 
+about 20,000 square kilometres and consists of ten administrative 
+districts, namely: Tamale Metropolitan, Yendi municipal, Savulugu 
+municipal, Sagnerigu municipal, the Karaga district, the Nanton 
+district, Gushegu district, the Tolon-Kumbungu district and the 
+Zabzugu district respectively.
+The region which the Dagbamba inhabit is savannah grassland 
+with scattered trees. There are mainly two seasons, namely: the 
+dry and rainy seasons, respectively. The period that is stated as the 
+rainy season alters with time as a result of global warming and other 
+such related factors and may span between the periods of April 
+Figure 1.1: Map of the Dagbamba of Ghana (by Monika Feinen, 2019)
+--- [PAGE 25] ---
+25
+and September. The remaining months are generally dry, with the 
+raging harmattan weather, thus classified as the dry season.
+Traditional Dagbamba houses are usually constructed with mud 
+and roofed with thatch. In recent times, however, thatched roofs 
+have been substituted mostly with metallic sheets as zinc and alu-
+mina. There has also been a surge of structures constructed with 
+blocks in most suburbs of Dagbon. The Dagbamba are a patrilineal 
+society with traditional polygamous households. As such, some 
+men may be found with more than a single wife. External family ties 
+are cherished by the Dagbamba as compared to nuclear family ties. 
+A typical Dagbamba compound may comprise of the husband, wife, 
+children, parents (mostly that of the husband) and some dependents 
+(see also Stuffelbeam 2014: 46–55 for further elaborations).
+As a patriarchal society, Dagbamba compounds are organ -
+ised mainly on patriarchal basis. Each married man is recognised 
+as the head of his respective family. More so, related families may 
+live together in one compound. Amongst related married siblings 
+either domiciled in one compound or not, the eldest amongst them 
+serves as the lineage head. Yet, amongst lineage heads who trace 
+their ancestry to one particular individual, the eldest amongst them 
+serves as the clan head. In the respective Dagbamba communities, 
+therefore, the clan heads serve as elders of the community which 
+normally has a chief as the main authority. 
+The Dagbamba are generally engaged in agriculture. Whereas 
+many raise animals and grow crops in subsistence, a few others 
+raise animals and grow crops on commercial basis. Amongst a host 
+of farm produce, the Dagbamba are well noted for the cultivation 
+of diverse varieties of yam. They also grow cereals such as maize, 
+millet, rice, sorghum, peanuts, beans and several other vegeta-
+bles, most important amongst which is okra. Fowls, guinea fowls, 
+goats, sheep and cattle are the common animals raised either in 
+subsistence or on commercial basis by the Dagbamba. Quite apart 
+from mango and pawpaw in particular, most fruits known to the 
+ Dagbamba are mostly gotten from the wild.
+
+--- [PAGE 26] ---
+26
+1.4 Praise Poetry in Dagbon
+Dagbamba have a rich and diverse culture and amongst other oral 
+traditions, perhaps their praise poetry, salima,  stands out as their 
+origin is inextricably woven on chieftaincy, which finds its grandeur 
+in the clan of praise poets known as the lunsi. Poetry, in its diverse 
+manifestations or the panegyric in Dagbamba contexts in particular 
+is shrouded in secrecy. How poetry or the word and its associated 
+actions translate into power is quite revealing. Power is significantly 
+defined by words; the more their potency to qualify in exultation 
+the better. There is no doubt therefore that the performances of the 
+Dagbamba panegyrics serve as catalysts to project power, its rele -
+vance and continuity. There is no chief in Dagbon without praise 
+poets. In fact, the presence of the former implies the later. The two 
+titles are central to Dagbon and go in tandem. Hence, every para-
+mount, divisional, sub-divisional chiefs and chiefs who head 
+communities will normally move with their personal orchestra of 
+drummers. More often than not, the more the number of the praise 
+singers, the greater the respect. However, true substance lies in 
+parading the best praise poets: those well versed in stringing grand 
+appellations of kings or chiefs in royal courts. Writing on the role of 
+the African musician, Kinney (1972: 258) maintains thus:
+The role that the African musician plays in relation to his chief is essen-
+tially one of mutual dependence. The musician depends upon the 
+ceremonies and other obligations of the chief in order to fulfil his func-
+tion as an artist and to gain recognition for himself. The chief, in turn, 
+depends upon the reliability of the musician to maintain the dignity 
+both of himself and his subjects and the relevance of the traditions.
+The art of performance, of which praise poetry performance is no 
+exception is generally the prerogative of the lunsi clan. As a posi -
+tion dictated by custom, one must have necessarily descended from 
+--- [PAGE 27] ---
+27
+a family of lunsi to be regarded as one. The lunsi, to say the least, are 
+the heartbeat of the Dagbamba. They are generally indispensable 
+in all life endeavours in Dagbon. They are present either in times of 
+sorrow or joy. They are involved in all cultural celebrations. These 
+celebrations may range from rites of passage, festival, durbars and 
+work amongst a host of other diverse celebrations. Writing on the 
+Damba festival for instance, Kinney observes that “the role of the 
+drummer in the Damba festival is certainly one most important for 
+he must be active in every major event that takes place. He must be 
+prepared to play and sing the prescribed music which dramatizes 
+the history of his people” (1972: 264).
+The craft of the lunsi  is referred to in Dagbani as luntali . The 
+luηa is an hour-glass shaped drum played by the lunsi  and serves 
+as a conceptual metaphor of the lunsi . No doubt both drum and 
+drummer are known by the same term luηa; the two are one and the 
+same. Quite apart from the term lunsi, which designates a respective 
+Dagbamba clan of praise poets, the term Daanga (Bansi PL) generally 
+connotes a singer or performer. 
+“In Dagbon, the drummers ( lunsi) are court historians, musi -
+cians, geographers, consultants, advisers, judges, and chroniclers 
+of the past and recorders of the present. They are also teachers, 
+researchers, and carvers” (Abdallah 2010: 1). The lunsi are versatile 
+artists with complex functions. Traditionally, the lunsi are regarded 
+as praise singers for the royal courts. They can best be described as 
+historians par excellence of the royal courts, communities and the 
+Dagbon kingdom as a whole. They are social as well as cultural 
+commentators (see also Oppong 1968, 1969).
+It is expected of the lunsi to have knowledge of the chiefs and 
+their ancestors. The appellations of chiefs or perhaps their subjects 
+of praise are particularly of great significance. The deeds, mostly 
+noble, of the chiefs and their places and circumstances of birth are 
+also of significant importance. In addition, the names and deeds of 
+elders and other distinctive loyal subjects need also to be known by 
+--- [PAGE 28] ---
+28
+the praise poets. As a whole, “[t]he unbroken historical narrative 
+and royal genealogy which they remember and recite is the charter 
+of the political structure of the kingdom, and the story of the origins 
+of the people, and as such is vital to the continuity of the traditional 
+system” (Abdallah 2010: 8).
+Dagbamba maintain that the praise poets have such unique 
+memory capabilities because the art of poetry runs in their veins. 
+Some other persons also maintain that the memory techniques of 
+the Dagbamba praise poets are further enhanced by the employ -
+ment of charms. It is not that easy to ascertain the potency of charms 
+in the praise poetry performances as Dagbamba panegyrics, 
+though its impacts cannot be in doubt. The drum as well as the 
+drummer are accorded significant respects. They may be fortified 
+with charms to enhance better delivery and reception. This belief 
+to say the least, is mainly due to the ability of drummers to hold 
+patrons and audience alike spellbound in their art of performances.
+Perhaps a brief rendition of the history of the drummers or 
+praise poets´ clan may point to how a people appropriated the 
+rubrics of memory, delivery and performance as a whole. The plight 
+of a young prince was bound to establish a distinctive vibrant clan 
+in the cultural fibre of the Dagbamba for centuries and would last 
+in the annals of Dagbamba existence. Dagbamba oral traditions 
+have it that the father and ancestor of the lunsi, the drummer clan, 
+is Bizung. It is from Bizung that all drummers in Dagbon trace 
+their ancestry. Bizung was a prince born to Naa Nyagse, the then 
+Yaa Naa and overlord of Dagbon who reigned between 1416–1432. 
+The mother of Bizung is said to be Napaga Faniriba, who later died 
+leaving Bizung and his elder brother Zima.
+Living in a polygamous household that consists of many wives 
+and mothers for that matter, the brothers did not receive the neces-
+sary attention after the demise of their mother. Feeding was in fact a 
+problem as their mother was not around to prepare their meals. The 
+story maintains that Bizung and his elder brother Zima espoused 
+--- [PAGE 29] ---
+29
+a strategy of playing calabashes to entertain their step siblings in 
+return for food at meal times. Other accounts maintain that Naa 
+Nyagse asked the orphaned brothers to play the calabashes at meal 
+time to remind him of their presence as he was busy with matters of 
+his state that could lead him to forgetfulness to which Bizung and 
+Zima obliged. And so was the beginning of the art of drumming.
+In Yaa Naa Nyagse’s conquests of the Tindannima , the indige -
+nous populace of Dagbon, he reached a town known as Diari and 
+to his utter dismay, instead of the inhabitants of Diara fleeing as 
+was usually the case or welcoming him with fright, they welcomed 
+him with pleasant rhythms played with the shells of snails. In their 
+performances, they eulogised Naa Nyagse with fond memories 
+of his ancestry and conquests. Delighted by their performances, 
+he spared them and told them of his two sons, Bizung and Zima, 
+and how they were also engaged in such a music enterprise. He 
+requested to bring his two sons under their tutelage, which he did. 
+Oral tradition has it that in Diara the orphaned princes were under 
+the tutelage of Tisuu. Unfortunately, prince Zima died in the subse-
+quent years. Bizung consequently remained in Diara, got married 
+and begot the praise poets of Dagbon known as the lunsi.
+Significantly, however, praise poetry proper and its functions 
+were not set at the time of Bizung. It was during the reign of Yaa 
+Naa Luro (1554–1570) that the art of the lunsi came into the limelight 
+in Dagbon. It was during the reign of Naa Luro that the descend -
+ants of Bizung found their way back to the royal courts to perform 
+both royal and social functions (Abdallah 2010). Hence, luŋa Zhega, 
+a son of Bizung was the first to start the art of praise singing in 
+Dagbamba courts. In the subsequent decades, Naa Zangina, who 
+reigned between 1648 and 1677 , was bound to expand the culture 
+and artistic trends in Dagbon.
+Namoo Naa is the title for the chief of all drummers in Dagbon. 
+The current Namoo Naa, as it is common with main chief drummers, 
+is resident at Yendi. He is one of the elders of the Yaa Naa and sits in 
+--- [PAGE 30] ---
+30
+state with him. His particular drum is called Gbungburiluŋa and this 
+drum is only played during the enskinment of a Yaa Naa or on his 
+demise. Quite apart from the Namoo Naa, there are also chief drum-
+mers at all known chieftains and they are generally known as Luŋ  
+Naa, chief drummer. The second in command after the Luŋ Naa  is 
+the Sampahi Naa and Taha Naa  happens to be the third title in the 
+ranks of the lunsi at the various palaces (see Abdallah 2010: 30–36 
+for a detailed list).
+1.5 Socio-Cultural Activities 
+Most of the socio-cultural accomplishments of the Dagbamba 
+are attributed to Yaa Naa Mohammed Zangina. Numerous other 
+Dagbamba socio-cultural ceremonies and practices as reiterated 
+earlier were initiated by Naa Zangina (Mahama 2004). Naa Zangina 
+also introduced Islam in Dagbon by inviting Muslim scholars to 
+instruct Dagbamba. This venture has since left a lasting mark on 
+the Dagbamba as a people. The evidence of Islam in Dagbon is over-
+whelming as it encompasses most of Dagbamba cultural activities.
+Dagbon was also a trade route and centre for the Hausa and 
+Wangara, also known as the Soninke traders. These contacts were 
+so strong to the extent that most of these traders were co-opted into 
+the Dagbamba. For instance, most of the titled Muslim clerics in 
+Dagbon are of Hausa origin. Nonetheless, as Dagbamba borrowed 
+extensively from Islam, they were certain to retain the ways of their 
+traditional Dagbamba ancestors, emerging with a unique cultural 
+tolerance of a blend of Islam and Dagbamba traditions. Quite apart 
+from the fact that most Dagbamba are Muslims, their traditional rites 
+of passage and festivals in particular have strong Islamic influences.
+As it is common with other societies, rites of passage such as 
+naming or birth rites, puberty rites (which are rarely realised in 
+recent times), marriage rites and death rites are accorded great 
+--- [PAGE 31] ---
+31
+importance. Dagbamba also have diverse other cultural celebra-
+tions; of prime importance amongst which include their festivals. 
+Most prominent festivals amongst the Dagbamba include the 
+Bugum Chugu (Fire festival) and the Damba Chugu (Damba festival). 
+The following discussion outlines the four main festivals amongst 
+the Dagbamba and their respective functions. Based on the descrip-
+tions, one is bound to identify that Islamic festivals are given a 
+traditional Dagbamba twist.
+The Kunyuri Chugu (Water drinking festival) is celebrated to mark 
+the end of Ramadan. Damba Chugu (Damba festival) which prom -
+inently features a durbar of chiefs and elders is celebrated to mark 
+the birth of the prophet Mohammed. Kpini Chugu (Guinea fowl fes-
+tival) is a festival that witnesses the whipping of guinea fowls. 
+Here,  unfettered guinea fowls are whipped with the accusation of 
+their refusal to give water to God’s child, prophet Mohammed after 
+which they are slaughtered. It should be noted that this festival is not 
+adhered to by some Muslim converts. The Chimsi chugu (Prayer festival) 
+is celebrated to mark the prayers during the pilgrimage to Mecca.
+The Bugum festival is celebrated at the beginning of every 
+lunar year in Dagbon Calendar. This usually falls in the month of 
+October. Bugum Chugu is celebrated on Bugum Goli , the month of 
+fire. The Damba festival is a thanksgiving festival celebrated on the 
+third month of the Lunar Calendar. It has two manifestations: Somo 
+Damba and Naa Damba. Somo Damba is celebrated on the tenth day 
+of the third month of the Dagbamba lunar calendar and the Naa 
+Damba commences on the 17 th of the same month. The Damba  fes-
+tival happens to coincide Rabi-ul-awwal, a commemoration of the 
+birth of the prophet Mohammed. For the Dagbamba, the tenth day 
+is the birth and the 17 th day is the naming, even though Prophet 
+Mohammed is said to be born on the twelfth day (Locke 1990).
+It is worth noting that there is usually a prayer ceremony organ-
+ised in the courts of the Yaa Naa on every Friday to pray for the 
+whole of Dagbon and Dagbamba as a whole. This normally includes 
+--- [PAGE 32] ---
+32
+both Islamic and traditional prayers concurrently. It is, however, not 
+on all Friday occasions that the Yaa Naa is seen in state. For instance, 
+when a Friday falls on the first, fifth, 15th and 25th of the Dagbamba 
+Lunar Calendar, the Yaa Naa does not appear in state although the 
+prayers still pertain. The Yaa Naa does not also appear in state on 
+Yendi market days (a three-day rotational market) that fall on Fri -
+days. Similar prayers and practices are also observed by the diverse 
+Dagbamba chiefs in their respective communities.
+1.6 Beliefs and Practices
+The Dagbamba believe in the supreme being, known as Naa Wuni  
+which literally translates as God King. Gods and shrines are collec-
+tively known as Buya (Bugli SG); while personal gods and charms 
+are collectively known as Bagyuya  ( Bagyuli SG). Dagbamba also 
+believe in the ancestors, known as Yabnima (Yab SG). They believe 
+in Wunbie (Wunbia SG) which translates as god’s child(ren) and refer 
+to main household gods usually found outside the house. There 
+are also the Wagla  and Sabli, medicines eaten or worn as amulets. 
+Tilo and Jebuni represent the traditional calabash and pot normally 
+found within the house.
+The Dagbamba believe in witchcraft, Sonya , and diverse other 
+supernatural forces. They refer to the seers as Jinwarba  and the 
+soothsayers are known as Bagsi (baga SG). Ultimately, they believe in 
+the hereafter; with the knowledge that human beings on earth are 
+on a transition to the ancestral world.
+As reiterated earlier, Islam is the dominant religion amongst 
+the Dagbamba. However, some of the practitioners of the Islamic 
+faith have not neglected the ways of their ancestors. Prior to the 
+coming of Islam in Dagbon, the Dagbamba predominantly prac -
+tised ancestral worship, which nonetheless was the belief and 
+worship of the supreme God. There are also a considerable number 
+--- [PAGE 33] ---
+33
+of Christians amongst the Dagbamba whiles a few others belong to 
+some  religious sects.
+1.7 Dagbamba Musical Traditions
+In as much as music is concerned, the Dagbamba have a wide range 
+of musical instruments used for quite diverse occasions and perfor-
+mances. Instruments are often used as complements of others 
+in most music and dance renditions. Of the four major classes of 
+musical instruments namely: ideophones, membranous, aero -
+phones and hydrophones, Dagbamba musical instruments mainly 
+consist of the last three and may be further classified as percus -
+sions, drums, string instruments, gonje  and wind instruments, 
+flutes. Amongst the host of musical instruments, one instrument of 
+the Dagbamba that features predominantly in most musical perfor-
+mances and used concurrently with other instruments is the drum 
+(Chernoff 1979). 
+A wide range of music and dance performances can be found 
+in Dagbon. More often than not, some music performances 
+ correspond with the various dances. The most notable dances in 
+Dagbon include the Takai , Bamaya and Jara . Other dance perfor -
+mances include: Billa , performed only at funerals of chiefs. Tohi 
+waa, hunters’ dance is usually performed during the funerals of 
+ Tindanima, the earth priests and hunters for that matter. Machele 
+waa – blacksmiths’ dance, is usually performed during the enskin-
+ment of blacksmiths. Other musical and dance performances 
+include Dikala – blacksmiths’ music, Dakohi waa – butchers’ dance, 
+Kambunsi/Sapashinima waa – warriors’/musketeers’ dance, Nabeɣu, 
+and Simpa dance amongst a host of others (see Chernoff 1985, 1990 
+for recorded Dagbamba musical types).
+Amongst the lunsi drum assemble are particularly the luŋa and 
+the gungon. The gungon is said to have been borrowed from the 
+--- [PAGE 34] ---
+34
+Kotokoli people and it is the usual complementary drum of the luŋa. 
+The luŋa is an hour-glass shaped drum made of wood from some 
+special trees. The ends of the luŋa are covered with goat skins which 
+are held and regulated by strings of ropes, mainly of antelope skin 
+and sometimes nylon; strung across the edges of the luŋa . The 
+gungon is of a similar make, however, with a metallic cylindrical 
+body. 
+Other drums employed in the music traditions of the Dagbamba 
+include the tempana  and the daligu  drums. The tempana  are the 
+talking drums usually used to welcome chiefs and other dignitaries 
+at royal courts, whereas the daligu  drums are also larger talking 
+drums used in every chief warrior’s court. Unlike the luŋa and the 
+gungon, the tempana and daligu drums are played by the warrior 
+caste known as the Sapashinima. Another instrument employed by 
+the Sapashinima in their musical performances is the flute. 
+The Gonjenima are the recognised clan of fiddlers introduced to 
+Dagbon by Yaa Naa Zangina in the 17 th century. They are known 
+for the gonje, a fiddle like instrument and its complement the zaabia 
+(rattle gourds). The gonje is principally made of a composite string 
+of hairs of a life horse’s tail. Normally, the box is made out of a 
+gourd and covered with the skin of a monitor lizard; the Nile mon-
+itor (varanus niloticus) or the Bosc’s or Savannah monitor (varanus 
+exanthematicus), with a stick from a unique tree passing through it 
+to hold the gonje in a violin form. The gonje is played with a similar 
+string instrument in a bow-like form. 
+There is also the use of two joint cylindrical drums played 
+mostly on social dance performances as the simpa dance. It is, how-
+ever, not uncommon to find the use of the simpa drums in most 
+charismatic churches especially in the northern part of Ghana. 
+These drums are popularly referred to as simpa drums and they are 
+usually joined together at the sides. It must be stated, however, that 
+the simpa drums are said to be borrowed from the Chokosi, a neigh-
+bouring people of the Dagbamba. Hence, unlike the other drums 
+--- [PAGE 35] ---
+35
+mentioned above, the drumming of the simpa drums is not the pre-
+rogative of the Dagbamba drummer clan per se.
+Amongst a host of metal claps employed by the Dagbamba 
+in some of their musical performances, they have particularly a 
+metallic bell struck with a horn or metal known as dawuli . Other 
+metallic claps are normally in pairs and are fastened to the thumb 
+and the index finger and clanked together to produce rhythmic 
+beats. A variety of metallic objects is also used in musical and dance 
+performances especially amongst the black smith clan on important 
+occasions as the enskinment of a chief or the death of a blacksmith. 
+The music of the blacksmiths is known as dikala by the Dagbamba.
+In some music and dance performances, especially amongst the 
+Sapashinima, the whistle plays a central role in dictating the move -
+ments of the performers. Last but not least, amongst Dagbamba 
+musical instruments are the gingeli and moglo. These are stringed 
+instruments similar to the lute. In recent time, however, these 
+instruments are not common as compared to the aforementioned 
+instruments.
+1.8 Structure of the Study 
+The research is principally divided into six chapters. The first 
+chapter focuses on the background and a general context of the 
+Dagbamba and some of their institutions that are imperative as far 
+praise poetry in Dagbon is concerned. Amongst other contextual 
+information, it traces their origin, religion, customs, some socio-po-
+litical activities, chieftaincy institutions, the drummer caste, 
+praise poetry performances in their world-view in general. Since 
+Dagbamba praise poetry is an oral performance, a deeper under -
+standing of these contexts best serves the objectives of the research. 
+Chapter two sets out to outline the research design and meth -
+odological procedures undertaken to meet the objectives set for the 
+--- [PAGE 36] ---
+36
+research. As such, elaborations on the significance of the research, 
+statement of the problem, objectives of the study and a survey of 
+the scope and methodology of the research are undertaken. Other 
+examinations that serve as key sections to this chapter include 
+detailed information on the data collection procedures, the Dag -
+bani language, issues on translation, limitations and delimitations 
+of the research and definitions of some key concepts.
+A literature review of verbal arts and Dagbamba art forms is 
+embarked in chapter three. Chapter three also attempts a prop -
+osition and justification of contextual relativism approach as the 
+theoretical framework of the research. Other theories that underpin 
+the approaches to the research as a whole are explored in detail. 
+The oral-formulaic theory as propounded by Parry and Lord, the 
+theory of oral composition as developed by Foley, ethnopoetics by 
+Hymes, Tedlock and Rothenberg and the performance approaches 
+by Okpewho and Bauman are some of the literary theories that 
+underpin the contextual relativist approach. Linguistic models 
+explored include: descriptive linguistic insights from corpus lin -
+guistics, cognitive linguistics and formalist approaches.
+Chapter four presents the performance context of Dagbamba 
+panegyrics. As the texts are orally composed and performed, 
+a deeper understanding of their artistry entails a better under -
+standing of the situation of performance. This chapter therefore 
+focuses mostly on the non-verbal and paralinguistic cues employed 
+by Dagbamba praise poets in their poetic renditions. Dagbamba 
+praise poets do not write praise poetry, neither do they recite it, they 
+perform it. Hence, the performance context of the texts cannot be 
+overemphasised. 
+Chapter five is dedicated to a literary linguistic analysis of 
+Dagbamba panegyrics. Literary linguistics seeks not only to under-
+stand the meaning of texts by the figurative use of language but 
+also how meaning is derived as evidenced in the composition of the 
+texts and the contexts within which the texts are realised in general. 
+--- [PAGE 37] ---
+37
+Dagbamba panegyrics are embroidered in figurative language and 
+are especially laden with epithets, metaphors and allusions. They 
+are also proverbial with idioms and sayings rooted in Dagbamba 
+world-view and environment. A literary linguistic analysis seeks 
+to ascertain the creative inventiveness of the texts. Amongst other 
+endeavours, this chapter also embarks on tracing the formulaic 
+techniques employed by Dagbamba praise poets in their perfor -
+mances. By so doing, a comparative analysis of proto-praise poems 
+such as in praise of God and other panegyric compositions of some 
+respective Dagbamba kings by some notable praise poets is done. 
+Some key issues examined include tradition versus the individual 
+talent, the mechanics of oral composition and the formulaic reper-
+toire of Dagbamba praise poets in particular.
+Chapter six, being the last chapter draws conclusions from 
+the research findings and formulates recommendations for fur -
+ther research. Appendices of selected Dagbamba panegyrics and 
+ Dagbamba kings are also categorised.
+--- [PAGE 38] ---
+38
+2. 1 Introduction
+Diverse methodological approaches are adopted in the research 
+as per the objectives set out to examine the literary linguistic 
+endowments of the Dagbamba panegyrics. This chapter there -
+fore expounds the general procedures adopted in the research 
+endeavour from its initial stages to its conclusion. Some issues that 
+deserve attention and are expounded herein include the scope of 
+the research, research objectives, significance of the study, state -
+ment of the problem, limitations and delimitations of the study, 
+definition of key concepts and the general methods such as the 
+choice of language, transliteration and translation procedures and 
+general analytic procedures.
+It is envisioned that an examination of the research design and 
+the methodological procedures that shape the processes of descrip-
+tion and analysis will shed more light on the objectives sought to be 
+achieved in general.
+Research Design and Methodology
+CHAPTER 2
+--- [PAGE 39] ---
+39
+2.2 Significance of the Study
+Considering the overwhelming need to document the dying tradi-
+tions of the world, this study aims to refine, revise and extend 
+the existing knowledge of orature and to acquaint students and 
+researchers of orature and other related fields with Dagbamba 
+praise poetry overall and the Dagbamba panegyric in particular. 
+This study also seeks to preserve and transmit Dagbamba pane -
+gyrics in their proto-forms vis-à-vis recent improvisations to the 
+academic world and generations to come.
+Like many other cultures, diverse research has been conducted 
+on the Dagbamba. Although most of this research relates to their 
+social lives, where their artistry is mentioned, it is simply glossed 
+over. It is therefore anticipated that this research will unearth the 
+underlying figurativeness and linguistic inventiveness of Dag -
+bamba praise poets and their panegyrics. This study seeks to 
+establish Dagbamba panegyrics as unique creative enterprises in 
+the literary canon and academia as a whole.
+It is hoped that by the completion of this research, an in-depth 
+understanding of the Dagbamba and the nature of Dagbamba pane-
+gyrics and the performance contexts of praise poetry in general will 
+be ascertained. The theories and approaches advanced to establish 
+the linguistic and literary inventiveness of Dagbamba panegyrics 
+will go a long way to influence other scholars of oral traditions in 
+their respective fields and contribute to current theoretical discus -
+sions in linguistics and literary foundations.
+Quite apart from establishing the figurativeness of oral tradi -
+tions as Dagbamba panegyrics, the research will also reiterate 
+the need to document oral traditions by archiving and show -
+case novelties of other technical media in the establishment of the 
+inextricable link between orature and the performance situation. 
+Further research into Dagbamba praise poetry and their oral tra-
+ditions generally is also anticipated as this work will ignite the 
+--- [PAGE 40] ---
+40
+attention of other scholars in Dagbamba panegyrics and other oral 
+traditions amongst other cultures in general.
+As it is also a belief held by the Dagbamba that the praise poet’s 
+genius rests on his innate creative ability as a member of a respec -
+tive clan and its associated charms, this research seeks to establish 
+to what extent both creative innateness and creative acquisitions 
+exist or contribute to the artistic process.
+2.3 Problem Statement 
+Praise poetry amongst the Dagbamba may be fraught with many 
+threats; however, the least amongst them is the threat of extinc -
+tion. In the abstract to Names that prick: Royal praise names in Dagbon, 
+Northern Ghana, Salifu (2010: 10) contends that “I do not start this 
+enquiry as a collector of material that is on the verge of dying, 
+getting corrupted, and thus needing to be captured on paper before 
+it is lost to eternity. I see the art as an everyday phenomenon which 
+is alive, beautiful and worthy of attention from us in academia”.
+This is mainly on grounds that the institution of praise poets 
+and chieftaincy are inextricably intertwined. Chieftaincy as an 
+institution in Dagbon is accorded great reverence. Foreign democ-
+racy may have a negative toll on it as a whole. However, chieftaincy 
+remains an institution to reckon with in Dagbon. And as long as 
+there is chieftaincy, so will the panegyric thrive as it serves as a com-
+pliment of the chieftaincy institution. In as much as the chieftaincy 
+institution is sustained, praise singers will remain to perform their 
+customary roles.
+Nevertheless, there are some challenges faced by praise poetry 
+performances in Dagbon. Significant amongst others is the lack of 
+interest on the part of coming generations to stick to the functions 
+of their respective clans. This is mainly a result of urbanisation 
+and formal education amongst other currents in this modern time. 
+--- [PAGE 41] ---
+41
+Many an artist also maintain that for one to indulge himself fully 
+in the praise performance enterprise as dictated by custom will be 
+very detrimental in recent times. As their populations continue 
+to increase, with the royal courts remaining almost the same over 
+the centuries, not all praise poets are seriously engaged to the royal 
+courts. As a whole the lucrativeness of the profession continues to 
+diminish as time goes on.
+Another problem worth noting is that though there are quite a 
+number of writings on the Dagbamba as a people and their oral tra-
+ditions, of which praise poetry is no exception, there is yet to be an 
+in-depth examination of the literariness of the Dagbamba praise 
+poetry as a whole and the panegyrics in particular and the linguistic 
+inventiveness of the composers as realised in the texts and the per-
+formance contexts.
+In his concluding remarks, Abdallah (2010: 64) also posits some 
+of the challenges of the Dagbamba praise poets as follows: “Finally, 
+lunsi need education and enlightenment with regard to their values 
+and things they can do as an institution to broaden their outlook. 
+They need material and financial support to keep things moving. 
+Most of their works need to be documented and to be preserved for 
+generations to come.”
+2.4 Research Objectives 
+The main objectives of the research are as follows:
+1. To establish the figurativeness of the Dagbamba panegyrics 
+and bring to the fore their linguistic and literary ingenuity.
+2. To establish the inextricable link between the performer, perfor-
+mance and audience (patrons) as central to orature vis-à-vis the 
+contexts of the texts.
+--- [PAGE 42] ---
+42
+3. To examine the non-verbal and paralinguistic elements that 
+enhance the creativeness of the oral texts. 
+4. To undertake an in-depth analysis of the methodological and 
+theoretical implications in the study of orature such as praise 
+poetry and to offer new directions for further research.
+5. To examine individual artistic prowess of respective praise 
+poets against the backdrop of the communal craft. 
+6. To digitise both performances and texts for further research 
+and posterity. It is anticipated that both the data presented 
+herein and a selection of the data obtained from the field 
+work would be archived online and made accessible by the 
+general public.
+2.5 Scope of the Research
+The sample population may generally be considered to be the 
+Dagbamba, whereas the sample size is restricted specifically to the 
+clans of praise poets and royals. Both structured and unstructured 
+interviews were conducted as and when the situation under consid-
+eration demanded. As a whole, a purposive sampling technique 
+was generally employed in the selection of Dagbamba communities 
+to visit and the persons interviewed.
+The researcher had to identify his objectives from the onset in 
+order to determine what to observe so that nothing obstructs his 
+purpose. Research questions had to be set; however, exercising 
+some amount of flexibility for changes such as additions and sub -
+tractions of the present questions. In the process of the general 
+observations, interviews, social interactions, audio/video record -
+ings, critical thoughts were noted. As a general note, the researcher 
+--- [PAGE 43] ---
+43
+had to critically manage and interpret behaviours and inferences.  
+Since the presence of the researcher may affect the behaviour of 
+the participants or phenomena under investigation in general, it 
+became necessary that the presence of the researcher was made 
+known only at necessary times. In fact, there were instances in 
+which he had to either emerge himself fully or partially from the 
+phenomena under investigation. The researcher was either a 
+complete observer or a complete participant; and in some other situ-
+ations an observer as participant or a participant as observer.
+Considering the concerns of the research, he had to gain the 
+trust of the Dagbamba before pondering over the right enquiries 
+to make and the appropriate questions to ask. This is important 
+as to ensure that the interviewees are comfortable with the ques -
+tions being posed and are not sceptical about the general enquiries 
+of the researcher. Prior to this, thorough research had to be done 
+on the ways of life and general world-view of the people. More so, 
+ knowledge of the current circumstances that pertain in Dagbon 
+was ascertained.
+More to having to stay in Dagbon for about three to four months 
+each in 2018 and 2019, the researcher had to interact with the Dag-
+bamba in their day-to-day activities and was present at diverse 
+social and cultural gatherings. The more he was seen in diverse 
+Dagbamba gatherings interacting with some notable chiefs and 
+elders, the better his recognition. The motives of the researcher and 
+the purpose or objectives so to say of the research was clearly out-
+lined at the first instance of community entry. It was essential for 
+him to ensure that there was mutual respect for all parties involved 
+and cultural practices in particular; a sense of relishing the internal 
+logic of the diverse cultures and world-view. The way and manner 
+the researcher managed cultural shocks, though minimal, were 
+well calculated. At most, a cultural relativist approach was adopted 
+in the research enterprise. These salient principles were established 
+in order that he obtains appropriate and best results.
+--- [PAGE 44] ---
+44
+Decisions on the elders interviewed and most importantly the 
+praise poets recorded were based on some pertinent principles. The 
+objectives of the research require that the elders and some notable 
+indigenes consulted had to have first-hand information on the art 
+of praise poetry in Dagbon and the Dagbamba as a whole. As the 
+study is focused on the enterprise of praise poetry performances, 
+focus had to be placed on the drummer clan, known as the lunsi , 
+as they are mandated by custom to perform such functions. In fact, 
+there was the need also to find the best amongst praise poets to have 
+a better grasp of the routines in the performances and the literary 
+linguistic inventiveness of the rendered panegyrics in particular. 
+The Dagbamba towns and palaces and events visited were 
+also chosen on purpose. The Dagbamba panegyrics are mostly 
+occasioned in the courts of the king or chiefs and on occasions of 
+durbars, festivals and funerals in particular where the presence of 
+the chiefs or king is inevitable. Several visits were therefore made 
+to Yendi, Gbewaa palace in particular. Permission had to be sought 
+from the overlord of Dagbon, who was then the regent of Dagbon 
+Kampakuya Naa Abdulai Yakuba Andana. He was later enskinned 
+as the chief of Savulugu where he currently serves in his capacity 
+as Yoo Naa. Meeting him was the best decision that was ever made 
+in the researcher’s field research endeavours. Permission to conduct 
+the field research was sought from the highest authority in Dagbon. 
+Quite apart from this feat, the then overlord of Dagbon further 
+appointed some elders from his court to lead him to the court of the 
+Namoo Naa, the overall chief of the drummer clan, who is also elder 
+in the Dagbon paramount court.
+Meeting these two highest authorities in Dagbon was enough 
+confirmation that all was indeed on the right track. Quite apart 
+from interviewing these personalities on matters relating to the 
+success of the fieldwork and the objectives sought by the research 
+in particular, they also appointed some of their representatives 
+to lead him to other notable courts and events. Quite apart from 
+--- [PAGE 45] ---
+45
+being in attendance at the Friday intercessory prayers in Yendi 
+in particular, these events also afforded him the opportunity to 
+meet most respected praise poets knowledgeable in the art of 
+praise poetry in particular in Dagbon. It was through the efforts 
+of the Namoo Naa, Abdulai, that the researcher was able to meet 
+the overlord of all female chiefs in Dagbon, Gundo Naa Salamatu, 
+and have a panegyric performed in her honour. One other notable 
+event that afforded him the opportunity to witness the grandeur 
+of Dagbamba culture and praise performances amongst other 
+performances was at the event of the enskinment of the regent 
+of Karaga in March 2018. Several other visits were made to some 
+notable praise poets who reside in Tamale and its environs. Praise 
+poets from Savulugu, Mion, Sang, Nantong and Kumbungu in 
+particular were also interviewed and some solicited panegyrics 
+performances recorded. The reception at all the places visited, to 
+say the least, was excellent.
+More often than not, the presence of an outsider is likely to influ-
+ence and change the behaviour of a people such as the poet cantors 
+of the Dagbamba panegyrics. Some praise poets at the initial 
+encounters in particular were not so convinced as to whether they 
+should be part of the research or not. This was anticipated as the 
+Yendi chieftaincy conflict was unresolved and most praise poets, if 
+not all Dagbamba, tended to side with one of the two factions. Some 
+interviewees and praise poets in particular were a bit reluctant to be 
+captured on any form of recording or state their opinions regarding 
+certain matters. The presence of recorders as the video and tape 
+recorders and microphones also tended to have some effects on 
+solicited performances in particular whereas some praise poets lost 
+their confidence during performances, others tried to over impress 
+in their acts. However, great care was ensured to ascertain the most 
+appropriate output.
+Quite apart from the visits and consultations to the traditional 
+courts and festive occasions in Dagbon, the researcher also visited 
+--- [PAGE 46] ---
+46
+some notable institutions to acquire some knowledge on the state of 
+the Dagbamba panegyric, Dagbamba lore and research as a whole. 
+The institutions visited included the Ghana Institute of Linguistics, 
+Literacy and Bible Translation (GILLBT) located in Tamale. Since its 
+establishment in 1962, GILLBT has become a force to reckon with, 
+with respect to Ghanaian languages, literacy and bible translations 
+in particular. Visits were also made to the College of Languages 
+Education, University of Education, Winneba. For the past few 
+years, the college has been engaged in the organisation of an annual 
+cultural week celebration to mark the International Mother Lan -
+guage Day Celebration amongst other activities as a durbar to 
+showcase the diverse creative cultural achievements of the thir -
+teen (13) Ghanaian languages studied in the faculty, of which 
+Dagbani is one. Visits to these institutions in particular enabled the 
+researcher to interact with both students and faculty on research 
+in Dagbani and the Dagbamba creative arts predominantly. Some 
+insights on performances are attained during the diverse cultural 
+performances.
+Quite apart from discussions above outlining the scope and 
+procedures undertaken in the research, some resource persons 
+and field assistants in particular served as significant assets for the 
+accomplishments of the research. Sources consulted include official 
+statistics, historical documents, books, articles and general infor -
+mation on the Dagbamba and their art of poetry on the internet and 
+social media in largely offered relevant information.
+2.5. 1 Data Collection and Research 
+Procedures
+The best way to gain an insider’s view is to be a participant-observer 
+in the research. Participant observation offered the researcher the 
+opportunity to have deeper insights into the world-view of the 
+--- [PAGE 47] ---
+47
+people, the art of praise poetry in practical terms and the situational 
+contexts of performance in particular.
+A holistic approach to verbal arts documentation and descrip -
+tion is resorted to in the field in order to meet the set objectives of 
+the research. The researcher undertook a three-month participant 
+field observation between March and May 2018 and a four-month 
+follow up field trip between February and May 2019. The researcher 
+had prior knowledge of some aspects of the praise or panegyric per-
+formances of the Dagbamba to some extent owing to the fact that 
+the researcher was born and raised in Dagbon for a considerable 
+time.
+Most of the texts under investigation were recorded during the 
+time spent on the first field trip. Both audio and video recordings of 
+texts were done for further transliteration and translation. Group 
+performances and relevant socio-cultural events were captured on 
+video to complement the texts and the situation of performance in 
+particular. Prearranged performances were also resorted to as most 
+texts that were recorded in the actual situations of performance 
+tended to be unclear in most instances. Some pictures were also 
+captured to showcase the performative nature of the Dagbamba 
+panegyrics.
+The texts alone cannot meet the objectives of the study. As such, 
+interviews were also conducted to ascertain some historical infor -
+mation about the Dagbamba as a people and their oral traditions in 
+particular. Dagbamba panegyrics in particular have diverse cul -
+tural undertones and require deeper contextual information for 
+a better understanding of the texts. As such, some personalities, 
+knowledgeable in Dagbamba lore were interviewed to ascertain 
+some pertinent information relevant for a better understanding of 
+the Dagbamba panegyric and Dagbamba praise poetry in general.
+The follow-up field trip was purposely meant to acquaint the 
+researcher with the nuances of the performance situation. The trip 
+also served as an excellent opportunity for the researcher to make 
+--- [PAGE 48] ---
+48
+some verifications on some transliterations and translations of texts 
+and some allusions and epithetical statements that make reference 
+to kings, historical events and places. The situation of performances 
+encapsulates many novel artistic and literary nuggets that warrant 
+critical attention. The use of both verbal and non-verbal cues, such 
+as gestures, silence, ululations and interpolations amongst a host 
+of other cues at the situation of performance are examined to find 
+their literary linguistic relevance. 
+Recorded texts are transcribed and translated for further anal -
+ysis. Interlinear translations are employed to reflect the poetic lines 
+of the texts in order to enhance a better appreciation of the linguistic 
+insights of the Dagbamba praise poets. Descriptive survey and ana-
+lytic interpretations based on the theories explored are examined in 
+relation to the texts under study. This is so as to ascertain the poetic 
+inventiveness of Dagbamba panegyrics and underscore the inextri-
+cable link between oral traditions and their consequent contextual 
+underpinnings.
+It was pertinent to explore the linguistic prowess or perhaps 
+strategies of the Dagbamba praise poets in particular. For instance, 
+how are the panegyrics rendered by different poets similar or dif -
+ferent, and how are the panegyrics of one particular praise poet 
+similar or different with respect to the same panegyric rendered at 
+different occasions and different panegyrics rendered by the same 
+praise poet generally. As such, there was the need to study some 
+notable praise poets in question, track their renditions of pane -
+gyrics to the same chief at different occasions, and their renditions 
+of panegyrics of different chiefs or Dagbamba kings as a whole.
+As a whole, the research is primarily qualitative by nature and 
+employs both synchronic and diachronic approaches. Quite apart 
+from general discussions and reviews of research relevant to this 
+study in the preceding chapters, interpretative descriptive anal -
+ysis of recorded texts and the general linguistic phenomena is 
+undertaken.
+--- [PAGE 49] ---
+49
+2.5.2 Choice of Texts in Appendices 
+The appendices to this study are divided into three main sections. 
+The first section consists of Dagbamba panegyrics recorded 
+during field research conducted by the researcher in Dagbon and 
+its environs. The second section consists of excerpts of Dagbamba 
+panegyrics sourced from other researchers. A list of the kings of 
+Dagbon, dating back to Naa Gbewaa are stated in the third section 
+of the appendices.
+The panegyrics included in the appendices for the main purpose 
+of analysis are contained in appendices A. Dakoli ny ɛ Bia text was 
+included in the appendices on the basis that it serves as a mother 
+text to all Dagbamba praise poetry, of which the panegyric is no 
+exception. It is the praise text that is taught every budding praise 
+poet in the early years of his training. These texts were chosen to 
+reflect the objectives set out in the research. For instance, two pane-
+gyrics performed by two praise poets in honour of Yaa Naa Yakubu 
+Nantoo serve to demonstrate how a panegyric in praise of one par-
+ticular monarch differ significantly in length and detail depending 
+on the performing praise poet in particular. Since kings and most 
+chiefs in Dagbon are usually male, it was significant to include 
+a panegyric in praise of a female chief, Gundo Naa Salamatu, to 
+reflect the reality in Dagbon. This text may be compared to the other 
+texts in praise of male chiefs or kings to ascertain their differences 
+and similarities in content in particular.
+In an attempt to understand the nature of the Dagbamba pane-
+gyric and the linguistic repertoire of Dagbamba praise poets, and 
+to what extent the texts are recycled from memory, two praise poets 
+from Nantong, related by blood and training were made to per -
+form the appellations of one particular king, Naa Yakubu Nantoo 
+in alternating turns. In their rendition, the brothers knew exactly 
+where to break for the other to take over the narration. In fact, it was 
+clearly evident that the text they performed was well ingrained 
+--- [PAGE 50] ---
+50
+in their linguistic repertoire as they knew exactly which text item 
+preceded the other and how to intermittently introduce drum beats. 
+The success of their performance hinged principally on the fact 
+that they had their training from the same master praise poets and 
+would have performed together or witnessed each other perform 
+on several occasions over the years. From all indications, it is also 
+possible to have two praise poets, unrelated by blood or training to 
+achieve such feats. The repertoire of the panegyric is laid out by a 
+tradition that transcends the praise poet or performer.
+To have a better grasp of the community craft as against the indi-
+vidual talent, a critical examination of some other praise poems 
+that tend to borrow the poetic idioms and style of the Dagbamba 
+panegyric is worthwhile. A typical example that illustrates these 
+distinctions is best captured by the praise poet Olivier Zakar -
+ia’s praise performance on the day of Corpus Christi at the Yendi 
+Catholic church in honour of Jesus Christ, the king of kings. In his 
+rendition, one knowledgeable in the Dagbamba panegyric is bound 
+to find echoes of the traditional Dagbamba panegyric. In this text, 
+the individual prowess as emanating from the communal art of 
+praise poetry is clearly evident.
+How the traditional idiomatic style of the Dagbamba panegyric 
+is transposed into a quite unique occasion and subject of praise 
+is very revealing. Indeed, Jesus Christ, also known as the king of 
+kings, is by all indications a royal of distinction by Christian dic -
+tates; hence standing in as a subject of praise in the Dagbamba 
+panegyric is not overstretched. What is even more innovative is 
+the skilful manipulation of the content of the panegyric; however, 
+maintaining the structure and musical quality of the original or tra-
+ditional panegyric.
+A critical examination of the performance by Olivier also 
+reveals not only the same rhythmical style of the typical Dagbamba 
+panegyric but significantly, a tactical subtraction and addition 
+--- [PAGE 51] ---
+51
+procedure in place. Quite apart from the subject, the themes and 
+their manner of arrangement are similar with that of the Dagbamba 
+panegyric. Considering Jesus Christ as God and king for example, 
+the unavoidable introductory phrase A balima  [...], which means 
+“your mercies [...]” , fits very well to his role and status as one who 
+is divine and to whom solicitations of all kinds are directed to in 
+prayers. The poem tends to allude to the connections to Jesus Christ 
+as the father God, Holy Spirit, virgin Mary as well as his status, role, 
+deeds, accomplishments and other social associations.
+2.6 The Language: Dagbani
+Dagbani, otherwise known as Dagbanli or Dagbane has three 
+dialects: Timosili, spoken in and around tamale; Nayahili, spoken 
+in and around Yendi and Nanundi, the language or dialect of 
+the Nanumba; spoken in and around Bimbila. The dialect for 
+Dagbamba orthography and education is Timosili. Some other 
+languages that are intelligible with Dagbani include: Mossi, spoken 
+in Burkina Faso and Talensi, Mampruli, Gurune, and Kusaal; all 
+spoken in the northern parts of Ghana. 
+Dagbani is a Gur language and belongs to the South East cat -
+egory of languages of the Niger-Congo language phylum, traced 
+down to the Central Gur language family and further to the Oti 
+Volta language family (Naden 1998, 1989). Typologically, Dagbani 
+is basically an SVO language and it is tonal by nature (Olawsky 
+1999). Dagbani is written in the Latin script. Notably, Dagbani has 
+an inventory of nine phonemic vowels, represented by the sym -
+bols available in the Latin alphabet, as well as by the relevant IPA 
+symbols. From the foregoing discussion on Dagbani, the following 
+tables illustrate the consonants and vowels employed in Dagbani 
+orthography.
+--- [PAGE 52] ---
+52
+The following three complex consonants occur in Dagbani: kp – voice-
+less labio-velar plosive; gb – voiced labio-velar plosive and ŋm – voiced 
+labiovelar nasal. The digraph ch represents the voiceless post aveolar 
+affricate (tʃ)*. Structurally, it fills the slot of c, the voiceless palatal 
+plosive. The digraph sh represents the voiceless post alveolar fricative 
+(ʃ)*. The digraph ny represents the voiced palatal nasal (ɲ)*. There are 
+Bilabial Labio-
+dental
+Alveolar Post- 
+alveolar
+Palatal Velar Labio- 
+velar
+Glottal
+-       + -             + -       + -     + -         + -      + -     + -      +
+Plosive p      b t        d tʃ k     g kp   gb
+Nasal        m         n            ɲ        Ŋ       ŋm
+Trill         r 
+Fricative f             vs       z ʃ      ʒ x      ɣ    h 
+Lateral         l 
+Approxi-
+mant
+               ʋ                      j
+Front Central Back
+High I ɨ*  u 
+Mid High e ɘ*  o 
+Mid Low ɛ  ɔ
+Low  a 
+Table 2.1: Dagbani consonants
+Table 2.2:  Dagbani vowels
+--- [PAGE 53] ---
+53
+seven short vowels as shown in table 2, and all seven vowels can also 
+be long:  i:, u:, e:, o:, ɛ:, ɔ:, a:. The vowels  ɨ* and ɘ* may be described as 
+epenthetic vowels in Dagbani. See Hudu’s (2010: 15-18) discussion on 
+Dagbani vowel inventory and vowel epenthesis for detailed elabora-
+tions of the usage of these vowels.
+Vowel elision is common in Dagbani, hence an apostrophe (’) is 
+used in place of the elided vowel. This is often the case with a final 
+vowel; a vowel that comes before another vowel and before a word 
+that begins with a consonant. Transcriptions and Dagbani fonts 
+employed herein are particularly from the IPA extensions of sym -
+bols from Microsoft Word.
+Alhassan (2012: xi) notes that writers usually differ in their 
+use of characters to depict different sounds. More often than not, 
+the same sounds are also depicted by writers differently. Alhassan 
+(2012: xi) states that: “The digraphs gb, kp, w, ny, are used without 
+variation, but dʒ (as in just) and tʃ (as in chin) have been replaced by 
+j and ch respectively by some writers.” It should be noted, however, 
+that some of these variations as found amongst writers are partly 
+based on the dialectical differences. For instance, while some Dag-
+bamba indigenes refer to their land as Dagbon, others refer to it as 
+Dagbaŋ. Generally, the following are the short vowels that occur 
+in Dagbani: a, e, ɛ, i, o, ɔ, u. The long vowels are notably: aa, ee, ii, 
+oo, and uu (Naden 1998, Blench et al. 2004: 5, Olawsky 1999 and 
+Alhassan 2012).
+The official writing of Dagbani dates back to 1968. Dagbani is 
+amongst the first nine languages to have been taught in schools 
+since the inception of Ghanaian language education in Ghanaian 
+schools. It is studied in the nursery, lower primary and secondary 
+schools in the northern region of Ghana. Dagbani is also studied in 
+the tertiary levels of education as in the colleges of education and 
+the university as well.
+A comparison of Dagbani with the other languages in Northern 
+Ghana with respect to literacy reveals that Dagbani has relatively 
+--- [PAGE 54] ---
+54
+more literature for educational, religious, and socio-cultural pur -
+poses, thanks mostly to the location of the Ghana Institute of 
+Linguistics, Literacy and Bible Translation (GILLBT) in Dagbon. For 
+instance, the complete Dagbani Bible was translated in 2007. The 
+first Dagbani dictionary was prepared in 1941 by Blair and Tama-
+kloe, though with no established and consistent orthography at the 
+time. A revised version of the Dagbani dictionary was prepared 
+later on 25th December 2004 by Roger Blench. 
+2.7 Notes on Translation 
+Dimmendaal (2015: 15) defines translation as “[...] an interpretive 
+task, whereby one tries to present the categories of one concep -
+tual system in terms of another, functioning as the metalanguage, 
+in order to make shared understandings possible.” In a cross-lin -
+guistic examination of semantic categorisation and cognition, 
+he (ibid.) notes some challenges that the art of translation is 
+often fraught with. Considering the fact that language in itself is 
+embedded in culture, it is not easy to separate what actually belongs 
+to language proper from the culture. The distinctions to say the 
+least are blurred in most respects. That notwithstanding, attempts 
+are made to render faithful translation worthy to capture the closest 
+resemblance of the target language to the source language. One 
+can, however, not deny the frustrations of coming to terms with the 
+reality that no matter the efforts made to render faithful translations 
+of poetic texts as the Dagbamba panegyric, the Dagbani language 
+has some peculiarities that are very difficult or almost impossible 
+to translate into English. Quite apart from finding exact words or 
+substitutes to capture the exact ideas sought to be conveyed in the 
+source language into the target language, the rhythmic or musical 
+quality as the Dagbamba panegyrics are concerned become stale in 
+their English translations.
+--- [PAGE 55] ---
+55
+Verbal arts as the Dagbamba panegyrics tend to lose some 
+aspects of their structure or form in their written word. Transferring 
+a live performance into a lifeless monograph is enough a disser -
+vice to verbal arts in general. Attempts such as translations have 
+shown that most languages cannot echo the thoughts and senti -
+ments sought to be conveyed by other languages. Hence, quite apart 
+from the efforts made at apt transcriptions and further translations 
+of Dagbamba panegyrics, good audio-video recordings as well as 
+pictures enhance one’s appreciation of the contexts of performance 
+as they tend to showcase the diverse non-verbal cues employed in 
+the performance of the texts. More significantly, the choice of not 
+placing the texts into recognised stanzas is also mainly based on the 
+fact that a single text does not remain the same over time, place or 
+occasion. That notwithstanding, the texts are organised in lines as 
+it is the case with most poetry. Rizk (2007: 71) quotes Kabira (1987: 7) 
+as stating thus: 
+The written word cannot convey the vivid and varied scenes and 
+atmosphere which are often evoked by the spoken word and enact -
+ments, especially when the performing artist is a skilled one. Writing 
+eliminates a great deal from an oral performance, and when the mate -
+rial is translated, it is removed from the original performance even 
+further. It is also difficult to transfer meaning from one language to 
+another.
+The fluidity of the oral word usually enables the respective praise 
+poets to alter the texts in some respects to fit the situation of perfor-
+mance. Hence, where a word may be employed to denote an idea 
+in some instances, entire clauses may also be employed to denote a 
+similar idea. In fact, the general content, structure and techniques 
+employed in the rendering of the Dagbamba panegyrics may not 
+only change per the praise poet in question but the occasion and 
+other circumstances in particular. 
+--- [PAGE 56] ---
+56
+In order to have accurate results and information especially 
+with regards to the texts therefore, Dagbamba language and culture 
+experts were consulted to assist in the transcriptions and transla-
+tions of the texts. Further clarifications were also ascertained from 
+knowledgeable Dagbamba in Dagbamba lore and panegyrics in 
+particular.
+2.8 Limitations and Delimitations
+Upon critical reflection, words as encapsulated in a work as this 
+cannot explain the experience of the performance in totality. No 
+matter the efforts made to portray the diverse contexts as with 
+respect to the non-verbal cues, the paralinguistic features and the 
+diverse evaluations by patrons and audience alike, the aura of the 
+performance lies in one actually witnessing the performance.
+Chiefs in Dagbon are as many as the Dagbamba communi -
+ties and they vary in ranks and territory. More so, there number of 
+praise poets, known by the Dagbamba as lunsi  far outnumber the 
+royals, with particular regard to chiefs. Every chief in Dagbon has 
+an entourage of praise poets. Per the objectives of this study and 
+the time for such a research enterprise in particular, soliciting pan-
+egyrics from the host of praise poets in Dagbon is a daunting task. 
+It is virtually impossible to have recorded texts from all the royal 
+courts in Dagbon just as it was not possible to have either met or 
+recorded all the renowned praise poets.
+Great strives were made to meet the most notable praise poets 
+and also visit the most notable courts to record actual occasioned 
+panegyric performances and also record solicited performances. 
+The zeal and enthusiasm of the researcher to be present at virtually 
+all known Dagbamba festivities that occasioned the performances 
+of panegyrics was high; however, time and resources did not afford 
+the researcher the opportunity to be present at all times. More often 
+--- [PAGE 57] ---
+57
+than not, festivities that occasioned the performances of panegyrics 
+were simultaneously ongoing at the same time but at different Dag-
+bamba localities; thereby making it impossible for the researcher 
+to be present at all festive occasions. However, the issue of being 
+present at most festive occasions was resolved to some extent by 
+the involvement of some field assistants who are often deployed to 
+some of the praise poetry festivities.
+Significant data was obtained from the field research. In the long 
+run, it became quite a complexity for the researcher to decide on the 
+data, especially recorded panegyrics to include as data for analysis 
+in the research. This issue was, however, resolved by a critical selec-
+tion of some of the most relevant Dagbamba panegyrics.
+As a whole, though significant financial support and research 
+material was obtained from notable agencies as the DFG (Prof. Dr. 
+Anne Storch, Leibniz), Deutscher Akademischer Austauschdienst 
+(DAAD), University of Cologne and the Institute of African Studies 
+and some other personalities in diverse respects, the researcher 
+nonetheless faced some financial constraints. That notwith -
+standing, the researcher would not have met the set objectives of 
+the researcher without the support of the aforementioned agencies 
+and personalities.
+2.9 Definition of Concepts
+Orature: Orature refers to orally conceived, composed and 
+performed creative or non-creative arts. Throughout the discus -
+sions, the concept orature is employed to mean what most scholars 
+would generally refer to as oral literature. It said to be coined by Pio 
+Zirimu, a Ugandan linguist and literary theorist. 
+Praise poetry: Praise poetry refers to creative expressions that serve 
+to extol either animate or inanimate things and both abstract and 
+--- [PAGE 58] ---
+58
+concrete entities as a whole. There are generally no limits to what is 
+being extolled. It is, however, not uncommon to find some elements of 
+critique or condemnation in some praise poetry. In Dagbani, the word 
+or concept Salima is a noun that may either denote a story or a praise 
+rendition and Salim is the verb that connotes ‘to praise’. The concept 
+in literary theory that denotes salima is ‘praise poetry’ of which the 
+concept panegyric serves as a kind. It is also worthy of note that the 
+Dagbamba salima – as in praise poetry – is more of a complex art form. 
+Praise poet: The praise poet may simply be referred to as one who 
+is engaged in the art of praise poetry. Amongst the Dagbamba, the 
+praise poet principally plays the role of a court historian. He is also 
+a counsellor, a musician, an entertainer, a town crier, a commentator 
+by all standards and the custodian of the culture and history of the 
+Dagbamba people as a whole. His roles and status in the Dagbon are 
+dictated by custom are inherited by virtue of his lineage or descent. 
+The Dagbamba praise poets form a respective clan in Dagbon and 
+they are generally known as the lunsi.
+Panegyric: A panegyric is a kind of poem that may be referred to 
+as court poetry or a heroic poem in most respects. It may be defined 
+as a eulogistic oration that relates to the discourse on the glory of 
+kings. The term panegyric is etymologically from Greek. It is 
+derived from the compound noun panegyris, denoting a general 
+assembly, traced from the early 17th century from French  panégyrique, 
+via Latin from Greek. Most notable ancient panegyrics include the 
+works of the Greek isocrates namely: the Panegyricus (c. 380 BC) and 
+ Panathenaicus (c. 340 BC). Affinities of the panegyric include the 
+ode, epic, eulogy and the dirge or lament. The Dagbamba  panegyric 
+in particular is an ovation in praise of kings, royals or other 
+notable persons. It is an epideictic, eulogistic, ceremonial oration 
+or discourse that may serve as an acclamation, accolade or tribute 
+depending on the context of its performance.
+--- [PAGE 59] ---
+59
+Context: Context refers to the general factors or circumstances 
+that surround or influence some phenomena. Some of the general 
+contexts that have a significant toll on literary works in particular 
+include the social, cultural, religious, economic and the general 
+world-view of a people.
+Performance: Performance, as in the situation or the context of perfor-
+mance serves as the most immediate and fundamental contexts of the 
+verbal or performing arts. Orature or the verbal arts for that matter are 
+generally realised in performance; as such, the creative ingenuity of 
+the arts are best evaluated at the situation of performance.
+Clan system: The stratified Dagbamba clan system is principally 
+hereditary by nature. It is a stratification of the people by socio-cul-
+tural categories or roles and functions as in barbers, royals, warriors 
+amongst a host of other occupations. All known clans are respected 
+or deemed important in as much as they contribute to the well-
+being of the Dagbon community as a whole. The drummer clan, 
+otherwise known as the Dagbamba praise poets are known in 
+Dagbon as the lunsi.
+The royal clan: The panegyric revolves mainly on the royal clan, 
+known in Dagbani as naanima. The paramount chief, under whose 
+chiefdom all other chiefs answer to is known as the Yaa Naa , 
+here referred to as the king of Dagbon or King of the Dagbamba, 
+other divisional and sub-chiefs are generally referred to as 
+chief(s) naanima (PL.) naa  (SG.). Dagbamba enskin female chief(s), 
+ pag’naanima (PL.) pag’naa  (sing) who are also generally referred 
+to as chiefs. The title “queen mother” has no parallel in amongst 
+the Dagbamba. The wife of the King or chief is known as napaga,  
+whereas leaders of female groups are generally referred to as 
+magazia.
+--- [PAGE 60] ---
+60
+3. 1 Introduction
+The lunsi, the drummer clan, is a pervasive force in Dagbon to 
+escape the attention of any one who finds himself or herself 
+amongst the Dagbamba. As reiterated earlier, the lunsi are the heart-
+beat of the Dagbamba. If the clan system of the Dagbamba is cited, 
+the lunsi stand paramount. If chieftaincy or the system of rule in 
+Dagbon is mentioned, the lunsi are not left out of the discussion. If 
+festivals or any other socio-cultural activities are mentioned, the 
+lunsi cannot be left out. More so, if the history of the Dagbamba 
+is in question, the lunsi  are invariably evoked. The lunsi  as a clan 
+is the epitome of Dagbon history. The history of the Dagbamba 
+rests on their shoulders. They are the wheels around whom the 
+Dagbamba society revolves. In fact, from the cradle to the grave 
+of the Dagbamba, be it social, cultural, religious, political or any 
+other aspect of Dagbamba life endeavours, the lunsi occupy a centre 
+Literature Review and 
+Theoretical Approaches
+CHAPTER 3

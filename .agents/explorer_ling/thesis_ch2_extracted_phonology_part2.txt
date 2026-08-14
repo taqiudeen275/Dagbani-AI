@@ -1,0 +1,752 @@
+ifferent harmony patterns depending on the 
+suffix. The phenomenon in Dagbani is not different from that of Dagaare, Gurune, and Moore 
+languages (cf  Dakubu, 1997:85). Dakubu interestingly states that [a] is a [-ATR], but can occur 
+in both [-ATR] and [+ATR] categories in the language (cf Dakubu 1997:84). Bodomo (1997) 
+also discusses the same occurrence in Dagaare. Instances of the impact of vowel harmony have 
+been captured in chapter seven. For example, root-to-suffix harmony helps explain the features 
+in RP quality, people, and couple that are investigated in chapter seven. 
+ Olawsky (1999) observes that the roots and suffixes of words play a vital role in vowel 
+harmony in Dagbani. It is the case that ‘the vowel of a suffix is generally realised according to 
+the feature value for [ATR] in the root’ Olawsky (1999:249). He presents the following as the 
+various vowels contained in the roots of words and the set of vowels in the suffix that follow 
+them. 
+[ATR] vowel Harmony 
+ROOT      SUFFIX    ROOT      SUFFIX 
+[-ATR]     [-ATR]    [+ATR]  [+ATR] 
+[a]      [a]   [i]   [i] 
+[ɛ]      [ɛ]   [u]   [u] 
+[ɔ]      [ɔ]   [o]   [o] 
+[ʊ]        [ʊ]   ([e])   [a] 
+[ɨ/ə]      [ɨ]                  ([e]) 
+Olawsky (1999:248-249) 
+Olawsky (1999) explains that if the [ -ATR] vowels occur in disyllable root of words, 
+vowels of the same set level will occur in the coda syllable and that the [-ATR] feature is found 
+in both the root and coda position (see also Dakubu 1997; Hudu 2010).  It is also the case that 
+the [+ATR] vowels [i , u, o] imply a vowel of the same set in the coda. In  addition, [a] is 
+generally admitted as the coda of the phonological word in both [+/ -ATR] contexts. [e] as a 
+single [+ATR] vowel is rare in the nucleus but occurs as a long vowel [e:]. For [a], the contrast 
+[+/-ATR] is neutralised. It has an exceptional status since it is very frequent in suffixes . It 
+--- [PAGE 64] ---
+ 
+45 
+ 
+occurs in all number classes  as a suffix by itself or part of it (singular suffixes) , Olawsky 
+(1999ː249). 
+ [-ATR] and [+ATR] vowels are both triggers of harmony, and at the same time, can be 
+targets of harmony in the language, especially with root -to-suffix harmony, as seen in 
+Olawsky’s (1999) assertion above. Discussing the process of harmony, Olawsky (1999) and 
+Dakubu (1997) only talk about root -to-suffix harmony and illustrate the distribution of [+/ -
+ATR] vowels in disyllabic words (CVCV) together in the following examples: 
+A  
+ Feature       Root vowel       Suffix vowel   Example           Gloss 
+[-ATR]         [a]                            [I]           <gbali>              [gbalɪ] ‘leg-SG’  
+          [ɛ]                            [ɪ]           <biɛri>               [bjɛrɪ] ‘day-PL’ 
+          [ɔ]          [ʊ]          <gɔrigu>            [gɔrgʊ]  ‘sickle’ 
+ The suffixes in A, the first set of words have changed in the second set of examples as 
+they are target by harmony. Consider that for [+ATR] 
+B  
+[+ATR]      [i]                                [u]             <dirigu>               [dirigu] (spoon-SG) 
+                   [i]                                [a]              <bia>                   [bia]   (child-SG) 
+                   [i]                                [o]              <chibo>               [tçibo]  (soap-SG) 
+                   [o]                               [o]              <polo>                 [polo]   (side-SG) 
+  Vowel harmony in simplex nouns Olawsky (1999ː249). 
+ In Olawsky’s illustration of the root-to-suffix harmony above, the [-ATR] vowel in the 
+root attracts the same group or set of vowel s. On the other hand, [+ATR] vowel in the root of 
+the syllable attracts the same class of vowels in the suffix. Therefore, the suffix: 
+ri becomes rɪ 
+li becomes lɪ 
+gu becomes gʊ 
+ The set of examples in A, which are [-ATR] vowels, attract [-ATR], while the set of 
+vowels with [+ATR], triggers and attracts the same [+ATR] vowels in the suffix. Examples A 
+and B are used to explain the vowel harmony employed by speakers in the realisation of the 
+features in table and quality, respectively in chapter seven of this study. 
+--- [PAGE 65] ---
+ 
+46 
+ 
+ Olawsky (1999) also discusses vowel length in vowel harmony. He observes that when 
+a root of a word contains a long vowel, and suffix of the same word contains a [+ATR] vowel 
+/i/, harmony is not possib le, but when root vowel is / ɛ/ or a short vowel with /i/ in the suffix, 
+vowel harmony is possible. He exemplifies it as shown in the examples below: 
+ [ATR]   length and harmony 
+<kpééní>  [kpé:ní] ‘important’ 
+ <nɛ́lí >  [nɛ́lɪ́] ‘millstone‘ 
+<gòòní‘>  [gòːní] ‘a wall‘ 
+ <gólí>                         [gólɪ́] ‘moon‘ 
+  Olawsky (1999:250) 
+ In addition to root -to-suffix harmony, Hudu (2010) goes a step further to discuss the 
+root-targeted-harmony (suffix-root harmony), which is not elaborate ly discussed by Dakubu 
+(1997) and Olawsky (1999). Nonetheless, Hudu (2010) shares the same view with Olawsky in 
+his explanation of the root-to-suffix harmony that in the root-to-suffix harmony, the trigger is 
+either [-ATR] or [+ATR] vowels, and the targets  are vowels of the same sets. The trigger for 
+suffix-to-root harmony, as Hudu illustrates, is the low mid -vowels (e and o), and their targets 
+are mid-low [+ATR] vowels (cf Hudu , 2010; 2016). Below is an illustration of the suffix -to-
+root harmony with [+ATR] mid vowels (e and o): 
+ [-ATR] ‘roots’  suﬃx-to-root harmony (rt = root, af = affix wrd = word) 
+ [dɔ́r] rt tɨ́]af  ‘diseases’  [dór] ó] af  ‘a disease’ 
+[tʃɔ̀r]rt tɨ̂] af  ‘blows’    [tʃòr] ê] af  ‘a blow’ 
+ [bɛ́]rt hɨ́] af   ‘shins’    [bé] é ] af ‘a shin’ 
+Hudu (2010ː164). 
+ As seen, the suffixes [e and o] in the second set of examples trigger [e and o] in the 
+roots, which were [ɔ and ɛ] in the first set of examples. We will refer to suffix-to-root harmony 
+to explain the realisation of the feature in the variable also in Dagomba’s use of the epenthetic 
+vowel, /i/ and the /o/ in the root syllable of the variable in DagbE. 
+ Moreover, Hudu observes that in the Dagbani [ATR] harmony system, [+ATR] 
+dominates the [-ATR] value of [ATR].  The author adds that a syllable root with a high -front 
+vowel triggers [+ATR] harmony with other vowels in the harmonic domain. The final mid 
+--- [PAGE 66] ---
+ 
+47 
+ 
+vowel in a domain also triggers advancement to preceding vowels, which is also [+ATR], as 
+shown above. He, therefo re, notes that in Dagbani, Harmony is controlled by [+ATR] vowel 
+height feature allowed by only slightly different vowels. For example: 
+ a. [dór] ó] the suffix vowel, o triggers [+ATR] o in the root. 
+ b. [diri] gu] the root vowel, i triggers [+ATR] u in the suffix 
+ c. [ko] re] the suffix vowel, e triggers [+ATR] o in the root 
+   Hudu (2010ː184) 
+ The word in ‘a’ in its plural form is [dɔ́r] tɨ́],  the one in ‘b‘ in its plural form is [dɨ́rɨ́tɨ́ ], 
+‘c‘ is [kɔ́rɨ́sɨ́], which through harmony are realised as shown in the above words. 
+ Although vowel harmony is a feature in Dagbani pronunciations, in some instances, it 
+is impossible. Hudu  (2010) discusses situations where vowel harmony is impossible. He 
+discovers that if vowels belong to tw o different roots, harmony is impossible between them , 
+Hudu (2010:184). He further notes that ‘‘the pattern of harmony in Dagbani shows that when 
+an opaque consonant lies between a [+ATR] root vowel trigger and an eligible vowel target, 
+the spread of [+ATR] is blocked, and harmony between the trigger and target fails’’ (Hudu 
+2010:185). The opaque consonants typically stand between a  root /i/ trigger of [+ATR] and a 
+suﬃx vowel target and/or between a mid -vowel trigger and a root vowel target . Examples of 
+opaque consonants are, l, s, r, (cf Hudu  2010:185). Harmony block usually concerns root -to-
+suffix harmony in the language, not suffi x-to-root (cf Hudu 2010:185). Consider some 
+examples with the opaque consonants: 
+ l- pilɨ *pili start 
+ r- jirɨgɨ *jirigi get tartled 
+ s- jinsɨ *jinsi houses 
+  (Hudu, 2010:192) 
+ As indicated in the above examples, harmony is blocked by l, r and s respectively from 
+the root vowel, i to the suffix vowels in the three words. This means the suffixes begin with 
+entirely determined consonants (l, r, and s) , which simply do not permit the assimilation 
+process. Harmony block explains one of the realisations of the variable people where /i/ in the 
+root vowel cannot trigger harmony in the suffix syllable. Hence, the suffix vowel is realised as 
+--- [PAGE 67] ---
+ 
+48 
+ 
+/ʊ/ and not /u/. Hudu (2010) also observes that there is no harmony between different lexical 
+root (different word root), for instance: 
+ (rt =root, wd =word, suf = suffix) 
+  [[bí]rt.] wd. [[bɛ]rt.-ʔʊ´]suf.]wd. 
+ *bí  bé-ʔú   *bɨ̀  béʔʊ́ . 
+ Child ugly    child ugly 
+ (cf Hudu, 2010ː165 emphasis added). 
+ This illustration suggests that  there is no harmony from bi (a word/ root) to b ɛ in the 
+word bɛʔʊ´. There is no harmony across word boundaries in the language. Hudu  (2010) also 
+discusses the height -conditioned-trigger of harmony in the language. This explains the 
+condition under which h armony occurs. He explains that the relationship between the trigger 
+and the target is essential, as the condition of the trigger is dependent on height. Thus, ‘‘the 
+trigger and target must both be speciﬁed for [+high] or [-high]’’ (Hudu 2010ː178). 
+ Considering the discussion on vowel harmony in Dagbani, the question one asks is , 
+what influence does vowel harmony exert on Dagomba’s pronunciation of English words? The 
+effects of vowel harmony on Dagomba’s realisation of RP features in words is used to support 
+the analyses of the RP feature, /pl/ in couple, people, and others in chapter seven.  
+2.3.2 Phonotactic Restrictions on Some Sounds 
+ This section discusses some occurrences that the phonotactics of Dagbani do not permit. 
+It is observed that as some consonants occur in all phonetic environments, there are other 
+phonetic environments in the language that some sounds do not occur  in. For example, 
+Olawsky (1999) reveals that the velar consonants ([k, ɡ, ŋ]) in a CV syllable do not occur before 
+the vowels [e] and [i]. However, it is possible for the phonemes /k, ɡ , ŋ/ to occur before the 
+front vowels in words with CVCV, CVCVN and CV.NCV word structures, as in: 
+ CVCVN                           CVCV                       CV.NCV 
+ Kɨ́lím ‘to be round’     gɨ́lí ‘to go around’      ŋɨ́nlí ‘without clothes’ or ‘uncovered’ 
+--- [PAGE 68] ---
+ 
+49 
+ 
+But not in CV syllable structure. Even though Hudu (2010:77) observes that the vowels [ɨ] and 
+[ʊ] occur in three positions, including CVC roots in words with which they occur, there is no 
+word in which [ɨ] succeeds /k/ CVC. 
+ Besides, in CV structure, Hudu (20 14) also discovers that [ ɨ, ʊ] do not occur in CV 
+words. While Olawsky (1999) identifies consonants and vowels, which do not co -occur in a 
+CV structure, Hudu (2014) discusses vowels that do not occur with any consonant in CV 
+structure.  
+ Olawsky (1999) als o posits that a labiovelar, /ŋm/ , seldom occurs before the back 
+vowels /o/ and /u/ in Dagbani. Moreover, several of the consonants in the consonants system 
+do not occur before the schwa vowel. About the sound /ŋm/, Olawsky (1999) also posits that it 
+rarely occurs before the back vowels /o/ and /u/ in Dagbani. Moreover, many of the consonants 
+in the consonants system do not occur before the schwa vowel. Conclusively, this could have 
+its effects on speakers’ pronunciation of some English words that will set them apart from other 
+users of English. Specifically, reference is made to this section as the RP feature / ɪ/ in the 
+variable kid is explained in chapter seven. 
+2.3.3 Some Co-occurring Vowels and Diphthongs in Dagbani  
+ In the section  above, we realised that the phonotactics of Dagbani disfavours some 
+consonants and some vowels from co -occurring in some words. Triphthongs  do not occur in 
+Dagbani, and even though diphthongisation is possible in Dagbani, it is also the case that some 
+co-occurring sounds may appear like diphthongs  still, their o ccurrence is due  to some 
+phonological processes. The discussion in this section, therefore, concentrates on diphthongs 
+in Dagbani. Some phonological processes also allow some occurrence that appear s like a 
+diphthong in the language. For instance, according to the Orthography Committee, 1996 
+spelling rules, the vowel /ɛ/ or /iɛ/ occurs immediately after the consonants: 
+sh as in shɛ́lí  ‘something’  ‘shiɛ́ɣú    ‘rainy season’   
+gb as in gbɛ̀ɣú/gbiɛ̀ɣú ‘forehead’,     
+kp as in kpɛ́  ‘enter’,  
+ŋm as in ŋmɛ́  ‘knock’,   
+ t as in tɛ́hí  ‘think’,  
+ l as in bílɛ́ɣù/bíliɛ́ɣù ‘a newly born child’ ,   
+ n as in nyɛ́bígá ‘a crocodile’, 
+as in vìɛ́lì  ‘beauty’,    
+--- [PAGE 69] ---
+ 
+50 
+ 
+ b as in bíɛ̀rí  ‘ugly’  
+See (rule number 1.3 to 3.1.3. of Orthography Report 1996).  
+ This rule may stem from the fact that all Dagbani front vowels undergo the 
+phonological process, palatalization, see (Olawsky, 1999 and Hudu, 2010). ‘‘…sounds are said 
+to be palatalized if the poin t of articulation moves forward the palatal region in some 
+circumstance’’ (Ladefoged 2006:229).  
+ Therefore, as shown in the above examples, /ɛ/ has undergone palatalization to /iɛ/. /iɛ/ 
+is consequently not a pure diphthong, but it exists as a result of palatalization. Also, according 
+to the committee’s report, /ia/ occurs after b as in bíá ‘a child’, sh as in shíá ‘a bee or spirit’, 
+and t as in tìá ‘a tree’. Also, /ua/ co-occurs with b, t,  and s as in the following examples , 
+respectively. búá ‘a goat’, tùá ‘baobab tree’ and s as in sùá ‘a knife or a machete’.  
+ In view of the above structures , therefore, vowels ua, and ia are pure diphthongs in 
+Dagbani. In this case, /ia/ and /ua/, are glides and considered as diphthongs in Dagbani. There 
+are other diphthongs like; ooi, eei, aai, and uui in the language. There are no recorded 
+triphthongs in the language. This, therefore, confirms that there are a limited number of 
+diphthongs and no triphthongs in Dagbani. The absence of triphthongs and the limited number 
+of diphthongs in Dagbani support the explanation of the restructuring  that Dagbani speakers 
+employ in the realisation of the features in power, hour, and oil in chapter seven. 
+2.4 The Syntactic and Verbal Systems of Dagbani 
+ The basic syntax of Dagbani and the Dagbani verb forms are discussed in this section. 
+These phenomena are crucial for understanding how the grammatical categories, tense, and 
+aspect are expressed in the Dagbani language. However, owing to how broad the grammatical 
+system is, the discussion is limited to the part of grammar that is of concern to this study. The 
+primary focus is on the Dagbani language's basic syntax, the nature of the Dagbani sentence, 
+the verb ‘be’, the Dagbani verb forms, pre-verbal, aspectual suffixes, and post-verbal particles.  
+2.4.1 The Syntactic System of Dagbani 
+ Dagbani is an SVO language, and its sentence structure does share similarities with the 
+structure of many languages, but not English . For instance, in Dagbani, the subject usually 
+comes first in an utterance, followed by the verb , then the object or any other element that 
+--- [PAGE 70] ---
+ 
+51 
+ 
+forms part of the sentence. Even in interrogatives or yes or no questions, the verb hardly 
+assumes an initial position. Consider these illustrations: 
+8. Ò chàŋyà? 
+          3SG go.PFV 
+          Is s/he gone? 
+ 
+9.   Bɛ̀  kànàà?  
+             3PL  come.PRFT 
+              Have they come? 
+ 
+10.   Bɛ̀  nì           kànáá? 
+             3PL  FUT Come.PFV  
+              Will they come? 
+ It is observed that no matter how the yes or no question is put, hardly will the Dagbani 
+verb come first in sentence construction; it is always the subject first. Tone (distinguishing 
+pitch levels within a word) is an important phenomenon in Dagbani since it helps make 
+semantic distinctions of words. Intonation (distinguishing pitch levels within a phrase, clause, 
+or sentence). In interrogatives, questions with the usual SVO and SV structures have falling 
+intonations, while questions that start with interro gatives, yà, ‘where’ bò ‘what’, wúlá ‘why’, 
+ŋùní/ŋùn ‘ who/whose/ whom/’, and dìní/dìn ‘which’, normally have rising intonations. 
+Sentences expressing indicative mood usually end in rising intonation. 
+ The nature of the Dagbani sentence structure is part of the features that sets the language 
+apart from other languages, especially English. It is observed that th e nature of the SVO 
+structure of Dagbani plays a significant role in learners’ understanding of the grammar of the 
+language. For instance, “the S-V-O word order of the Dagbani syntax facilitates the distinction 
+between the two major lexical categories, noun and verb ” (Olawsky 1999: 22). As illustrated 
+above, a sentence in the language starts typically with a subject followed by the verb, then the 
+object or other elements like adverbials, for example: 
+11.  Tí  kárìn-dì  lá  shìkúrú.  
+        1PL read.IMPFV FOC  School. 
+        We attend school. /We are attending school. 
+ In the above sentence, the first linguistic element is a pronoun occupying the first 
+position. The second is the verb, followed by a focus marker and an adverbial. It is usually the 
+case that the subject takes an initial position in a sentence. The verb can take the second, last, 
+--- [PAGE 71] ---
+ 
+52 
+ 
+and or other positions but not the first position in a sentence. The only time the Dagbani verb 
+is fronted is when it is in a gerundial use or when it is nominalised. Some examples are: 
+12. Chán-dí      kà     ó       jè. 
+         Go.IMPFV   FOC 3SG   not want 
+      It is going he s/he does not want. 
+ 
+13. Dúɣíbú          kà       tí      náán   bórá. 
+     Cook.IMPFV  FOC    1PL   ASP    want. IMPFV 
+     It is cooking we would like. 
+ However, it should still be maintained that a verb in the gerundial use ceases to be a 
+verb, as it does not function as a verb in the sentence in which it occurs. In this case, the fact 
+remains that no Dagbani verb occupies the initial position in a sentence.  
+ Also, other elements, including focus marker s, emphatic markers, discourse markers, 
+and adverbials, can occupy the second position. This explanation shows  that in Dagbani, one 
+of the arch functional features of the verb  is that it does not occurs in the initial position in a 
+sentence. 
+Table 2.2 The Nature of the Dagbani Sentence 
+Subject Time depth marker Tense PFV/IPFV verb base  Discourse particle Other elements 
+Ò Dì yên Cháŋ mì Object, adverbial 
+1SG TDP0 FUT go.IPFV EMPH  
+‘S/he was about to go.’  
+ The first part of the sentence, as indicated in Table 2.3, is the subject which is typically 
+occupied by pronouns tí ‘we,’ bɛ̀  ‘they,’ ǹ ‘ɪˋ,’ ó ‘s/he,’ dí ‘it,’ and nominals. The second 
+element in the sentence is aspectual that sometimes marks remoteness distinctions. The third 
+slot is occupied by tense, which a future marker can occupy. The fourth element is reserved for 
+the aspect verb base, usually occupied by the Dagbani perfective and imperfective verb usually 
+a Dagbani ‘lexical’ verb. The fifth slot of the sentence is a slot for the discourse particles mì, 
+focus lá, emphatic markers mí or lá. The sixth, or sometimes the last slot, is for other elements 
+like the object and the adverbial. When there is a determiner in a sentence, it could take the last 
+slot as well.   
+ This means there are instances when the object moves from its original position to occupy 
+the first slot of the sentence. In this case, the focus marker, ka, is introduced between the patient 
+--- [PAGE 72] ---
+ 
+53 
+ 
+and the agent before the verb. The structure, therefore, becomes OSV. There are also instances 
+where an adverbial can occupy a sentence -initial position. In such constructions, the focus 
+marker is introduced, followed by the subject, and then comes the verb at the final position of 
+the sentence. In that case, the structure ASV is also possible. In a situation where the object or 
+adverbial of a sentence is brought to the initial position as explained, the determiner can occupy 
+the second or last position of the sentence. The following examples illustrate the OSV and the 
+ASV structures respectively in the language: 
+14. Bíá      ká         ó                bú           máà. 
+                            Child   FOC     3SG.SUB     beat.PFV   DEF 
+                            It is a child he beat. 
+ 
+15.  Sòhàlá       ká      ó          sá    kànà 
+                            Yesterday FOC  3SG      TDM  Come.PFV 
+                             S/he came yesterday. 
+ In sentence ( 14), the patient (object) occupies the initial position while the agent 
+(subject) comes after the focus particle, ká, then comes at the last position, the verb. In number 
+(15), the adverbial comes before the rest  in the sentence. It is observed in Dagbani that these 
+two forms of sentences ( 14) and ( 15) are generally limited in use, even though they are not 
+wrong to be used. Moreover, Olawsky (1999) assertion confirms the above illustration on the 
+Dagbani sentence when he posits that noun, apart from their typical morphological structure, 
+can be subjects and always occupy the initial part of sentences. In this construction, the 
+movement of an object to the initial position will result in the word order O-S-V (see Olawsky 
+1999ː22). It is the case that when a sentence deviates from the typical SVO structure, a focus 
+marker is introduced (see also Issah  2013). The verb ‘beˋ’ is next on the discussion. 
+2.4.2 The Verb ‘Bé’ in the Dagbani Language 
+ As an open word class, verbs in Dagbani are numerous and cannot be completely 
+discussed in this study. Therefore, a basic explanation of the two most occurring and common 
+verbs, nyέ, and bé, are considered essential. As Olawsky (1999) indicates, nyέ is like an English 
+copular verb, ‘is’ and ‘are,’ which express the state s of being. Discussing these verbs, one 
+would notice that the copular Dagbani verb bé functions as a locative verb. Bé is like one of 
+the locative verbs Nam (2012) describes in his study of Syntax-semantics mapping of locative 
+arguments. Nam discusses the locative verb types to include goal locatives, stative locatives, 
+and directional locatives. Nam (2012) observes that as some languages use verbal suffixes to 
+--- [PAGE 73] ---
+ 
+54 
+ 
+express spatial properties of locatives, others use uniqu e verb forms and serial verb 
+construction to express these uses. See Nam (2012ː473-480). 
+ Dagbani is one of those languages that use special verbs to express the spatial properties 
+of locatives. In Dagbani, the verb bé functions as a stative locative as it denotes a point where 
+something happened without location change. The following are sentences illustrating the 
+above copular (nyέ) and locative (bé) verbs: 
+16.     Ń      nyέ    lá     páɣà.  
+                               1SG    be    FOC  woman 
+                               I am a woman.  
+ 
+17.    À   nyέ lá        ǹ               bìà. 
+                             2SG  be FOC  1SG.POSS  child 
+                            You are my child. 
+ 
+18.    Ń      bé             lá              Germany   
+                             1SG   be.SLOC  FOC    Germany 
+                             I live in Germany/ I am in Germany/ I stay in Germany. 
+ In sentences 16 and 17, the verb ny έ is copular, which indicates state of being of the 
+subjects in sentences as it identifies the subjects of the sentences . Therefore, it tells what the 
+subjects are. In sentence 18, the verb bé expresses a spatial property of location that is stative. 
+Thus, it indicates the location of the speaker. In this case, the verb yi expresses the source 
+location of an argument in Dagbani. Consider the following examples:  
+19.   Ò      yì-lá               dàá      ná. 
+                             3SG   SOLOC-FOC market DP  
+                             He came from market. 
+ 
+20. Tí     yí-là             Màlshèɣú ná. 
+                               1PL SOLOC-FOC   Malshegu DP 
+                          We come from Malshegu. 
+ Another use of the Dagbani verb bé is like that of the verb be. It can be used to describe 
+the state or condition of a person or something (cf Olawsky 1999). In Dagbani, the appropriate 
+verb to use when we ask about the condition of a person is the verb ‘be’. Consider the following 
+illustrations: 
+21.   Ò      bè        vényálá. 
+       3SG   ST/CON  good    
+--- [PAGE 74] ---
+ 
+55 
+ 
+        S/he is doing well good. 
+ 
+22. Dì  bí       bé          vényálá. 
+       It   NEG  ST/CON  good 
+       It is doing well. 
+ The Dagbani verb bé, as seen in the above sentences, also indicates a state or condition 
+of the subjects in the sentences. It, therefore, confirms that the Dagbani verb bé is not only a 
+stative locative verb, but it also indicates the state and/or condition of being of something or a 
+person, as illustrated in the above sentences. 
+2.4.3 Dagbani Verb Forms  
+ The two Dagbani verb forms that are related to the perfective and imperfective aspects 
+are discussed in this section . This section, therefore, concerns the Dagbani perfect ive and 
+imperfective aspect.  It is stated in the introductory chapter that the discussion of the Dagbani 
+verb forms is vital because the influence that occurs is due to the lack of distinction between 
+the grammatical categories and subcategories.  As demonstrated in the analysis of chapters five 
+and six, the difference rests on these verb forms, which express the perfective and imperfective 
+aspects of  Dagbani. Given that verbs, adjectives, nouns, and pronouns belong to different word 
+classes, they have various morphological realisations. This phenomenon is a prominent 
+distinguishing feature among the word classes. To this notion, Olawsky (1999) confirms that 
+verbs, in general, have morphologically different structures from nouns. He highlights that the 
+Dagbani verb has two forms. They are the perfective and imperfective  verb forms. He also 
+maintains that the imperfective verb forms share the same features as th e English progressive 
+but can also express habitual meanings. In Comrie ’s (1978) explanation, the imperfective 
+aspect has to do with the internal temporal structure of a situation and that the imperfectiveness 
+includes habitual and progressive meanings. As explained in Comrie’s illustration of aspect in 
+the fourth chapter, the grammar of many languages shows that the imperfective is divided into 
+two parts, namely, habituality and continuousness.  In languages with the imperfective aspect 
+or verbal form, a si tuation expresses both habitual and progressive meaning (cf Comrie 
+1978:24-28). This is the case in the Dagbani language. In Dagbani, no distinction is made 
+between the progressive and the habitual present.  
+--- [PAGE 75] ---
+ 
+56 
+ 
+ The other verb form, which expresses the perfective  aspect, however, expresses a 
+completed action. The refore, the perfective aspect comprises the simple past and the perfect  
+(present pe rfect). The perfective is described as a complete d situation and not a complete 
+situation, because it emphasises the situation being completed and terminated at a certain point 
+in time (cf Comrie 1987:18). Given Comrie’s explanation of the perfective, Dagbani has a 
+perfective aspect expressed with the perfective verb form.  As Olawsky indicates, the present 
+perfect and the simple past are referred to as the perfective (a completed situation). Therefore, 
+the imperfective aspect expresses a situation that is in progress, a situation at the time of 
+speaking, or a situation that holds as a habit. Thus, the imperfective is realised in the present / 
+habitual present and the progressive situations in Dagbani. Thus, the perfective and 
+imperfective aspects are presented in the perfective and imperfective  verb forms. The verb 
+forms are realised through the aspectual suffixes and the bare infinitive form of the verb.  
+ Therefore, the subcategories past, perfect , on the one hand, and habitual and 
+progressive, on the other , have a morphological inflection usually referred to as aspectual 
+suffixes. The imperfective and perfective aspects explain  the grammatical categories and 
+subcategories in chapters five and six of this study. 
+ In Dagaare, one of the Mabia languages closely related to Dagbani, Dakubu (1989) , 
+Bodomo (1997) and Saanchi (2003) observe that the Dagaare verb has two forms. These two 
+forms are the perfective and the imperfective. Instead, the two verb forms  seem to be a bit 
+differently expressed from that of the Dagbani language. That is, both the perfective and the 
+imperfective have further divisions of two forms each. In Dagaare, there is a distinction 
+between past/perfect and present/progressive (cf Dakubu 1989) and (Saanchi  2003). Dakubu 
+(1989), for instance, refers to the perfective verb forms as perfective ‘A’ and perfective ‘B’, 
+then the imperfective as imperfective ‘A’ and imperfective ‘B’. However, it is not only Dagbani 
+and Dagaare that have these two verb forms. Most of the Mabia languages show a distinction 
+between a perfective and an imperfective verb base.  
+ The subcategories under these grammatical categories (past  tense, present perfect, 
+progressive aspect, and the habitual present) can be expressed through the pre-verbal particles, 
+post-verbal particles, and the lexical expressions and lexically composite expressions. The pre-
+verbal particle is next to be discussed.  
+--- [PAGE 76] ---
+ 
+57 
+ 
+2.4.4 Dagbani Pre-Verbal Particles 
+ This part of the chapter discusses the preverbal particles. The preverbal particles occur 
+before verbs in utterances to express imperfective and perfective aspects in Dagbani. The  
+preverbal particles discussed in this section are the time-depth particles; sá (an aspectual for 
+yesterday or tomorrow), dí (an aspectual for a few minutes or hours ago, basically concerning 
+today), dáá (more than day ago); they are used to express tense in the Dagbani. These particles 
+(dí, sá, dáá) fall under one of the ways of expressing tense in human language termed as the 
+degree of remoteness in Comrie (1985), remoteness distinctions in Botne (2012), and metrical 
+tense in  Bodomo (2001 ; 2018). This phenomenon suggests that in Dagbani, some of the 
+preverbal particles sometimes express tense and remoteness distinctions. The remoteness 
+distinctions give accurate time specifications between syntactic expressions. The remoteness 
+distinctions have been investigated in some of the Mabia (Gur) languages, namely, Dagaare 
+and Dagbani. Bodomo’s (2001) work on  the Temporal Systems in Dagaare and Dagbani 
+discovers time -depth particles that mark the degree of remoteness in expressing tense in 
+Dagaare and Dagbani. 
+ The Mabia languages such as Dagaare and Dagbani have additional tense -making 
+systems, which are the time -depth ‘(Bodomo 2001). These additional time marking systems 
+are part of the preverbal particles. The author posits that tense in the Dagaare, Dagbani, Frafra, 
+Kusaal, Mampruli  languages is expressed using a system of preverbal particles , normally 
+occurring with the lexical verb(s) in sentences. He identifies these particles in Dagbani as; daa 
+‘more than one day ago, sà ‘one day away’, dì ‘today’. Also, yì ‘habitual’, nà ‘still/yet’, yáá 
+‘once again/ as usual’, díí ‘suddenly/just’, kù ‘future negative’, láh́ ‘again’ (Bodomo 2001: 45). 
+This scholar maintains that these particles are used to express polarity, aspect, and mood in 
+Mabia. Among the verbal particles he  identifies are particles that show tense and time -depth, 
+remoteness, and metrical tense. These particles mark remoteness distinctions and tense in 
+Dagbani. This section is referred to in the explanation of the influence of the perfective aspect, 
+especially the marked past on English tense. 
+ While discussing the time-depth particles, Bodomo (2001) observes that in addition to 
+expressing time with the verbal systems, Dagaare and Dagbani, most related languages in the 
+Mabia (Gur) language group, have a system of expressing time in both past and future tenses. 
+--- [PAGE 77] ---
+ 
+58 
+ 
+He observes that though both Dagaare and Dagbani have the extended use of the verbal systems 
+to express time, Dagbani instead seems to have a more complicated way of using these verbal 
+systems in locating time than Dagaare. This is because not only do the time -depth particles 
+express time in the past but also these preverbal particles occur with other verb forms to express 
+the degree of remoteness in the future . The author  explains that the d egree of remoteness, 
+known as the tense metric system, resembles that of Comrie’s observation on the Latinate 
+expressions of the degree of remoteness as in hodiernal, hesternal, and pre-hesternal preverbal 
+particles (cf  Bodomo 2001:48; Bodomo 2018; Comrie 1985). Consider the time-depth particles 
+of Dagaare and Dagbani in Table 4 below.  
+Table 2.3 The Time-depth Particles of Dagaare and Dagbani 
+Time Depth Dagaare Dagbane 
+Hodiernal dà di 
+Hesternal zàá sa 
+Pre-hesternal dáá daa 
+   Source: Bodomo (2001:47)   
+ As indicated in Table 4, Bodomo (2001) identifies the time-depth particles in Dagaare 
+as; da, za, daa, and in Dagbani as; dì, sà, and dáá. All are used in metric tense or degree of 
+remoteness that express past tense in these two languages. Bodomo posits that the Latinate 
+hordienal counterpart in Dagaare, da, shows past tense and  gives a time specification in the 
+past, specifically in the same day. Comrie (1985) observes a similar occurrence in the Bameleka 
+Dchang language. For detailed information on metric tense in Dagaare, (see Bodomo 2001). 
+ With regard to the metric tense in Dagbani, Bodomo uses the time -depth markers; di, 
+sa, and daa. He explains that the di in Dagbani is used to express past situations within the day. 
+However, unlike its Dagaare counterpart, it can  also be used to express the future time  and 
+today, (see also Botne  2012). The following examples illustrate the use of t he di particle in 
+both the past and future times: 
+23.       Ń     dí       chàŋ       shìkúrú   zúŋͻ́. 
+     1SG  TDP  go.PFV   school    today 
+--- [PAGE 78] ---
+ 
+59 
+ 
+            I went to school today.  
+24.       Ń       díîn          cháŋ            shìkúrú   zúŋͻ́. 
+         1SG   FUT.TDP   go.IMPFV   school   today 
+                     I will just go to school today.    
+            (Bodomo 2001:13) 
+ The particle dì in the future is an exception as it does not just mark future time in the 
+day. It expresses situations in the near future that may even go beyond today. This particle may 
+not mark remoteness in the future.  
+ The next particle he discusses is the hesternal particle sà. Also, the particle sà expresses 
+the past before today and not before yesterday. It is a past situation that holds on only yesterday. 
+It can also be used to express the future time for only a day after today. That is the future time 
+that holds on only tomorrow. For example: 
+25.      Ń         sà          cháŋ shìkúrú. 
+    1SG     PS.TDP   go.PFV school 
+           I went to school yesterday. 
+ 
+26.      Ń       sán           cháŋ          shìkúrú. 
+           1SG   FUT.TDP    go.IMPFV  school  
+        I will go to school tomorrow. 
+                (Bodomo, 2001:13 emphasis added) 
+ The last metric tense particle in Dagbani is the dáá particle. Bodomo explains dáá (pre-
+hesternal) as a metric tense marker that marks past after yesterday and beyond, and as well 
+marks future after tomorrow and beyond. The following are some examples: 
+27.       Ń dáá   cháŋ shìkúrú. 
+           1SG PS.TDP go.PFV school 
+           I went to school two or more days ago. 
+ 
+28.      Ń    dáán         cháŋ       shìkúrú. 
+           1SG  FUT.TDP   go.PFV   school. 
+          I will go to school in two or more days. 
+--- [PAGE 79] ---
+ 
+60 
+ 
+(Bodomo 2001:13) 
+ As demonstrated, dì refers to the past within the day and not before today in the 
+Dagbani. Dí is, therefore, equivalent to the Dagaare da. Bodomo observes that the Dagbani 
+time-depth markers instead perform more functions than that of Dagaare. For instance, the 
+hodiernal particle dì expresses past time within today and future time (not necessarily within 
+the day). Thus, the vowel in dí lengthens rapid speech to díín, which is dì+ nì when expressing 
+future time with dì. The time-depth particle, the hesternal sá, is also used to express the future 
+time that does not go beyond tomorrow. In marking the future time, it also becomes sân, which 
+is sá+ní. The pre-hesternal dáá also expresses the past after yesterday and has a future version 
+that starts after tomorrow and beyond. It is realised in the future illustration as dáàn, that is, 
+dáá+ nì. Ní is a future marker, so when used with the time -depth particles, they tend to mark 
+the specific times in the future and not the past. This, therefore, explains why díín, sân, and 
+dáàn express the future in Bodomo’s explanation. It should also be borne out that díín, sân, 
+and dáàn are used in rapid speech, which is mostly realised in written Dagbani as dí nì, sá nì, 
+and dáá nì, respectively. Without argument, it is established  that when these are added to an 
+utterance, that utterance illustrates remote tense in Dagbani without ambiguity. Thus, speakers 
+can accurately mark past and future tenses with the time-depth markers, as seen in the sentences 
+above. Although the above preverbal particles mark tense in the Dagbani, they are not strictly 
+obligatory as the English morphological time markers. There are other ways of expressing time; 
+nonetheless, this section is referred to in chapter five to explain the influence of the Dagbani 
+perfective form on English use. Below is a discussion on a set of aspectual modifiers that also 
+mark time in Dagbani. 
+2.4.5 Dagbani Aspectual Modifiers 
+ Another work that discusses preverbal particles regarding tense expression in one of 
+the Mabia languages is Atintono (2005). Atintono’s work aim s to examine the aspectual 
+modifiers in the Gurenε language. He maintains that the aspectual modifiers indicate  whether 
+the situations denoted by the verbs are completed, ongoing, or involve internal complications. 
+The discussion of aspectual modifiers as part of expressing time in Gurenε is considered 
+important in this study. Dagbani and Gurenε belong to one langu age group with over 50% 
+intelligibility. This means they share some linguistic similarities in both grammar and 
+phonology. Therefore, it is indicated that most of the preverbal particles used to express time  
+--- [PAGE 80] ---
+ 
+61 
+ 
+or aspect in these two languages are similar. In this case, each set of these preverbal particles 
+in one language has a counterpart in the other language. Therefore, th e preverbal particles are 
+worth discussing as each preverbal  particle or aspectual plays an essential role in expressing 
+time to which reference is made in chapters five and six of this study. It is, therefore , not out 
+of place to look at verbal particles in Gurenε even though the investigation concerns Dagbani.  
+ Some preverbal particles Atintono discusses are the aspectual modifie rs pugum and 
+pilum of  Gurenε. He observes that the Gurenε preverbal particle, pugum, indicates a completed 
+action where the agent in the sentence does not intentionally perform an act to hurt. This 
+particle, pugum, has a counterpart known as pilum. He makes clear that pilum is also a modifier 
+used to mark a completed action. Pilum is, however, used to express a situation that happens 
+before its stipulated time. The author interprets both as completed situations. They only differ 
+a bit semantically. That means the sentences could be interpreted, for example, as either perfect 
+or past. Thus, these particles can be used to mark time either in the present perfect or in the 
+simple past. In this case, the perfective aspect.  For examples of th is usage, (see Atintono 
+2005:4-5). 
+ Another particle Atintono discusses is the Gurenε pre -verbal particle yeem. This, he 
+says is realised as weem in Bongo where another dialect of Gurenε is spoken. According to 
+him, it is used in statements where the speaker attaches no seriousness to what is said. One 
+example is: 
+29.       A      yeem   soke   fu     yele  
+              S/he  ASP    ask    2SG   case  
+           ‘S/he only asked about you’  
+(Atintono 2005:109). 
+ In addition, the aspectual modifier tábélε is part of Atintono’s (2005) investigation on 
+the aspectual modifiers. According to him, this aspectual can be used in events about the past 
+(a completed action) in Gurenε. He refers to this aspectual as an affirmative aspectual that 
+expresses a historic past meaning.  
+ Moreover, nàn and kelum are part of the enumerated aspectual by Atintono. He explains 
+that they express a continuing existence of conditions and activities, respectively in Guren ɛ. 
+The use of nàn with a low tone involves situations or event s that are basic conditions, and the 
+particle kelum involves situations that are activities. That means nàn and kelum are aspectual 
+--- [PAGE 81] ---
+ 
+62 
+ 
+that involve the imperfective use in the language. However, as nàn involves a condition 
+regarding activities or events, kelum consists of the action itself. Others are the particles ná, 
+nán, and yà’àm.   
+ The above preverbal particles Atintono discusses also exist in Dagbani and are 
+expressed almost the same way as they are expressed in Gurenε. For instance, the counterpart 
+of the Gurenε preverbal particles, pugum and pilum, is the preverbal particle pún in Dagbani. 
+In Dagbani, the particle pún also denotes a situation that happens before its stipulated time. 
+Additionally, it can denote a completed situation in Dagbani. Therefore, Dagbani pún combines 
+the two functions of the Gurenε aspectual pugum and pilum.  
+ Alhassan (1988) also discusses pre verbal particle pún in Dagbani. He states that pún 
+expresses completed action. Thus, his illustration also shows that pún and the bare infinitive 
+verb form expresses a completed action. One other important feature Alhassan identifies about 
+pún is that when it occurs with the time -depth dí, it expresses the past perfect in Dagbani. In 
+this case, it forms part of the expression of plu perfect in Dagbani. This means that the aspectual 
+pún can express accurate time specifications when expressing tense in Dagbani; or remoteness 
+distinction since it expresses distance past. 
+ Although Alhassan’s (1988) explanation of this particle is slightly different from that 
+of Atintino’s illustration of pugum in Gurenε, there are still more similarities between pún, and 
+pugum and pun use. For instance, they both help express a completed action. Atintono’s pilum 
+in his illustrations indicates perfective sentences and not  necessarily past perfect. Also, 
+Atintono’s explanation does not include distan t past. H owever, distance past forms part of 
+Alhassan’s (1988) explanation of the feature. Some examples of the use of pún expressing the 
+present perfect situation in Dagbani are: 
+30.     Ń     pún  chàŋ.  
+                  1SG  ASP  go.PFv 
+                   I have already gone. 
+ 
+31.     Bɛ̀  pún  gbíhí. 
+                   3PL  ASP  leep.PFV  
+                They have already slept. 
+ 
+32.   Ń  pún  dùɤì. 
+       1SG  ASP  cook.PFV  
+--- [PAGE 82] ---
+ 
+63 
+ 
+      My mother has already cooked.  
+             (Alhassan, 1988:28) 
+ The preverbal article pilum in Gurenε is also illustrated in Alhassan’s exemplification 
+of pun in the Dagbani, thus expressing a situation happening before its stipulated time. 
+However, to describe a remote past, consider the sentence below: 
+33.       Ò dì     pún     dì           ká    nààyì  pààgì. 
+              3SG  TDP    ASP    eat.PFV   FOC   finish  arrive.PFV 
+             He had finish eating before he arrived. 
+    (Alhassan 1988). 
+ This means that when the time-depth markers are combined with the aspectual pun, a 
+temporal distance in the past is created in Dagbani. This is because, if the combination of di 
+(hodiernal), a past marker within the day, and pún express distant past in the day, then the 
+particle pún plus the other past markers, hesternal and the pre-hesternal that express pluperfect 
+in Dagbani, will express temporal distance within those periods (yesterday and a day before 
+yesterday), respectively. Consider some examples are: 
+34.        Ó        sá        tì           yε̂n     káná        kà      ń      pún chàղ. 
+             3SG   TDM   before     FUT   come.PFV   FOC 1SG   ASP go.PFV 
+             Before he came (yesterday), I had left. 
+ 
+35.       Ó      dáá     tì          yε̂n     káná          kà    ń      pún  chàŋ. 
+           3SG TDM   before   FUT   come.PFV   FOC 1SG  ASP  go.PFV 
+           Before s/he came two or more days ago, I had left. 
+ The use of pún in sentences 30-35 shows that the activities or situations  happened 
+before their stipulated time. Thus, the speaker did not expect the completion of the situation at 
+that time. However, 33 to 35 have additional meaning; they express the degree of remoteness. 
+ From the two scholars, the verbal particles, pún, pugum, and pilum, as the same verbal 
+particles in these two Mabia languages , express time in the perfective (a completed action). 
+Even in Dagbani, it can also occur with different verbs to express habitual and progressive 
+meanings. It, however, still involved a preconceived intention or decision before the actual time 
+of the situation. Therefore, the particle is involved in situations that express the two 
+grammatical categories (perfective and imperfective aspects), depending on the verbs with 
+which they occur. We refer to this aspectual in the analysis of the perfective and the 
+--- [PAGE 83] ---
+ 
+64 
+ 
+imperfective in chapters five and si x. Moreover, the preverbal particles yeem and weem have 
+their counterpart in Dagbani. The aspectual ‘kúlí’/kúl is their counterpart.  
+ In a rapid speech, the last vowel sound is deleted; in this case, it is realised as kúl. These 
+verbal particles also indicate that the speaker just makes a statement without any seriousness 
+attached. In Dagbani, it can be part of a past, habitual/progressive, and even in the future time, 
+depending on which verb it occurs. Some examples of its uses in Dagbani are: 
+36.  Ń     kúlí    bóhì-rì             mì. 
+            1SG  ASP  ask.IMPFV      EMP 
+           I am only/ just asking. 
+ 
+37. Ń      kúlí  bóhì     mí. 
+          1SG    ASP ask.PFV  EMP 
+    I only asked. 
+ The above sentences indicate that this particle can help express time depending on the 
+verb form, either in the past or present. Also, Gurenε  aspectual tábélε has a counterpart in 
+Dagbani known as shírí. It performs the same function tábélε performs in Gurenɛ. Thus, it is 
+also an affirmative aspectual. This particle shírí as an affirmative verbal parti cle can express 
+the past, the present, and the future times in Dagbani. Examples of shírí in the past tense are 
+seen in the following sentences: 
+38.  Páɣá       màà    shírí    dòɣì                       bíá 
+            Woman  DEF    ASP    give.birth.IMPFV  child 
+            The woman indeed gave birth to a child.  
+             Translated from Gurenɛ (Atintono 2005). 
+ Shírí, as a verbal particle in Dagbani, is more complex  as it can be used in the future 
+and the habitual present. Shírí, therefore, is used in situations involving the past tense and  
+situations involving other tenses. It is the case that the above sentence expresses a past situation 
+in the language, but the aspectual, shírí is just performing an affirmative function. This means 
+that the aspectual shírí does not primarily mark tense, instead, it affirms the verbal action in a 
+sentence. This explanation suggests that it can still be part of the habitual or progressive 
+situation and a completed situation in the language. Moreover, depending on the  main verb, 
+the above sentence can express past, present, habitual, etc.  
+--- [PAGE 84] ---
+ 
+65 
+ 
+ Another aspectual  marker in Dagbani that has its equivalence in Guren ɛ is ná. Its 
+aspectual counterparts are nàn and kelum in Gurenɛ. Like the Gurenɛ aspectual, the Dagbani 
+aspectual ná also expresses the continuity of a situation, whether it is an activity or a condition. 
+This aspectual combines the two functions associated with situations related to conditions, and 
+activities connected to the aspectual nàn and kelum in Gurenɛ. 
+Examples: 
+39.   Ò      sà         nà    dìrì             mí. 
+               3SG  TDM   ASP Eat.IMPF   EMP 
+             He was still eating yesterday.  
+ 
+40. Dì                 nà     màhà. 
+           3SG. INAM   ASP   wet 
+       It is still wet.   
+The aspectual nà in the above two sentences expresses the continuity of a situation that depicts 
+activity in sentence (39) and a condition in sentence (40). 
+ This aspectual modifier nà still performs an additional function in Dagbani. It performs 
+the same function that the Gurenε aspectual nà performs. Thus, it occurs with Dagani verbs to 
+express a progressive/habitual meaning. This section is specially referred to in explaining the 
+influences of the imperfective aspect on Dagomba’s use of English tense and aspect. Consider 
+the following sentence: 
+41. Ò      nà    kòhìrì            shínkááfá. 
+          3SG   HAB sell.IMPFV     rice 
+          She still sells rice/She is still selling. 
+ Nà can also be used to mark the immediate past in the Dagbani language

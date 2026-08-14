@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dagbani LLM & TTS Development Strategy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Chosen Palette: Warm Neutrals (Sand, Terra Cotta, Sage Green) for a calm, grounded, community-focused feel. -->
+    <!-- Application Structure Plan: The SPA uses a tabbed dashboard layout. This structure was chosen because building an AI pipeline for a low-resource, oral-heavy language is complex and linear. Breaking it down into 'Overview', 'Data Strategy', 'LLM Dev', and 'TTS Integration' allows the user to explore each distinct engineering phase independently without being overwhelmed by technical density. -->
+    <!-- Visualization & Content Choices: Data Proportions -> Goal: Inform on data composition -> Viz: Chart.js Donut Chart -> Interaction: Tooltips -> Justification: Clearly shows the necessary heavy reliance on transcribed audio over scarce written text. Resource Timeline -> Goal: Compare phase durations -> Viz: Chart.js Bar Chart -> Interaction: Hover details -> Justification: Sets realistic expectations for project management. Architecture Flow -> Goal: Organize processes -> Viz: Tailwind CSS Flexbox diagrams -> Interaction: Clickable nodes for details -> Justification: Replaces SVG/Mermaid for strict compliance while maintaining visual clarity. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 250px;
+            }
+        }
+        .tab-active {
+            border-bottom: 4px solid #D97757;
+            color: #D97757;
+            font-weight: bold;
+        }
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        body {
+            background-color: #FDFBF7;
+            color: #333333;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <nav class="bg-[#EAE4D3] shadow-md border-b border-[#D5CDBD] sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl">&#127760;</span>
+                    <span class="font-bold text-xl tracking-tight text-[#4A443A]">Dagbani AI Initiative</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="bg-[#8E9B82] text-white px-3 py-1 rounded-full text-xs font-semibold tracking-wide">RESEARCH PLAN</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-6xl mx-auto px-4 py-8">
+        <div class="mb-8">
+            <h1 class="text-4xl font-extrabold text-[#2C2822] mb-3">Building a Dagbani LLM with Text-to-Speech</h1>
+            <p class="text-lg text-[#5A5449] max-w-3xl">A strategic blueprint for developing conversational AI for an oral-centric, low-resource language. This interactive report outlines the required phases, from specialized audio data collection to dual-model integration.</p>
+        </div>
+
+        <div class="border-b border-gray-300 mb-6">
+            <ul class="flex flex-wrap space-x-6 text-sm font-medium text-gray-500" id="navTabs">
+                <li class="pb-3 cursor-pointer hover:text-[#D97757] tab-active transition-colors" data-target="overview">&#128203; Executive Summary</li>
+                <li class="pb-3 cursor-pointer hover:text-[#D97757] transition-colors" data-target="data">&#128225; Data Strategy</li>
+                <li class="pb-3 cursor-pointer hover:text-[#D97757] transition-colors" data-target="llm">&#129504; LLM Training</li>
+                <li class="pb-3 cursor-pointer hover:text-[#D97757] transition-colors" data-target="tts">&#128266; TTS Integration</li>
+            </ul>
+        </div>
+
+        <div id="contentArea" class="bg-white rounded-xl shadow-sm border border-[#EAE4D3] p-6 md:p-8 min-h-[500px]">
+            
+            <div id="overview" class="section-content fade-in">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-[#2C2822] mb-2">The Core Challenge & Solution</h2>
+                    <p class="text-gray-700 leading-relaxed">This section provides a high-level overview of the architectural approach required to serve native Dagbani speakers, emphasizing the necessity of an audio-first interaction layer.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-[#F9F7F1] p-6 rounded-lg border-l-4 border-[#D97757]">
+                        <h3 class="text-xl font-bold mb-3 text-[#4A443A]">&#9888; The Problem</h3>
+                        <p class="text-gray-600 mb-4">Dagbani has a rich cultural heritage, but it is primarily an oral language. While a written standard exists, daily communication, folklore, and rural interaction rely heavily on speech. A standard text-in/text-out LLM would suffer from low adoption rates among the native population.</p>
+                        <ul class="list-disc pl-5 text-gray-600 space-y-1">
+                            <li>Scarcity of digitized written text.</li>
+                            <li>Low literacy rates in the standardized orthography.</li>
+                            <li>High context dependency in spoken nuances.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-[#F9F7F1] p-6 rounded-lg border-l-4 border-[#8E9B82]">
+                        <h3 class="text-xl font-bold mb-3 text-[#4A443A]">&#128161; The Architecture</h3>
+                        <p class="text-gray-600 mb-4">The solution is a composite AI pipeline. We must build a traditional text-based LLM, but encapsulate it entirely within a robust Automatic Speech Recognition (ASR) and Text-to-Speech (TTS) shell.</p>
+                        <div class="flex items-center justify-between bg-white p-3 rounded shadow-inner text-sm font-mono text-center">
+                            <div class="p-2 border border-gray-200 rounded">User Audio</div>
+                            <span class="text-xl">&#8594;</span>
+                            <div class="p-2 border border-gray-200 rounded bg-[#EAE4D3]">ASR</div>
+                            <span class="text-xl">&#8594;</span>
+                            <div class="p-2 border border-[#8E9B82] rounded bg-[#8E9B82] text-white font-bold">LLM</div>
+                            <span class="text-xl">&#8594;</span>
+                            <div class="p-2 border border-gray-200 rounded bg-[#D97757] text-white">TTS</div>
+                            <span class="text-xl">&#8594;</span>
+                            <div class="p-2 border border-gray-200 rounded">Audio Out</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <h3 class="text-xl font-bold text-[#2C2822] mb-4">Estimated Project Timeline</h3>
+                    <div class="chart-container">
+                        <canvas id="timelineChart"></canvas>
+                    </div>
+                    <p class="text-sm text-center text-gray-500 mt-2">Months required for a production-ready, localized prototype.</p>
+                </div>
+            </div>
+
+            <div id="data" class="section-content hidden">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-[#2C2822] mb-2">Data Collection Strategy</h2>
+                    <p class="text-gray-700 leading-relaxed">Because Dagbani lacks large text corpora (like Wikipedia or Common Crawl), the strategy must pivot to parallel audio-text generation and community sourcing.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <div class="space-y-4">
+                            <div class="bg-white p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow cursor-pointer" onclick="updateDataDetail('text')">
+                                <div class="flex items-center justify-between">
+                                    <h4 class="font-bold text-lg text-[#4A443A]">&#128214; Text Mining (15%)</h4>
+                                    <span class="text-[#D97757]">&#10149;</span>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow cursor-pointer" onclick="updateDataDetail('transcription')">
+                                <div class="flex items-center justify-between">
+                                    <h4 class="font-bold text-lg text-[#4A443A]">&#127908; Audio Transcription (65%)</h4>
+                                    <span class="text-[#D97757]">&#10149;</span>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow cursor-pointer" onclick="updateDataDetail('translation')">
+                                <div class="flex items-center justify-between">
+                                    <h4 class="font-bold text-lg text-[#4A443A]">&#128257; Synthetic Translation (20%)</h4>
+                                    <span class="text-[#D97757]">&#10149;</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="dataDetailBox" class="mt-6 p-5 bg-[#F9F7F1] rounded-lg border border-[#EAE4D3] min-h-[150px]">
+                            <h5 class="font-bold text-[#2C2822] mb-2">Select a data source above.</h5>
+                            <p class="text-sm text-gray-600">Click on the methodologies to view detailed acquisition strategies for Dagbani.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col items-center">
+                        <div class="chart-container">
+                            <canvas id="dataMixChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-4 text-center">Projected Training Corpus Composition. Note the heavy reliance on transcribed spoken word.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="llm" class="section-content hidden">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-[#2C2822] mb-2">Language Model Architecture</h2>
+                    <p class="text-gray-700 leading-relaxed">Training an LLM from scratch requires billions of tokens, which Dagbani currently lacks. The optimal strategy relies on Transfer Learning and Continuous Pre-training on existing multilingual models.</p>
+                </div>
+
+                <div class="flex space-x-2 mb-6 bg-gray-100 p-1 rounded inline-block">
+                    <button id="btnFinetune" class="px-4 py-2 bg-white rounded shadow-sm text-sm font-bold text-[#D97757]" onclick="toggleLLM('finetune')">Transfer Learning (Recommended)</button>
+                    <button id="btnScratch" class="px-4 py-2 text-gray-500 rounded text-sm font-medium hover:text-gray-800" onclick="toggleLLM('scratch')">Train from Scratch (High Risk)</button>
+                </div>
+
+                <div id="llmFinetuneView" class="fade-in">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="border border-[#8E9B82] rounded p-4 text-center bg-[#F4F6F1]">
+                            <div class="text-3xl mb-2">&#127970;</div>
+                            <h4 class="font-bold text-sm">1. Select Base Model</h4>
+                            <p class="text-xs text-gray-600 mt-1">Llama-3 (8B), Aya-23, or Mistral. Models with good multilingual foundations.</p>
+                        </div>
+                        <div class="border border-[#8E9B82] rounded p-4 text-center bg-[#F4F6F1]">
+                            <div class="text-3xl mb-2">&#128218;</div>
+                            <h4 class="font-bold text-sm">2. Vocabulary Expansion</h4>
+                            <p class="text-xs text-gray-600 mt-1">Add specific Dagbani characters/tokens to the tokenizer to prevent text fragmentation.</p>
+                        </div>
+                        <div class="border border-[#8E9B82] rounded p-4 text-center bg-[#F4F6F1]">
+                            <div class="text-3xl mb-2">&#128295;</div>
+                            <h4 class="font-bold text-sm">3. LoRA / QLoRA</h4>
+                            <p class="text-xs text-gray-600 mt-1">Parameter-efficient fine-tuning on high-quality Dagbani instruction pairs.</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded text-sm text-gray-700">
+                        <strong>Why this works:</strong> The model already "understands" logic, reasoning, and grammar from English/French. We are teaching it to map those abstract concepts to the Dagbani linguistic structure, requiring drastically less data (approx. 50k - 100k high-quality conversational pairs).
+                    </div>
+                </div>
+
+                <div id="llmScratchView" class="hidden fade-in">
+                    <div class="bg-red-50 border border-red-200 p-6 rounded text-center">
+                        <div class="text-4xl mb-3">&#10060;</div>
+                        <h4 class="font-bold text-red-800 text-lg mb-2">Not Recommended for Dagbani</h4>
+                        <p class="text-sm text-red-600 max-w-xl mx-auto">Training a foundational model from scratch typically requires trillions of tokens. The entire digitized text available for Dagbani is estimated to be less than 50 million tokens. A model trained from scratch on this data would suffer from severe overfitting and fail to grasp basic logic.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tts" class="section-content hidden">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-[#2C2822] mb-2">Text-to-Speech (TTS) Integration</h2>
+                    <p class="text-gray-700 leading-relaxed">The TTS layer is the most critical component for user adoption. It must sound natural and respect local dialects (e.g., Tomosili vs. Nayahali).</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                    <div class="md:col-span-5 bg-[#F9F7F1] p-5 rounded-lg border border-[#EAE4D3]">
+                        <h3 class="font-bold text-lg mb-4 border-b pb-2">TTS Development Steps</h3>
+                        <ul class="space-y-4">
+                            <li class="flex">
+                                <span class="bg-[#8E9B82] text-white w-6 h-6 rounded-full flex items-center justify-center text-xs mr-3 shrink-0 mt-0.5">1</span>
+                                <div>
+                                    <strong class="text-sm text-gray-800">Phonetic Dictionary</strong>
+                                    <p class="text-xs text-gray-600">Map Dagbani text to IPA (International Phonetic Alphabet). Crucial for tonal accuracy.</p>
+                                </div>
+                            </li>
+                            <li class="flex">
+                                <span class="bg-[#8E9B82] text-white w-6 h-6 rounded-full flex items-center justify-center text-xs mr-3 shrink-0 mt-0.5">2</span>
+                                <div>
+                                    <strong class="text-sm text-gray-800">Studio Recording</strong>
+                                    <p class="text-xs text-gray-600">20+ hours of clean, phonetically balanced recordings by a native voice actor.</p>
+                                </div>
+                            </li>
+                            <li class="flex">
+                                <span class="bg-[#8E9B82] text-white w-6 h-6 rounded-full flex items-center justify-center text-xs mr-3 shrink-0 mt-0.5">3</span>
+                                <div>
+                                    <strong class="text-sm text-gray-800">Model Selection</strong>
+                                    <p class="text-xs text-gray-600">Train using VITS (end-to-end) or FastSpeech2 + HiFi-GAN for fast, natural inference.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="md:col-span-7 flex flex-col justify-center">
+                        <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm relative">
+                            <h4 class="text-center font-bold text-gray-700 mb-4">Application Data Flow</h4>
+                            
+                            <div class="flex flex-col items-center space-y-2">
+                                <div class="bg-gray-100 border-2 border-dashed border-gray-400 p-2 rounded w-48 text-center text-sm font-bold text-gray-600">
+                                    &#128172; LLM Output (Text)
+                                    <br><span class="text-xs font-normal">"N-ti pahi, Dagbani..."</span>
+                                </div>
+                                <div class="text-gray-400">&#8595;</div>
+                                <div class="bg-blue-50 border border-blue-200 p-2 rounded w-64 text-center text-sm cursor-pointer hover:bg-blue-100 transition" onclick="alert('Text Normalization: Expands numbers, dates, and abbreviations into spoken Dagbani words.')">
+                                    Text Normalization Unit (Click)
+                                </div>
+                                <div class="text-gray-400">&#8595;</div>
+                                <div class="bg-purple-50 border border-purple-200 p-2 rounded w-64 text-center text-sm cursor-pointer hover:bg-purple-100 transition" onclick="alert('G2P (Grapheme-to-Phoneme): Converts written text into phonetic symbols handling Dagbani specific tones.')">
+                                    Grapheme-to-Phoneme (G2P)
+                                </div>
+                                <div class="text-gray-400">&#8595;</div>
+                                <div class="bg-[#D97757] text-white p-3 rounded w-48 text-center font-bold shadow-md cursor-pointer hover:bg-[#c2684b] transition" onclick="alert('VITS / Tacotron Model: Generates the actual acoustic spectrograms from the phonetic input.')">
+                                    Neural TTS Engine
+                                </div>
+                                <div class="text-gray-400">&#8595;</div>
+                                <div class="bg-gray-800 text-green-400 p-2 rounded w-48 text-center text-sm font-mono">
+                                    &#9654; Audio.wav
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const appState = {
+            activeTab: 'overview',
+            chartsInitialized: {
+                timeline: false,
+                dataMix: false
+            }
+        };
+
+        const chartInstances = {};
+
+        const dataDetails = {
+            text: {
+                title: "Text Mining",
+                content: "Scraping Wikipedia, local news sites (if any), and digitizing existing literature, educational materials, and religious texts. Yields clean but very limited data."
+            },
+            transcription: {
+                title: "Audio Transcription (Crucial)",
+                content: "Partnering with local radio stations in Tamale and Yendi to access archives. Using tools like Whisper (fine-tuned) to auto-transcribe broadcasts, followed by community validation. This is where 60%+ of conversational data will originate."
+            },
+            translation: {
+                title: "Synthetic Translation",
+                content: "Using existing powerful LLMs (like GPT-4) to translate English instruction datasets (like Alpaca or Dolly) into Dagbani, followed by manual review by native speakers to ensure cultural relevance."
+            }
+        };
+
+        function switchTab(targetId) {
+            document.querySelectorAll('.section-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            document.getElementById(targetId).classList.remove('hidden');
+            document.getElementById(targetId).classList.add('fade-in');
+
+            document.querySelectorAll('#navTabs li').forEach(el => {
+                el.classList.remove('tab-active');
+                el.classList.add('text-gray-500');
+            });
+
+            const activeTabElement = document.querySelector(`[data-target="${targetId}"]`);
+            activeTabElement.classList.add('tab-active');
+            activeTabElement.classList.remove('text-gray-500');
+
+            appState.activeTab = targetId;
+
+            if (targetId === 'overview' && !appState.chartsInitialized.timeline) {
+                renderTimelineChart();
+            }
+            if (targetId === 'data' && !appState.chartsInitialized.dataMix) {
+                renderDataMixChart();
+            }
+        }
+
+        document.querySelectorAll('#navTabs li').forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                switchTab(e.target.dataset.target);
+            });
+        });
+
+        function updateDataDetail(key) {
+            const box = document.getElementById('dataDetailBox');
+            box.innerHTML = `
+                <h5 class="font-bold text-[#D97757] mb-2">${dataDetails[key].title}</h5>
+                <p class="text-sm text-gray-700">${dataDetails[key].content}</p>
+            `;
+        }
+
+        function toggleLLM(type) {
+            const btnFine = document.getElementById('btnFinetune');
+            const btnScratch = document.getElementById('btnScratch');
+            const viewFine = document.getElementById('llmFinetuneView');
+            const viewScratch = document.getElementById('llmScratchView');
+
+            if (type === 'finetune') {
+                btnFine.className = "px-4 py-2 bg-white rounded shadow-sm text-sm font-bold text-[#D97757]";
+                btnScratch.className = "px-4 py-2 text-gray-500 rounded text-sm font-medium hover:text-gray-800";
+                viewFine.classList.remove('hidden');
+                viewScratch.classList.add('hidden');
+            } else {
+                btnScratch.className = "px-4 py-2 bg-white rounded shadow-sm text-sm font-bold text-red-600";
+                btnFine.className = "px-4 py-2 text-gray-500 rounded text-sm font-medium hover:text-gray-800";
+                viewScratch.classList.remove('hidden');
+                viewFine.classList.add('hidden');
+            }
+        }
+
+        function renderTimelineChart() {
+            const ctx = document.getElementById('timelineChart').getContext('2d');
+            chartInstances.timeline = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Phase 1: Data Gathering', 'Phase 2: Data Cleaning', 'Phase 3: Base LLM Finetuning', 'Phase 4: TTS Voice Recording', 'Phase 5: TTS Model Training', 'Phase 6: Integration & App UI'],
+                    datasets: [{
+                        label: 'Estimated Duration (Months)',
+                        data: [4, 2, 3, 1, 2, 2],
+                        backgroundColor: '#8E9B82',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw + ' Months Estimated';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Months' }
+                        }
+                    }
+                }
+            });
+            appState.chartsInitialized.timeline = true;
+        }
+
+        function renderDataMixChart() {
+            const ctx = document.getElementById('dataMixChart').getContext('2d');
+            chartInstances.dataMix = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Audio Transcription', 'Synthetic Translation', 'Native Text Mining'],
+                    datasets: [{
+                        data: [65, 20, 15],
+                        backgroundColor: ['#D97757', '#EAE4D3', '#8E9B82'],
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ' ' + context.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            appState.chartsInitialized.dataMix = true;
+        }
+
+        window.onload = () => {
+            renderTimelineChart();
+        };
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+
+==================== QUERY: VITS (Total hits: 10) ====================
+[Building Dagbani Language Model and TTS_clean.txt:29] Text-to-Speech (TTS) Synthesis and Generative Voice Architecture The final operational node in the speech-enabled ecosystem converts the language model's textua
+[Building Dagbani Language Model and TTS_clean.txt:41] cellular data associated specifically with the artificial intelligence application. For example, recent high-level initiatives involving Google's heavy investme
+[Building Dagbani Language Model and TTS_extracted.txt:5736] VITS
+[Building Dagbani Language Model and TTS_extracted.txt:5885] VITS
+[Building Dagbani Language Model and TTS_extracted.txt:5989] VITS
+[Building Dagbani Language Model and TTS_extracted.txt:9031] VITS
+[Building Dagbani Language Models_clean.txt:14] modeling. 49 Due to the lack of massive text corpora, developers typically use a two-step transfer learning process: 1. Multilingual Pre-training: Utilizing mod
+[Building Dagbani Language Models_clean.txt:22] content in their native language, bridging the gap between L1 (first language) instruction and English. 1 4. Preservation of Oral Literature: Digitizing and rev
+[Building Dagbani Language Models_extracted.txt:2182] VITS
+[Building Dagbani Language Models_extracted.txt:2833] ●  TTS:  Train  a  VITS-based  model  using  the  high-fidelity  recordings  from  the  WAXAL
+
+==================== QUERY: FastSpeech (Total hits: 1) ====================
+[2026.loreslm-1.54_extracted.txt:178] sequence models such as Tacotron and FastSpeech
+
+==================== QUERY: Matcha (Total hits: 0) ====================
+
+==================== QUERY: MMS-TTS|mms-tts|Massively Multilingual Speech (Total hits: 10) ====================
+[APSIPA2025_P208_clean.txt:11] TABLE II BLEU SCORES ON VALIDATION AND TEST SETS ACROSS DIFFERENT LANGUAGE PAIRS AND SYSTEM CONFIGURATIONS . Method ES-EN DE-EN FR-EN RU-EN IT-EN Valid Test Val
+[APSIPA2025_P208_clean.txt:17] we achieved consistent performance gains, with FR-EN pre- training yielding the best results due to larger data volume. Ablation studies show that encoder trans
+[APSIPA2025_P208_extracted.txt:303] from the Massively Multilingual Speech (MMS) project 5[19].
+[APSIPA2025_P208_extracted.txt:327] 5https://huggingface.co/facebook/mms-tts-eng
+[APSIPA2025_P208_extracted.txt:521] “Cvss corpus and massively multilingual speech-to-
+[Building Dagbani Language Model and TTS_clean.txt:20] experienced a paradigm shift toward deep neural networks and self-supervised learning frameworks, fundamentally altering how low-resource language processing is
+[Building Dagbani Language Model and TTS_clean.txt:29] Text-to-Speech (TTS) Synthesis and Generative Voice Architecture The final operational node in the speech-enabled ecosystem converts the language model's textua
+[Building Dagbani Language Model and TTS_clean.txt:41] cellular data associated specifically with the artificial intelligence application. For example, recent high-level initiatives involving Google's heavy investme
+[Building Dagbani Language Model and TTS_clean.txt:53] https://www.researchgate.net/publication/404021382_Hard_to_Be_Heard_Phoneme-Level_ASR_Analysis_of_Phonologically_Complex_Low-Resource_Endangered_Languages 38. B
+[Building Dagbani Language Model and TTS_extracted.txt:9760] https://medium.com/sciforce/breaking-language-barriers-through-asr-implementation-with-tensorflow-0000f7a8e10a 39.  Liquid  AI:  Build  efficient  general-purpo
+
+==================== QUERY: Coqui (Total hits: 2) ====================
+[2026.loreslm-1.54_extracted.txt:196] models with Coqui TTS, demonstrating its effec-
+[2026.loreslm-1.54_extracted.txt:331] XTTS-v2, released by Coqui AI in 2023, sup-
+
+==================== QUERY: Orpheus (Total hits: 17) ====================
+[2026.loreslm-1.54_extracted.txt:36] tuned Orpheus-3B and XTTS-v2 for speech
+[2026.loreslm-1.54_extracted.txt:41] of 5 for Orpheus-3B. The UTMOS evaluation
+[2026.loreslm-1.54_extracted.txt:43] out of 5 for Orpheus-3B. The A/B tests revealed
+[2026.loreslm-1.54_extracted.txt:46] for Orpheus-3B. After fine-tuning on Mooré,
+[2026.loreslm-1.54_extracted.txt:257] and compared two TTS models: Orpheus-3B
+[2026.loreslm-1.54_extracted.txt:292] 3.2.1 Orpheus-3B
+[2026.loreslm-1.54_extracted.txt:293] Orpheus-3B is a state-of-the-art open-source text-
+[2026.loreslm-1.54_extracted.txt:319] Table 2: Orpheus-3B training hyperparameters
+[2026.loreslm-1.54_extracted.txt:400] tion, Orpheus-3B and XTTS-v2 have been used to
+[2026.loreslm-1.54_extracted.txt:407] Orpheus-3B achieved 3.47 out of 5, which is
+[2026.loreslm-1.54_extracted.txt:412] UTMOS metric gave 2.80 out of 5 for Orpheus-3B
+[2026.loreslm-1.54_extracted.txt:415] Orpheus-3B 77.8% of time, when comparing them
+[2026.loreslm-1.54_extracted.txt:419] Orpheus-3B 3.47 2.80 22.2%
+[2026.loreslm-1.54_extracted.txt:442] with Mooré tokens, Orpheus-3B has directly been
+[2026.loreslm-1.54_extracted.txt:509] Canopy Labs. 2025a. Orpheus-3b finetuned model. Ac-
+
+==================== QUERY: XTTS (Total hits: 16) ====================
+[2026.loreslm-1.54_extracted.txt:36] tuned Orpheus-3B and XTTS-v2 for speech
+[2026.loreslm-1.54_extracted.txt:39] 36 Mooré native speakers, XTTS-v2 achieved
+[2026.loreslm-1.54_extracted.txt:42] resulted in 3.47 out of 5 for XTTS-v2 and 2.80
+[2026.loreslm-1.54_extracted.txt:44] that the evaluators preferred XTTS-v2 Mooré
+[2026.loreslm-1.54_extracted.txt:258] and XTTS-v2. For the Mooré ASR task, we
+[2026.loreslm-1.54_extracted.txt:264] the XTTS-v2 base version for French TTS in the
+[2026.loreslm-1.54_extracted.txt:330] 3.2.2 XTTS-v2
+[2026.loreslm-1.54_extracted.txt:331] XTTS-v2, released by Coqui AI in 2023, sup-
+[2026.loreslm-1.54_extracted.txt:341] Table 3: XTTS-v2 training hyperparameters
+[2026.loreslm-1.54_extracted.txt:349] Given that XTTS-v2 doesn’t support Mooré na-
+[2026.loreslm-1.54_extracted.txt:400] tion, Orpheus-3B and XTTS-v2 have been used to
+[2026.loreslm-1.54_extracted.txt:409] 6.48 hours of data. XTTS-v2 got 4.36 out of 5
+[2026.loreslm-1.54_extracted.txt:413] and 3.47 out of 5 for XTTS-v2. That’s why XTTS-
+[2026.loreslm-1.54_extracted.txt:420] XTTS-v2 4.36 3.47 77.8%
+[2026.loreslm-1.54_extracted.txt:441] proverbs. XTTS-v2 required vocabulary extension
+
+==================== QUERY: HiFi-GAN|BigVGAN|vocoder|neural vocoder (Total hits: 15) ====================
+[APSIPA2025_P208_clean.txt:2] Improving Speech-to-Speech Translation for Low-Resource Languages via Transfer Learning Rui Zhou and Akinori Ito and Takashi Nose Graduate School of Engineering
+[APSIPA2025_P208_clean.txt:5] <es speech> Speech Encoder Auxiliary tgt Decoder Auxiliary src Decoder <es char> N o l o h e v i s t o <en char> I h a v e n o t s e e n h i m Unit Decoder <en 
+[APSIPA2025_P208_clean.txt:17] we achieved consistent performance gains, with FR-EN pre- training yielding the best results due to larger data volume. Ablation studies show that encoder trans
+[APSIPA2025_P208_extracted.txt:52] A vocoder, such as Unit HiFi-GAN, is subsequently used to
+[APSIPA2025_P208_extracted.txt:113] 37, 46, 58, 79, 45, 16, 3...Vocoder
+[APSIPA2025_P208_extracted.txt:121] 68, 32, 11, 9, 89, 87, 22, 45... Vocoder
+[APSIPA2025_P208_extracted.txt:479] [5] J. Kong, J. Kim, and J. Bae, “Hifi-gan: Generative ad-
+[Building Dagbani Language Model and TTS_clean.txt:29] Text-to-Speech (TTS) Synthesis and Generative Voice Architecture The final operational node in the speech-enabled ecosystem converts the language model's textua
+[Building Dagbani Language Model and TTS_clean.txt:35] modules. 44 Furthermore, cascaded systems benefit instantaneously from any independent advancements in text-based language modeling or specialized adversarial v
+[Building Dagbani Language Model and TTS_clean.txt:41] cellular data associated specifically with the artificial intelligence application. For example, recent high-level initiatives involving Google's heavy investme
+[Building Dagbani Language Model and TTS_extracted.txt:5696] vocoders
+[Building Dagbani Language Model and TTS_extracted.txt:5868] HiFi-GAN
+[Building Dagbani Language Model and TTS_extracted.txt:5870] vocoder.
+[Building Dagbani Language Model and TTS_extracted.txt:6958] vocoders.
+[Building Dagbani Language Model and TTS_extracted.txt:9014] Fifth,  the  system  must  utilize  next-generation  Text-to-Speech  neural  vocoders  to  generate
+
+==================== QUERY: phonemizer|grapheme|phoneme|G2P|Epitran (Total hits: 102) ====================
+[2026.loreslm-1.54_extracted.txt:194] acoustic or grapheme-to-phoneme models. Addi-
+[Building Dagbani Language Model and TTS_clean.txt:5] approximately 1.16 million people, primarily comprising the Dagomba ethnic group. 6 The linguistic and cultural epicenter of the Dagbamba people spans approxima
+[Building Dagbani Language Model and TTS_clean.txt:23] requirements by several orders of magnitude. 3 A persistent and severe challenge in Dagbani speech recognition stems from the lack of universal orthographic sta
+[Building Dagbani Language Model and TTS_clean.txt:41] cellular data associated specifically with the artificial intelligence application. For example, recent high-level initiatives involving Google's heavy investme
+[Building Dagbani Language Model and TTS_clean.txt:44] universal audio foundation models such as UniAudio and Chatterbox Turbo. These incredibly sophisticated systems mathematically utilize stochastic duration predi
+[Building Dagbani Language Model and TTS_clean.txt:50] https://blog.google/intl/en-africa/company-news/outreach-and-initiatives/introducing-waxal-a-new-open-dataset-for-african-speech-technology/ 25. Mozilla Common 
+[Building Dagbani Language Model and TTS_clean.txt:53] https://www.researchgate.net/publication/404021382_Hard_to_Be_Heard_Phoneme-Level_ASR_Analysis_of_Phonologically_Complex_Low-Resource_Endangered_Languages 38. B
+[Building Dagbani Language Model and TTS_extracted.txt:665] phoneme-to-grapheme
+[Building Dagbani Language Model and TTS_extracted.txt:669] grapheme-to-phoneme
+[Building Dagbani Language Model and TTS_extracted.txt:991] Phonetic  Category  Specific  Dagbani  Phonemes  and  Features
+[Building Dagbani Language Model and TTS_extracted.txt:4139] grapheme-level
+[Building Dagbani Language Model and TTS_extracted.txt:4212] To  comprehensively  mitigate  this  statistical  anomaly,  adopting  a  phoneme-level  acoustic
+[Building Dagbani Language Model and TTS_extracted.txt:4221] grapheme-level
+[Building Dagbani Language Model and TTS_extracted.txt:4244] Phoneme-level
+[Building Dagbani Language Model and TTS_extracted.txt:4297] Epitran
+
+==================== QUERY: tone|tonal|downstep|high-high|pitch (Total hits: 142) ====================
+[2026.loreslm-1.54_extracted.txt:94] properply tone and accent.
+[2026.loreslm-1.54_extracted.txt:117] From a linguistic perspective, Mooré is a tonal
+[2026.loreslm-1.54_extracted.txt:119] tone levels at both the lexical and grammatical lev-
+[2026.loreslm-1.54_extracted.txt:120] els (Beckman and Venditti, 2010). These tones
+[2026.loreslm-1.54_extracted.txt:410] with a much better naturalness, tone and pronun-
+[2026.loreslm-1.54_extracted.txt:499] Mary E. Beckman and Jennifer J. Venditti. 2010.Tone
+[35_breaking_the_low_resource_barr_clean.txt:7] AfricaNLPworkshopatICLR2023 Inlow-resourcedsettingssuchasthis,transcriptionofaudiooftenrequiressignificanthumancapital(Dar‘gisetal,2020).Inthispaper,wehighlight
+[35_breaking_the_low_resource_barr_clean.txt:12] AfricaNLPworkshopatICLR2023 (Baldi&Mahmoud,2006)representsanumberofallophonicdistinctions,butdoesnotfeatureanydiacriticmarks.2.3 TONE Gurlanguagesfeatureaverbal
+[35_breaking_the_low_resource_barr_clean.txt:37] AfricaNLPworkshopatICLR2023 D.vanNiekerk,C.vanHeerden,M.Davel,N.Kleynhans,O.Kjartansson,M.Jansche,andL.Ha.(2017) “Rapid development of TTScorpora for four South
+[35_breaking_the_low_resource_barr_extracted.txt:28] Theremainderofthispaperisstructuredasfollows:insection2wedetailourfocuslanguage’sorthographyandtonesystem.Section3explainstheprocessofcreatingourdataset,includi
+[35_breaking_the_low_resource_barr_extracted.txt:44] (Baldi&Mahmoud,2006)representsanumberofallophonicdistinctions,butdoesnotfeatureanydiacriticmarks.2.3 TONE
+[35_breaking_the_low_resource_barr_extracted.txt:45] Gurlanguagesfeatureaverbalaspectmarking.Likemostlanguagesinthisfamily,Dagbaniisatonallanguagethatemployspitchtodistinguishbetweenwords,notableexamplesbeinggball
+[35_breaking_the_low_resource_barr_extracted.txt:129] Knut Olawsky (1997). Interaction of tone and morphology in Dagbani. Online version:https://user.phil.hhu.de/~olawsky/hp-dgfs.htm
+[Building Dagbani Language Model and TTS_clean.txt:2] Architecting Speech-Centric Large Language Models for Oral-Predominant Low-Resource Languages: A Strategic and Technical Blueprint for Dagbani The proliferation
+[Building Dagbani Language Model and TTS_clean.txt:8] acoustic modeling. Dagbani features distinct regional dialects that are mutually intelligible but exhibit notable phonological divergences. The two most promine
+
+==================== QUERY: BPE|Byte-Pair|SentencePiece|byte-fallback|subword fertility|fertility (Total hits: 8) ====================
+[Building Dagbani Language Models_clean.txt:5] produced with a High-Low (H-L) pattern. 5 For a language model to be truly representative, and for a TTS system to sound natural, the architecture must account 
+[Building Dagbani Language Models_clean.txt:25] The challenge of building a language model for Dagbani is representative of the broader global struggle to preserve linguistic diversity in the digital age. 2 F
+[Building Dagbani Language Models_extracted.txt:1082] Byte-Pair
+[Building Dagbani Language Models_extracted.txt:1086] (BPE),
+[Building Dagbani Language Models_extracted.txt:3240] Byte-Pair
+[Building Dagbani Language Models_extracted.txt:3244] (BPE),
+[Building Dagbani Language Models_extracted.txt:3281] BPE
+[Grandmasters_of_the_drum_Special_Issue_6_extracted.txt:3374] to these walking libraries as archives of information. The fertility
+
+==================== QUERY: vocabulary expansion|vocab expansion (Total hits: 0) ====================
+
+==================== QUERY: LoRA|QLoRA|Continual Pre-training|domain adaptation|Aya|Llama|Mistral|Gemma (Total hits: 82) ====================
+[2026.loreslm-1.54_extracted.txt:295] 2025, built on the Llama-3B architecture and pre-
+[2026.loreslm-1.54_extracted.txt:312] LoRA rank r 64
+[2026.loreslm-1.54_extracted.txt:313] lora_dropout 0
+[2026.loreslm-1.54_extracted.txt:314] lora_aplha 64
+[2026.loreslm-1.54_extracted.txt:326] sloth and made a LoRA fine-tuning on Mooré data.
+[2026.loreslm-1.54_extracted.txt:514] Göknar, Iulian Gulea, Logan Hart, Aya Aljafari,
+[35_breaking_the_low_resource_barr_clean.txt:2] AfricaNLPworkshopatICLR2023 BREAKINGTHELOW-RESOURCEBARRIERFORDAGBANIASR:FROMDATACOLLECTIONTOASRMODELING Naafi DasanaIbrahim, Paul Azunre, Joel Budu, LawrenceAsa
+[35_breaking_the_low_resource_barr_clean.txt:7] AfricaNLPworkshopatICLR2023 Inlow-resourcedsettingssuchasthis,transcriptionofaudiooftenrequiressignificanthumancapital(Dar‘gisetal,2020).Inthispaper,wehighlight
+[35_breaking_the_low_resource_barr_clean.txt:22] AfricaNLPworkshopatICLR2023 EverydayspeechforDagbani,likemostAfricanlanguages,containsborrowedwordsfromotherlanguages,predominantlyEnglish.Removingsuchborrowedw
+[35_breaking_the_low_resource_barr_clean.txt:27] AfricaNLPworkshopatICLR2023 Google Sheets and the recorder app used had no suchlimits. Overall, ourdatahasanicerepresentationoftypicalutterancesanaverageusermig
+[35_breaking_the_low_resource_barr_extracted.txt:8] Abdul HalimIbrahim, Abdul MuksonIbrahim, Abdul Rauf Abdul Rashid, Abdul-RafiuFuseini, Adbul-RasheedYussif, Abdul-Rauf Ummi-Ma-abadi, AlhassanAbdul Wadudu,Alhass
+[35_breaking_the_low_resource_barr_extracted.txt:14] Acouple of mostlyself-fundedgrassrootsprojectshaveattemptedtoremedythis, notablyGhanaNLPandDagbaniWikimediaGroup.Forexample,GhanaNLPhasdeployedtheworld’sfirst,a
+[35_breaking_the_low_resource_barr_extracted.txt:21] Inthispaper,wepresentatranscribedDagbanispeechdatasetandASRsystemdevelopedforDagbanifromtheresultingdata.ThisisthefirsteverASRsystemforthelanguage,tothebestofou
+[35_breaking_the_low_resource_barr_extracted.txt:79] WebuiltaSpeech-to-Text(orASR)systembasedontheWav2Vec2.0architectureintroducedinBaevskietal.(2020)withthenewlycreateddataset.UsingHuggingFaceTransformersPythonli
+[35_breaking_the_low_resource_barr_extracted.txt:98] Weaddressthefollowingethicalconsiderationstoensurethattheentiredatacollectionprocessisrespectful,culturallysensitiveandbenefitsthelanguageandresearchcommunities
+
+==================== QUERY: Common Voice|Mozilla (Total hits: 16) ====================
+[Building Dagbani Language Model and TTS_clean.txt:11] Dagbani datasets, providing the necessary raw materials to train sophisticated speech models. One of the most monumental advancements in African language speech
+[Building Dagbani Language Model and TTS_clean.txt:17] synthesis. Mozilla Common Voice Audio + Text Transcript 20,000+ validated recordings Crowdsourced read-speech, extensive demographic metadata, community-validat
+[Building Dagbani Language Model and TTS_clean.txt:41] cellular data associated specifically with the artificial intelligence application. For example, recent high-level initiatives involving Google's heavy investme
+[Building Dagbani Language Model and TTS_clean.txt:50] https://blog.google/intl/en-africa/company-news/outreach-and-initiatives/introducing-waxal-a-new-open-dataset-for-african-speech-technology/ 25. Mozilla Common 
+[Building Dagbani Language Model and TTS_extracted.txt:2317] Mozilla
+[Building Dagbani Language Model and TTS_extracted.txt:3028] Mozilla  Common  Voice
+[Building Dagbani Language Model and TTS_extracted.txt:8643] Mozilla
+[Building Dagbani Language Model and TTS_extracted.txt:9554] https://blog.google/intl/en-africa/company-news/outreach-and-initiatives/introducing-waxal-a-new-open-dataset-for-african-speech-technology/ 25.  Mozilla  Commo
+[Building Dagbani Language Model and TTS_extracted.txt:9572] https://diff.wikimedia.org/2026/04/22/mozilla-common-voice-meets-wikidata-how-the-dagbanli-dictionary-got-audio-usage-examples/ 26.  Dagbani  Language  Activist
+[Building Dagbani Language Model and TTS_extracted.txt:9611] Mozilla
+[Building Dagbani Language Model and TTS_extracted.txt:9622] https://www.mozillafoundation.org/en/blog/latest-common-voice-dataset-surpasses-20000-hours-of-open-source-speech-data/ 30.  Improving  phoneme  set  discovery 
+[Building Dagbani Language Models_clean.txt:8] Data Elicitation Strategies in Oral-Centric Environments The primary obstacle to Dagbani language modeling is the "data desert" common to low-resource languages
+[Building Dagbani Language Models_clean.txt:11] WAXAL Corpus Transcribed Speech Cross-lingual transfer; phonetically balanced scripts 23 Wikidata Lexicographical Data Structured semantic mapping; dictionary i
+[Building Dagbani Language Models_clean.txt:22] content in their native language, bridging the gap between L1 (first language) instruction and English. 1 4. Preservation of Oral Literature: Digitizing and rev
+[Building Dagbani Language Models_extracted.txt:1525] Furthermore,  the  integration  of  Mozilla  Common  Voice  provides  a  scalable  mechanism  for
+
+==================== QUERY: Bible|JW300|jw\.org|bible\.com|Biblica|Open\.Bible|BibleTTS (Total hits: 31) ====================
+[2026.loreslm-1.54_extracted.txt:185] support these approaches, BibleTTS (Meyer et al.,
+[2026.loreslm-1.54_extracted.txt:191] from Biblica’s Open.Bible project, the dataset fa-
+[2026.loreslm-1.54_extracted.txt:268] websites such as jw.org and bible.com, that have
+[2026.loreslm-1.54_extracted.txt:269] different translations of Bible. These websites al-
+[2026.loreslm-1.54_extracted.txt:270] low users to read and listen Bible in many dif-
+[2026.loreslm-1.54_extracted.txt:274] and audio on jw.org using the python packagejw-
+[2026.loreslm-1.54_extracted.txt:275] soup2. The data originating from bible.com web-
+[2026.loreslm-1.54_extracted.txt:280] of the Bible. So we used fairseq toolkit (Ott et al.,
+[2026.loreslm-1.54_extracted.txt:286] jw.org and bible.com, which allowed us to create
+[2026.loreslm-1.54_extracted.txt:303] Source Bible JW.org Bible.com
+[2026.loreslm-1.54_extracted.txt:595] suddeen Hassan Muhammad. 2022. Bibletts: a
+[Building Dagbani Language Models_clean.txt:14] modeling. 49 Due to the lack of massive text corpora, developers typically use a two-step transfer learning process: 1. Multilingual Pre-training: Utilizing mod
+[Building Dagbani Language Models_clean.txt:51] https://play.google.com/store/apps/details?id=com.nlpghana.khaya 79. Pronunciation Modeling for Synthesis of Low Resource Languages, accessed on April 28, 2026,
+[Building Dagbani Language Models_extracted.txt:1987] (JW300),
+[Building Dagbani Language Models_extracted.txt:5633] https://scalastic.io/en/whisper-pyannote-ultimate-speech-transcription/ 84.  ghananlpcommunity/dagbani-tts-bible-full-audio-text  at  main  -  Hugging  Face,
+
+==================== QUERY: Wikimedia|Wikipedia|Wikidata (Total hits: 56) ====================
+[35_breaking_the_low_resource_barr_clean.txt:2] AfricaNLPworkshopatICLR2023 BREAKINGTHELOW-RESOURCEBARRIERFORDAGBANIASR:FROMDATACOLLECTIONTOASRMODELING Naafi DasanaIbrahim, Paul Azunre, Joel Budu, LawrenceAsa
+[35_breaking_the_low_resource_barr_clean.txt:7] AfricaNLPworkshopatICLR2023 Inlow-resourcedsettingssuchasthis,transcriptionofaudiooftenrequiressignificanthumancapital(Dar‘gisetal,2020).Inthispaper,wehighlight
+[35_breaking_the_low_resource_barr_clean.txt:12] AfricaNLPworkshopatICLR2023 (Baldi&Mahmoud,2006)representsanumberofallophonicdistinctions,butdoesnotfeatureanydiacriticmarks.2.3 TONE Gurlanguagesfeatureaverbal
+[35_breaking_the_low_resource_barr_clean.txt:17] AfricaNLPworkshopatICLR2023 ParticipantsontheAndroidsystemusedtheSpell4Wikiapp 5 ,anandroidapplicationformakingvoicerecordingsofentitiesanduploadingtoWikimediac
+[35_breaking_the_low_resource_barr_clean.txt:27] AfricaNLPworkshopatICLR2023 Google Sheets and the recorder app used had no suchlimits. Overall, ourdatahasanicerepresentationoftypicalutterancesanaverageusermig
+[35_breaking_the_low_resource_barr_extracted.txt:9] DagbaniWikimediansUserGroup
+[35_breaking_the_low_resource_barr_extracted.txt:14] Acouple of mostlyself-fundedgrassrootsprojectshaveattemptedtoremedythis, notablyGhanaNLPandDagbaniWikimediaGroup.Forexample,GhanaNLPhasdeployedtheworld’sfirst,a
+[35_breaking_the_low_resource_barr_extracted.txt:25] .TheresultingdatafromthisundertakingishostedonWikimediaCommons,allowingfreeunrestrictedaccesstoallindividuals
+[35_breaking_the_low_resource_barr_extracted.txt:35] FilesuploadedbyspellforWikiindag(WikimediaCommons(2023)).Availableathttps://commons.wikimedia.org/wiki/Category:Files_uploaded_by_spell4wiki_in_dagCategory
+[35_breaking_the_low_resource_barr_extracted.txt:50] Wefirst collect textual dataforDagbanibyextractingsentencesfromarticlespostedontheDagbaniWikipediapage
+[35_breaking_the_low_resource_barr_extracted.txt:52] .ThesearticlesaregovernedbytheCC0licence,allowingtheiruseforanypurpose.Allofthedatawaswrittenandpublishedinthetargetlanguage.Sourcesfromwhichthesearticleswerede
+[35_breaking_the_low_resource_barr_extracted.txt:56] https://dag.wikipedia.org/wiki/Di%C5%8B%27gahim:AllPages
+[35_breaking_the_low_resource_barr_extracted.txt:63] ,anandroidapplicationformakingvoicerecordingsofentitiesanduploadingtoWikimediacommons. Allaudiodatarecordedwiththistoolweresavedinthe‘.ogg’formatandthushadtobec
+[35_breaking_the_low_resource_barr_extracted.txt:68] Spell4Wiki uses the content ofthetextual input (whereinspacesarereplacedwith‘_’)asidentifiersforuploadedaudiofiles.Thus,toalignaudiorecordingstotheappropriatetr
+[35_breaking_the_low_resource_barr_extracted.txt:100] Inthispaper,wedescribecreatingspeechdataforthelow-resourcedAfricanlanguageDagbanifromscratchandwithalimitedbudget.Wedemonstratehowtheoutcomecanenableresearchers
+
+==================== QUERY: LoresLM|LoResLM (Total hits: 5) ====================
+[2026.loreslm-1.54_extracted.txt:3] Proceedings of the Second Workshop on Language Models for Low-Resource Languages (LoResLM 2026) , pages 623–629
+[Building Dagbani Language Model and TTS_clean.txt:44] universal audio foundation models such as UniAudio and Chatterbox Turbo. These incredibly sophisticated systems mathematically utilize stochastic duration predi
+[Building Dagbani Language Model and TTS_extracted.txt:9332] https://aclanthology.org/2026.loreslm-1.54.pdf 5.  Cultivating  Spoken  Language  Technologies  for  Unwritten  Languages  |  Request
+[Building Dagbani Language Models_clean.txt:36] https://www.researchgate.net/publication/399542291_DIGITAL_PRESERVATION_AND_DOCUMENTATION_OF_INDIGENOUS_KNOWLEDGE_IN_AFRICA_A_DATA-DRIVEN_APPROACH 9. nlp-powere
+[Building Dagbani Language Models_extracted.txt:4875] https://aclanthology.org/2026.loreslm-1.14.pdf 19.  Towards  Speech  Technology  for  Garo:  A  Low-Resource  ASR  System  via
+
+==================== QUERY: drum|drummer|drumming|Lunsi|oral literature|Namoo (Total hits: 249) ====================
+[Building Dagbani Language Model and TTS_clean.txt:47] https://epub.uni-bayreuth.de/6513/1/Thesis%20Submitted%20Revised%2029%20June%20PDF%202.pdf 10. Culture & History Archives - Page 2 of 3 - Ghana Goods, accessed 
+[Building Dagbani Language Model and TTS_extracted.txt:9420] https://epub.uni-bayreuth.de/6513/1/Thesis%20Submitted%20Revised%2029%20June%20PDF%202.pdf 10.  Culture  &  History  Archives  -  Page  2  of  3  -  Ghana  Good
+[Building Dagbani Language Model and TTS_extracted.txt:9430] https://www.academia.edu/95676973/Grandmasters_of_the_Drum_A_Literary_Linguistic_Analysis_of_the_Dagbamba_Panegyrics 12.  Dagbani  language  -  Wikipedia,  acce
+[Building Dagbani Language Models_clean.txt:22] content in their native language, bridging the gap between L1 (first language) instruction and English. 1 4. Preservation of Oral Literature: Digitizing and rev
+[Grandmasters_of_the_drum_Special_Issue_6_extracted.txt:4] Grandmasters of the Drum: A Literary Linguistic
+[Grandmasters_of_the_drum_Special_Issue_6_extracted.txt:10] Grandmasters of the Drum: A Literary Linguistic Analysis of the
+[Grandmasters_of_the_drum_Special_Issue_6_extracted.txt:65] the success of my field research. The relentless support of Namoo
+[Grandmasters_of_the_drum_Special_Issue_6_extracted.txt:74] lunsi, praise poets of Dagbon and the Naanima , chiefs of Dagbon,
+[Grandmasters_of_the_drum_Special_Issue_6_extracted.txt:146] 4.7.2 The Drum and other Accompaniments  135
+[Grandmasters_of_the_drum_Special_Issue_6_extracted.txt:311] to Dagbamba kings or chiefs and lunsi as maintained in Dagbamba
+[Grandmasters_of_the_drum_Special_Issue_6_extracted.txt:350] drummer clan is known as Lunsi, the warrior clan is known as the
+[Grandmasters_of_the_drum_Special_Issue_6_extracted.txt:386] is indeed from the butcher clan just as when a Dagbana drummer
+[Grandmasters_of_the_drum_Special_Issue_6_extracted.txt:388] from the drummer clan is nearly a hundred percent. That is to say,
+[Grandmasters_of_the_drum_Special_Issue_6_extracted.txt:662] in the clan of praise poets known as the lunsi. Poetry, in its diverse
+[Grandmasters_of_the_drum_Special_Issue_6_extracted.txt:674] drummers. More often than not, the more the number of the praise
+
+==================== QUERY: radio|broadcast|Simli|Diamond|Justice|Zaa|Tamale (Total hits: 107) ====================
+[35_breaking_the_low_resource_barr_clean.txt:12] AfricaNLPworkshopatICLR2023 (Baldi&Mahmoud,2006)representsanumberofallophonicdistinctions,butdoesnotfeatureanydiacriticmarks.2.3 TONE Gurlanguagesfeatureaverbal
+[35_breaking_the_low_resource_barr_clean.txt:32] AfricaNLPworkshopatICLR2023 REFERENCES Ife Adebara, Abdel RahimElmadany, MuhammadAbdul-Mageed, AlcidesAlcobaInciarte.AfroLID:ANeuralLanguageIdentificationToolfo
+[35_breaking_the_low_resource_barr_extracted.txt:53] TherecruitmentofvoicetalentfortheDagbanispeechdatacollectionprojectwasconductedfollowingthecriteriaoffluency, literacy, andfamiliaritywithvoicerecordingasoutlin
+[35_breaking_the_low_resource_barr_extracted.txt:118] DagbaniOrthographyCommittee.(1998).ApprovedDagbaniOrthography.n/p(Tamale,N/R)
+[Building Dagbani Language Model and TTS_clean.txt:5] approximately 1.16 million people, primarily comprising the Dagomba ethnic group. 6 The linguistic and cultural epicenter of the Dagbamba people spans approxima
+[Building Dagbani Language Model and TTS_clean.txt:8] acoustic modeling. Dagbani features distinct regional dialects that are mutually intelligible but exhibit notable phonological divergences. The two most promine
+[Building Dagbani Language Model and TTS_clean.txt:11] Dagbani datasets, providing the necessary raw materials to train sophisticated speech models. One of the most monumental advancements in African language speech
+[Building Dagbani Language Model and TTS_clean.txt:50] https://blog.google/intl/en-africa/company-news/outreach-and-initiatives/introducing-waxal-a-new-open-dataset-for-african-speech-technology/ 25. Mozilla Common 
+[Building Dagbani Language Model and TTS_extracted.txt:645] Tamale
+[Building Dagbani Language Model and TTS_extracted.txt:1045] Tamale,
+[Building Dagbani Language Model and TTS_extracted.txt:2295] Tamale,
+[Building Dagbani Language Model and TTS_extracted.txt:9580] https://diff.wikimedia.org/2025/06/05/dagbani-language-activists-trained-to-promote-and-protect-their-work-online/ 27.  Dagbani  Community  Builds  Voice  AI  D
+[Building Dagbani Language Model and TTS_extracted.txt:9588] https://letsdatascience.com/news/dagbani-community-builds-voice-ai-dataset-in-tamale-e7fcdb19 28.  GhanaNLP  Parallel  Corpora:  Comprehensive  Multilingual  Re
+[Building Dagbani Language Models_clean.txt:8] Data Elicitation Strategies in Oral-Centric Environments The primary obstacle to Dagbani language modeling is the "data desert" common to low-resource languages
+[Building Dagbani Language Models_clean.txt:30] For the acoustic model, the use of "adversarial" training (as seen in MelGAN architectures) can help the model generate higher-frequency details that are essent
+
+==================== QUERY: UGSpeechData|WAXAL|GhanaNLP|Khaya|Spell4Wiki (Total hits: 89) ====================
+[35_breaking_the_low_resource_barr_clean.txt:2] AfricaNLPworkshopatICLR2023 BREAKINGTHELOW-RESOURCEBARRIERFORDAGBANIASR:FROMDATACOLLECTIONTOASRMODELING Naafi DasanaIbrahim, Paul Azunre, Joel Budu, LawrenceAsa
+[35_breaking_the_low_resource_barr_clean.txt:7] AfricaNLPworkshopatICLR2023 Inlow-resourcedsettingssuchasthis,transcriptionofaudiooftenrequiressignificanthumancapital(Dar‘gisetal,2020).Inthispaper,wehighlight
+[35_breaking_the_low_resource_barr_clean.txt:17] AfricaNLPworkshopatICLR2023 ParticipantsontheAndroidsystemusedtheSpell4Wikiapp 5 ,anandroidapplicationformakingvoicerecordingsofentitiesanduploadingtoWikimediac
+[35_breaking_the_low_resource_barr_clean.txt:22] AfricaNLPworkshopatICLR2023 EverydayspeechforDagbani,likemostAfricanlanguages,containsborrowedwordsfromotherlanguages,predominantlyEnglish.Removingsuchborrowedw
+[35_breaking_the_low_resource_barr_clean.txt:27] AfricaNLPworkshopatICLR2023 Google Sheets and the recorder app used had no suchlimits. Overall, ourdatahasanicerepresentationoftypicalutterancesanaverageusermig
+[35_breaking_the_low_resource_barr_extracted.txt:6] GhanaNaturalLanguageProcessing(GhanaNLP)
+[35_breaking_the_low_resource_barr_extracted.txt:14] Acouple of mostlyself-fundedgrassrootsprojectshaveattemptedtoremedythis, notablyGhanaNLPandDagbaniWikimediaGroup.Forexample,GhanaNLPhasdeployedtheworld’sfirst,a
+[35_breaking_the_low_resource_barr_extracted.txt:21] Inthispaper,wepresentatranscribedDagbanispeechdatasetandASRsystemdevelopedforDagbanifromtheresultingdata.ThisisthefirsteverASRsystemforthelanguage,tothebestofou
+[35_breaking_the_low_resource_barr_extracted.txt:35] FilesuploadedbyspellforWikiindag(WikimediaCommons(2023)).Availableathttps://commons.wikimedia.org/wiki/Category:Files_uploaded_by_spell4wiki_in_dagCategory
+[35_breaking_the_low_resource_barr_extracted.txt:37] APIavailableviahttps://translation.ghananlp.org/(AlgorineResearch&NLPGhana,2023)
+[35_breaking_the_low_resource_barr_extracted.txt:61] ParticipantsontheAndroidsystemusedtheSpell4Wikiapp
+[35_breaking_the_low_resource_barr_extracted.txt:63] ,anandroidapplicationformakingvoicerecordingsofentitiesanduploadingtoWikimediacommons. Allaudiodatarecordedwiththistoolweresavedinthe‘.ogg’formatandthushadtobec
+[35_breaking_the_low_resource_barr_extracted.txt:68] Spell4Wiki uses the content ofthetextual input (whereinspacesarereplacedwith‘_’)asidentifiersforuploadedaudiofiles.Thus,toalignaudiorecordingstotheappropriatetr
+[35_breaking_the_low_resource_barr_extracted.txt:71] Spell4Wikimobileappavailableat:https://github.com/manimaran96/Spell4Wiki
+[35_breaking_the_low_resource_barr_extracted.txt:79] WebuiltaSpeech-to-Text(orASR)systembasedontheWav2Vec2.0architectureintroducedinBaevskietal.(2020)withthenewlycreateddataset.UsingHuggingFaceTransformersPythonli

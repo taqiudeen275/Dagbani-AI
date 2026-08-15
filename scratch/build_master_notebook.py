@@ -84,9 +84,14 @@ import sys
 import gc
 import torch
 import warnings
+import logging
+from pathlib import Path
 from huggingface_hub import login
 
 warnings.filterwarnings("ignore")
+logging.getLogger("transformers").setLevel(logging.ERROR)
+logging.getLogger("bitsandbytes").setLevel(logging.ERROR)
+os.environ["BITSANDBYTES_NOWELCOME"] = "1"
 
 if not torch.cuda.is_available():
     raise SystemError("❌ No GPU detected! Go to Kaggle Settings -> Accelerator -> select 'GPU T4 x2'.")
@@ -101,6 +106,17 @@ os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 torch.backends.cuda.matmul.allow_tf32 = True
 torch.backends.cudnn.benchmark = True
+
+# --- Disk & Cache Redirection (Prevents Kaggle /tmp out of space error) ---
+WORKSPACE = "/kaggle/working" if os.path.exists("/kaggle/working") else "."
+os.environ["HF_HOME"] = f"{WORKSPACE}/hf_cache"
+os.environ["HF_DATASETS_CACHE"] = f"{WORKSPACE}/hf_cache/datasets"
+os.environ["TRANSFORMERS_CACHE"] = f"{WORKSPACE}/hf_cache/models"
+os.environ["TORCH_HOME"] = f"{WORKSPACE}/torch_cache"
+os.environ["TMPDIR"] = f"{WORKSPACE}/tmp"
+
+for p in [f"{WORKSPACE}/hf_cache", f"{WORKSPACE}/torch_cache", f"{WORKSPACE}/tmp"]:
+    Path(p).mkdir(parents=True, exist_ok=True)
 
 # --- Hugging Face Secrets Authentication ---
 HF_TOKEN = os.environ.get("HF_TOKEN")
@@ -385,88 +401,106 @@ feature_extractor = WhisperFeatureExtractor.from_pretrained(cfg.BASE_MODEL_NAME)
 whisper_tokenizer = WhisperTokenizer.from_pretrained(cfg.BASE_MODEL_NAME, task=cfg.TASK)
 processor = WhisperProcessor.from_pretrained(cfg.BASE_MODEL_NAME, task=cfg.TASK)
 
+import shutil
+import openpyxl
+
 def fetch_scidb_subset():
     data_dir = Path(cfg.DATA_DIR)
     excel_path = data_dir / "Dagbani.xlsx"
     zip_path = data_dir / "Dagbani.zip"
     audio_dir = data_dir / "audios"
+    audio_dir.mkdir(parents=True, exist_ok=True)
     
-    if not excel_path.exists():
+    if not excel_path.exists() or excel_path.stat().st_size == 0:
         print("Downloading SciDB Dagbani.xlsx metadata...")
         urllib.request.urlretrieve(cfg.SCIDB_EXCEL_URL, excel_path)
-    if not zip_path.exists() and not audio_dir.exists():
-        print("Downloading SciDB Dagbani.zip audio archive...")
+    if not zip_path.exists() or zip_path.stat().st_size == 0:
+        print("Downloading SciDB Dagbani.zip audio archive (~5.5GB)...")
         urllib.request.urlretrieve(cfg.SCIDB_ZIP_URL, zip_path)
-    if zip_path.exists() and not audio_dir.exists():
-        print("Extracting SciDB audio...")
-        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-            zip_ref.extractall(data_dir)
-            
-    if excel_path.exists() and audio_dir.exists():
-        df = pd.read_excel(excel_path, sheet_name=0)
-        audio_col = [c for c in df.columns if "audio" in c.lower() or "file" in c.lower() or "name" in c.lower()][0]
-        text_col = [c for c in df.columns if "transcript" in c.lower() or "text" in c.lower() or "sentence" in c.lower()][0]
         
+    existing_mp3s = list(audio_dir.glob("*.mp3"))
+    if len(existing_mp3s) < 100 and zip_path.exists():
+        print("Extracting SciDB audio files into flattened audio directory...")
+        with zipfile.ZipFile(zip_path, "r") as zf:
+            for info in zf.infolist():
+                if info.is_dir() or not info.filename.lower().endswith(".mp3"):
+                    continue
+                target_path = audio_dir / Path(info.filename).name
+                if not target_path.exists():
+                    with zf.open(info) as src, open(target_path, "wb") as dst:
+                        shutil.copyfileobj(src, dst)
+        print(f"✅ Extracted {len(list(audio_dir.glob('*.mp3'))):,} audio files into {audio_dir}.")
+        
+        # Delete zip archive immediately to reclaim 5.5 GB of disk space
+        print("Reclaiming 5.5 GB disk space by removing Dagbani.zip...")
+        zip_path.unlink(missing_ok=True)
+            
+    if excel_path.exists():
+        wb = openpyxl.load_workbook(str(excel_path), read_only=True, data_only=True)
+        sheet_name = "Transcribed" if "Transcribed" in wb.sheetnames else wb.sheetnames[0]
+        df = pd.read_excel(excel_path, sheet_name=sheet_name)
+        
+        audio_col = None
+        text_col = None
+        for c in df.columns:
+            c_str = str(c).strip().lower()
+            if "full filename" in c_str or "filename" in c_str or "audio" in c_str:
+                audio_col = c
+            if "transcription" in c_str or "sentence" in c_str or "text" in c_str:
+                text_col = c
+                
         valid_rows = []
         for _, row in df.iterrows():
-            fname = str(row[audio_col]).strip()
+            fname = str(row[audio_col]).strip() if audio_col else ""
+            if not fname or fname.lower() == "nan":
+                continue
             if not fname.endswith((".wav", ".mp3")):
                 fname += ".mp3"
-            fpath = audio_dir / fname
-            text = str(row[text_col]).strip()
+            fpath = audio_dir / Path(fname).name
+            text = str(row[text_col]).strip() if text_col else ""
             if fpath.exists() and text and text.lower() != "nan":
-                valid_rows.append({
-                    "audio": str(fpath),
-                    "sentence": normalizer.normalize_text(text, for_asr=True)
-                })
+                norm_text = normalizer.normalize_text(text, for_asr=True)
+                if len(norm_text) > 0:
+                    valid_rows.append({"audio": str(fpath), "sentence": norm_text})
                 
         if len(valid_rows) > 0:
-            print(f"Loaded {len(valid_rows)} audio-transcript pairs from SciDB.")
+            print(f"✅ Loaded {len(valid_rows):,} audio-transcript pairs from SciDB.")
             ds = Dataset.from_list(valid_rows)
             ds = ds.cast_column("audio", Audio(sampling_rate=16000))
             return ds
     return None
 
+def extract_text_safely(batch):
+    for k in ["sentence", "transcription", "TRANSCRIPTION", "text", "raw_transcription", "verse_text", "target_text", "transcript"]:
+        val = batch.get(k)
+        if val and str(val).strip() and str(val).lower() != "nan":
+            batch["sentence"] = normalizer.normalize_text(str(val), for_asr=True)
+            return batch
+    batch["sentence"] = ""
+    return batch
+
 def load_unified_dagbani_dataset(source: str = "all") -> DatasetDict:
     collected_datasets = []
     
-    # 1. Ingest SciDB
+    # 1. Ingest SciDB (18,192 Gold Spontaneous Native Samples)
     if source in ["all", "scidb"]:
         try:
-            print("--- Ingesting SciDB Corpus ---")
+            print("--- Ingesting SciDB Native Speech Corpus ---")
             scidb_ds = fetch_scidb_subset()
             if scidb_ds is not None and len(scidb_ds) > 0:
-                print(f"✅ SciDB loaded: {len(scidb_ds)} samples.")
+                print(f"✅ SciDB loaded: {len(scidb_ds):,} native speech samples.")
                 collected_datasets.append(scidb_ds)
         except Exception as e:
             print(f"⚠️ SciDB ingestion notice: {e}")
             
-    # 2. Ingest Mozilla Common Voice
-    if source in ["all", "common_voice"]:
-        try:
-            print("--- Ingesting Mozilla Common Voice ('dag') ---")
-            cv_ds = load_dataset("mozilla-foundation/common_voice_17_0", "dag", split="train")
-            cv_ds = cv_ds.cast_column("audio", Audio(sampling_rate=16000))
-            def clean_cv(batch):
-                batch["sentence"] = normalizer.normalize_text(batch["sentence"], for_asr=True)
-                return batch
-            cv_ds = cv_ds.map(clean_cv)
-            print(f"✅ Common Voice loaded: {len(cv_ds)} samples.")
-            collected_datasets.append(cv_ds)
-        except Exception as e:
-            print(f"⚠️ Common Voice notice: {e}")
-            
-    # 3. Ingest BibleTTS
+    # 2. Ingest GhanaNLP BibleTTS (1,328 Studio Native Voice Samples)
     if source in ["all", "bible_tts"]:
         try:
-            print("--- Ingesting GhanaNLP BibleTTS ---")
+            print("--- Ingesting GhanaNLP BibleTTS Native Studio Corpus ---")
             b_ds = load_dataset("ghananlpcommunity/dagbani-tts-bible-full-audio-text", split="train")
             b_ds = b_ds.cast_column("audio", Audio(sampling_rate=16000))
-            def clean_b(batch):
-                batch["sentence"] = normalizer.normalize_text(batch.get("sentence", batch.get("text", "")), for_asr=True)
-                return batch
-            b_ds = b_ds.map(clean_b)
-            print(f"✅ BibleTTS loaded: {len(b_ds)} samples.")
+            b_ds = b_ds.map(extract_text_safely)
+            print(f"✅ BibleTTS loaded: {len(b_ds):,} studio samples.")
             collected_datasets.append(b_ds)
         except Exception as e:
             print(f"⚠️ BibleTTS notice: {e}")
@@ -511,44 +545,11 @@ print(f"\\n✅ Dataset Ready for Training: {len(raw_datasets['train'])} train, {
 # ============================================================================
 # 8. FEATURE VECTORIZATION & DATA COLLATOR
 # ============================================================================
-add_md("""## 7. Feature Extraction & Data Collator""")
+add_md("""## 7. Dynamic Feature Extraction & Data Collator
+Uses **Dynamic On-The-Fly Mel Spectrogram Extraction** inside the Data Collator.
+This eliminates the need to write 35+ GB of intermediate log-mel spectrogram tables to disk, allowing training to start instantly with **zero disk caching overhead**.""")
 
-add_code("""def prepare_dataset_features(batch):
-    audio = batch.get("audio")
-    
-    # Safe audio extraction
-    if audio is not None and isinstance(audio, dict) and "array" in audio:
-        wav = audio["array"]
-        sr = audio.get("sampling_rate", 16000)
-    elif audio is not None and isinstance(audio, str) and os.path.exists(audio):
-        wav, sr = librosa.load(audio, sr=16000)
-    else:
-        # Fallback 1-second silence
-        wav, sr = np.zeros(16000, dtype=np.float32), 16000
-        
-    # Log-mel spectrogram extraction
-    batch["input_features"] = feature_extractor(wav, sampling_rate=sr).input_features[0]
-    
-    # Tokenize target text with truncation to Whisper's max decoder context (448 tokens)
-    sentence = batch.get("sentence", "")
-    batch["labels"] = whisper_tokenizer(sentence, truncation=True, max_length=448).input_ids
-    return batch
-
-print("Vectorizing datasets to log-mel spectrograms & labels...")
-vectorized_datasets = raw_datasets.map(
-    prepare_dataset_features, 
-    remove_columns=raw_datasets["train"].column_names, 
-    num_proc=2
-)
-
-# Filter out empty or excessively long sequences to ensure stable GPU training
-vectorized_datasets = vectorized_datasets.filter(
-    lambda x: 0 < len(x["labels"]) <= 448
-)
-print(f"✅ Vectorized & Filtered: {len(vectorized_datasets['train'])} train, {len(vectorized_datasets['validation'])} validation.")
-
-# Data Collator with Padding
-import torch
+add_code("""import torch
 from dataclasses import dataclass
 from typing import Any, Dict, List, Union
 
@@ -556,22 +557,40 @@ from typing import Any, Dict, List, Union
 class DataCollatorSpeechSeq2SeqWithPadding:
     processor: Any
 
-    def __call__(self, features: List[Dict[str, Union[List[int], torch.Tensor]]]) -> Dict[str, torch.Tensor]:
-        input_features = [{"input_features": feature["input_features"]} for feature in features]
-        batch = self.processor.feature_extractor.pad(input_features, return_tensors="pt")
+    def __call__(self, features: List[Dict[str, Any]]) -> Dict[str, torch.Tensor]:
+        audio_arrays = []
+        for feature in features:
+            audio = feature["audio"]
+            if isinstance(audio, dict) and "array" in audio:
+                audio_arrays.append(audio["array"])
+            elif isinstance(audio, str) and os.path.exists(audio):
+                wav, _ = librosa.load(audio, sr=16000)
+                audio_arrays.append(wav)
+            else:
+                audio_arrays.append(np.zeros(16000, dtype=np.float32))
 
-        label_features = [{"input_ids": feature["labels"]} for feature in features]
+        batch = self.processor.feature_extractor(
+            audio_arrays, 
+            sampling_rate=16000, 
+            return_tensors="pt"
+        )
+
+        label_features = [
+            {"input_ids": self.processor.tokenizer(feature["sentence"], truncation=True, max_length=448).input_ids}
+            for feature in features
+        ]
         labels_batch = self.processor.tokenizer.pad(label_features, return_tensors="pt")
         labels = labels_batch["input_ids"].masked_fill(labels_batch.attention_mask.ne(1), -100)
 
-        if (labels[:, 0] == self.processor.tokenizer.bos_token_id).all().cpu().item():
-            labels = labels[:, 1:]
+        if hasattr(self.processor.tokenizer, "bos_token_id") and self.processor.tokenizer.bos_token_id is not None:
+            if (labels[:, 0] == self.processor.tokenizer.bos_token_id).all().cpu().item():
+                labels = labels[:, 1:]
 
         batch["labels"] = labels
         return batch
 
 data_collator = DataCollatorSpeechSeq2SeqWithPadding(processor=processor)
-print("✅ Vectorization and Data Collator initialized.")""")
+print("✅ Dynamic On-The-Fly Data Collator initialized (Zero disk caching required).")""")
 
 # ============================================================================
 # 9. 8-BIT QLORA MODEL
@@ -679,6 +698,10 @@ add_md("""## 10. Training Execution on Dual T4 GPUs""")
 
 add_code("""from transformers import Seq2SeqTrainer, Seq2SeqTrainingArguments
 
+# Create a fast 150-sample validation subset for rapid intermediate checks (1.5 mins vs 60 mins)
+val_full = raw_datasets["validation"]
+eval_subset = val_full.select(range(min(150, len(val_full))))
+
 training_args = Seq2SeqTrainingArguments(
     output_dir=cfg.OUTPUT_DIR,
     per_device_train_batch_size=cfg.PER_DEVICE_TRAIN_BATCH_SIZE,
@@ -699,17 +722,18 @@ training_args = Seq2SeqTrainingArguments(
     load_best_model_at_end=True,
     metric_for_best_model="norm_wer",
     greater_is_better=False,
+    remove_unused_columns=False,           # Required for dynamic on-the-fly DataCollator
     push_to_hub=cfg.PUSH_TO_HUB,
     hub_model_id=cfg.HUB_MODEL_ID if cfg.PUSH_TO_HUB else None,
     hub_token=HF_TOKEN,
-    dataloader_num_workers=2,
+    dataloader_num_workers=0,              # Clean single-process loading
 )
 
 trainer = Seq2SeqTrainer(
     args=training_args,
     model=model,
-    train_dataset=vectorized_datasets["train"],
-    eval_dataset=vectorized_datasets["validation"],
+    train_dataset=raw_datasets["train"],
+    eval_dataset=eval_subset,              # Ultra-fast intermediate checks
     data_collator=data_collator,
     compute_metrics=compute_dagbani_asr_metrics,
     processing_class=processor.feature_extractor,
@@ -722,6 +746,11 @@ final_adapter_path = f"{cfg.OUTPUT_DIR}/final_dagbani_whisper_lora"
 trainer.save_model(final_adapter_path)
 processor.save_pretrained(final_adapter_path)
 print(f"\\n🎉 Training Complete! Model saved to: {final_adapter_path}")
+
+# Run Full-Corpus Benchmark Evaluation on all 3,500 validation clips once after training
+print("\\n📊 Running Final Full-Corpus Benchmark Evaluation on all validation samples...")
+full_metrics = trainer.evaluate(eval_dataset=val_full)
+print(f"🏆 Final Full-Corpus Benchmark Results:\\n{full_metrics}")
 
 # Auto-push to Hugging Face Hub if authenticated
 if cfg.PUSH_TO_HUB and HF_TOKEN:

@@ -15,6 +15,7 @@ from textwrap import dedent
 ROOT = Path(__file__).resolve().parents[1]
 NOTEBOOK_DIR = ROOT / "notebooks"
 PHASE1_PATH = NOTEBOOK_DIR / "01_Dagbani_ASR_Data_Audit_and_Baselines_Kaggle.ipynb"
+BASELINE_PATH = NOTEBOOK_DIR / "01b_Dagbani_ASR_Baseline_Only_Kaggle.ipynb"
 PHASE2_PATH = NOTEBOOK_DIR / "02_Dagbani_ASR_Whisper_Small_Training_Kaggle.ipynb"
 
 
@@ -106,6 +107,7 @@ PHASE1_CELLS = [
         from __future__ import annotations
 
         import dataclasses
+        import gc
         import gzip
         import hashlib
         import importlib.metadata
@@ -162,7 +164,7 @@ PHASE1_CELLS = [
             min_words_per_s: float = 0.25
             max_words_per_s: float = 8.0
             waxal_benchmark_min_duration_s: float = 1.5
-            waxal_benchmark_min_words_per_s: float = 4.0
+            waxal_benchmark_max_words_per_s: float = 4.0
             common_voice_root: str = os.getenv("COMMON_VOICE_DAG_ROOT", "")
             local_manifest_paths: tuple[str, ...] = ()
             # Empty means every discoverable source. For the first supervised
@@ -720,6 +722,57 @@ PHASE1_CELLS = [
         accepted_df = accepted_df[CANONICAL_COLUMNS + [column for column in accepted_df.columns if column not in CANONICAL_COLUMNS]]
 
 
+        SPLIT_KEEP_PRIORITY = {"test": 4, "external_test": 3, "validation": 2, "train": 1}
+
+
+        def quarantine_cross_split_audio_duplicates(
+            table: pd.DataFrame,
+        ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+            '''Preserve held-out splits and quarantine lower-priority exact copies.'''
+            supervised = table[table["split"].isin(SPLIT_KEEP_PRIORITY)]
+            hashed = supervised[supervised["audio_hash"].fillna("").astype(str).ne("")]
+            drop_indexes: list[int] = []
+            decisions: list[dict[str, Any]] = []
+            for audio_hash, group in hashed.groupby("audio_hash"):
+                splits = set(group["split"].astype(str))
+                if len(splits) <= 1:
+                    continue
+                keep_split = max(splits, key=lambda name: SPLIT_KEEP_PRIORITY.get(name, 0))
+                kept_ids = sorted(group.loc[group["split"] == keep_split, "sample_id"].astype(str))
+                for index, row in group[group["split"] != keep_split].iterrows():
+                    drop_indexes.append(index)
+                    decisions.append({
+                        "audio_hash": audio_hash,
+                        "dropped_sample_id": str(row["sample_id"]),
+                        "dropped_split": str(row["split"]),
+                        "kept_split": keep_split,
+                        "kept_sample_ids": ",".join(kept_ids),
+                        "reason": "cross_split_exact_audio_duplicate",
+                    })
+            if not drop_indexes:
+                return table.copy(), pd.DataFrame(), pd.DataFrame(decisions)
+            quarantined = table.loc[drop_indexes].copy()
+            quarantined["reason"] = "cross_split_exact_audio_duplicate"
+            quarantined["error"] = ""
+            decision_by_id = {row["dropped_sample_id"]: row for row in decisions}
+            quarantined["kept_split"] = quarantined["sample_id"].astype(str).map(
+                lambda value: decision_by_id[value]["kept_split"]
+            )
+            quarantined["kept_sample_ids"] = quarantined["sample_id"].astype(str).map(
+                lambda value: decision_by_id[value]["kept_sample_ids"]
+            )
+            repaired = table.drop(index=drop_indexes).reset_index(drop=True)
+            return repaired, quarantined.reset_index(drop=True), pd.DataFrame(decisions)
+
+
+        accepted_df, quarantined_duplicates_df, dedup_decisions_df = quarantine_cross_split_audio_duplicates(accepted_df)
+        if not quarantined_duplicates_df.empty:
+            rejected_df = pd.concat([rejected_df, quarantined_duplicates_df], ignore_index=True, sort=False)
+            dropped_ids = set(quarantined_duplicates_df["sample_id"].astype(str))
+            near_df = near_df[~near_df["sample_id"].astype(str).isin(dropped_ids)].reset_index(drop=True)
+            print(f"Quarantined {len(quarantined_duplicates_df):,} lower-priority cross-split exact-audio copies.")
+
+
         def is_official_waxal_speaker_overlap(group: pd.DataFrame) -> bool:
             '''WAXAL's published ASR splits are topic-level and reuse speakers.'''
             official_splits = {"train", "validation", "test"}
@@ -794,6 +847,23 @@ PHASE1_CELLS = [
             "blocking_split_leaks": len(blocking_leakage_df),
             "waxal_protocol_speaker_overlaps": len(waxal_protocol_overlap_df),
         })
+        if not blocking_leakage_df.empty:
+            print("Blocking cross-split overlaps (inspect before training):")
+            display(blocking_leakage_df)
+            blocking_audio_hashes = set(
+                blocking_leakage_df.loc[
+                    blocking_leakage_df["kind"] == "audio_hash_overlap", "value"
+                ].astype(str)
+            )
+            if blocking_audio_hashes:
+                display(
+                    accepted_df[accepted_df["audio_hash"].astype(str).isin(blocking_audio_hashes)][
+                        ["sample_id", "source", "split", "speaker_id", "duration_s", "audio_hash", "transcript_raw"]
+                    ].sort_values(["audio_hash", "split", "sample_id"])
+                )
+        if not rejected_df.empty and "reason" in rejected_df:
+            print("Rejected-row reasons:")
+            print(rejected_df["reason"].value_counts(dropna=False).to_string())
         """
     ),
     markdown("## 7. Export immutable audit artifacts and readiness state"),
@@ -810,6 +880,7 @@ PHASE1_CELLS = [
         write_table(inventory_df, "corpus_inventory")
         write_table(accepted_df, "accepted_manifest")
         write_table(rejected_df, "rejected_samples")
+        write_table(dedup_decisions_df, "dedup_decisions")
         write_table(leakage_df, "split_leakage_report")
         write_table(exact_duplicates, "exact_audio_duplicates")
         write_table(near_duplicates, "near_audio_duplicates")
@@ -917,7 +988,7 @@ PHASE1_CELLS = [
                 reference = strict_text(record.get("transcription", ""))
                 duration = len(array) / 16_000
                 words_per_s = len(normalize_eval(reference).split()) / max(duration, 1e-6)
-                if duration < cfg.waxal_benchmark_min_duration_s or words_per_s < cfg.waxal_benchmark_min_words_per_s:
+                if duration < cfg.waxal_benchmark_min_duration_s or words_per_s > cfg.waxal_benchmark_max_words_per_s:
                     continue
                 yield {"id": str(record.get("id", yielded)), "audio": array, "reference": reference, "duration_s": duration}
                 yielded += 1
@@ -927,20 +998,54 @@ PHASE1_CELLS = [
 
         def benchmark_model(model_id: str, rows: list[dict[str, Any]]) -> tuple[dict, pd.DataFrame]:
             import torch
-            from transformers import pipeline
-            device = 0 if torch.cuda.is_available() else -1
-            dtype = torch.float16 if device >= 0 else torch.float32
-            recognizer = pipeline("automatic-speech-recognition", model=model_id, device=device, torch_dtype=dtype)
+            from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor
+            if not torch.cuda.is_available():
+                raise RuntimeError("Enable a Kaggle GPU before running baselines")
+            major, minor = torch.cuda.get_device_capability(0)
+            device_arch = f"sm_{major}{minor}"
+            supported_arches = set(torch.cuda.get_arch_list())
+            print({"gpu": torch.cuda.get_device_name(0), "device_arch": device_arch, "torch_arches": sorted(supported_arches)})
+            if supported_arches and device_arch not in supported_arches and f"compute_{major}{minor}" not in supported_arches:
+                raise RuntimeError(
+                    f"Kaggle's current PyTorch build does not support {device_arch}. "
+                    "Select a T4 GPU instead of P100 and restart the session."
+                )
+            processor = AutoProcessor.from_pretrained(model_id, token=cfg.hf_token)
+            load_kwargs = {"token": cfg.hf_token, "low_cpu_mem_usage": True}
+            try:
+                model = AutoModelForSpeechSeq2Seq.from_pretrained(model_id, dtype=torch.float16, **load_kwargs)
+            except TypeError:
+                model = AutoModelForSpeechSeq2Seq.from_pretrained(model_id, torch_dtype=torch.float16, **load_kwargs)
+            model.to("cuda").eval()
+            model.generation_config.forced_decoder_ids = None
             predictions = []
             started = time.time()
-            for index, row in enumerate(rows, 1):
-                result = recognizer({"array": row["audio"], "sampling_rate": 16_000}, generate_kwargs={"task": "transcribe"})
-                predictions.append(strict_text(result["text"]))
-                if index % 25 == 0:
-                    print(f"{model_id}: {index}/{len(rows)} rows, {time.time() - started:.1f}s")
+            batch_size = 8
+            for offset in range(0, len(rows), batch_size):
+                batch = rows[offset:offset + batch_size]
+                inputs = processor.feature_extractor(
+                    [row["audio"] for row in batch], sampling_rate=16_000,
+                    return_tensors="pt", padding="max_length", truncation=True,
+                    max_length=30 * 16_000, return_attention_mask=True,
+                )
+                generate_kwargs = {
+                    "input_features": inputs.input_features.to("cuda", dtype=torch.float16),
+                    "task": "transcribe",
+                }
+                if "attention_mask" in inputs:
+                    generate_kwargs["attention_mask"] = inputs.attention_mask.to("cuda")
+                with torch.inference_mode():
+                    generated = model.generate(**generate_kwargs)
+                predictions.extend(strict_text(text) for text in processor.batch_decode(generated, skip_special_tokens=True))
+                completed = min(offset + len(batch), len(rows))
+                if completed % 32 < batch_size or completed == len(rows):
+                    print(f"{model_id}: {completed}/{len(rows)} rows, {time.time() - started:.1f}s")
             references = [row["reference"] for row in rows]
             metrics = asr_metrics(references, predictions) | {"model_id": model_id, "elapsed_s": time.time() - started}
             table = pd.DataFrame({"sample_id": [row["id"] for row in rows], "reference": references, "hypothesis": predictions})
+            del model, processor
+            gc.collect()
+            torch.cuda.empty_cache()
             return metrics, table
 
 
@@ -981,6 +1086,501 @@ PHASE1_CELLS = [
 ]
 
 
+BASELINE_CELLS = [
+    markdown(
+        r"""
+        # Dagbani ASR Phase 1B — GPU Baseline Only
+
+        This auxiliary Kaggle notebook evaluates `openai/whisper-small` and the
+        public WAXAL Dagbani Whisper-small checkpoint without repeating the CPU data
+        audit. It reads the release-ready private Phase 1 manifest, freezes the
+        WAXAL cleaning filter (duration >= 1.5 seconds and speech rate <= 4
+        words/second), batches GPU inference, and publishes predictions and metrics
+        back to `phase1/baselines/` in the private dataset repository.
+
+        Start with the 256-row pilot. The public checkpoint's 34.0% WER / 11.9% CER
+        target applies to the full filtered evaluation set, not necessarily the pilot.
+        The public model card currently prints `speech rate >= 4 WPS`; applied to the
+        sealed manifest that retains only two rows. This notebook therefore records
+        the empirically corrected `<= 4 WPS` cleaning rule as a separate v2 protocol.
+        Do not call it an exact public-score reproduction unless the official cleaned
+        evaluation manifest or filtering script confirms the same rows.
+        """
+    ),
+    markdown("## 1. Install only missing runtime packages"),
+    code(
+        r"""
+        import importlib.util
+        import subprocess
+        import sys
+
+        REQUIRED = {
+            "datasets": "datasets[audio]>=3.2,<5",
+            "transformers": "transformers>=4.48,<6",
+            "huggingface_hub": "huggingface_hub>=0.27,<2",
+            "jiwer": "jiwer>=3.0,<5",
+            "soundfile": "soundfile>=0.12,<1",
+            "librosa": "librosa>=0.10,<1",
+            "pyarrow": "pyarrow>=17,<25",
+        }
+        missing = [spec for module, spec in REQUIRED.items() if importlib.util.find_spec(module) is None]
+        if missing:
+            subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", *missing])
+        print("Baseline environment ready. PyTorch is intentionally not replaced.")
+        """,
+        "setup",
+    ),
+    markdown("## 2. Configuration — the pilot is opt-in"),
+    code(
+        r"""
+        from __future__ import annotations
+
+        import gc
+        import hashlib
+        import io
+        import json
+        import os
+        import string
+        import time
+        import unicodedata
+        from dataclasses import asdict, dataclass, field
+        from pathlib import Path
+        from typing import Any, Iterator
+
+        import numpy as np
+        import pandas as pd
+        import soundfile as sf
+
+
+        def kaggle_secret(name: str) -> str | None:
+            value = os.getenv(name)
+            if value:
+                return value
+            try:
+                from kaggle_secrets import UserSecretsClient
+                return UserSecretsClient().get_secret(name)
+            except Exception:
+                return None
+
+
+        @dataclass
+        class BaselineConfig:
+            manifest_repo_id: str = "ats-tech/dagbani-asr-phase1"
+            hf_token: str | None = field(default_factory=lambda: kaggle_secret("HF_TOKEN"))
+            model_ids: tuple[str, ...] = (
+                "waxal-benchmarking/whisper-small-waxal-dag",
+                "openai/whisper-small",
+            )
+            run_baselines: bool = False
+            max_samples: int | None = 256  # Set None only after the pilot succeeds.
+            batch_size: int = 8
+            upload_every: int = 100
+            session_budget_minutes: float = 150.0
+            work_dir: str = "/kaggle/working/dagbani_asr_baselines"
+            min_duration_s: float = 1.5
+            max_words_per_s: float = 4.0
+            protocol_id: str = "waxal-clean-v2-max4wps"
+
+            def validate(self) -> None:
+                if not self.hf_token:
+                    raise ValueError("Attach the Kaggle HF_TOKEN secret")
+                if not self.manifest_repo_id:
+                    raise ValueError("manifest_repo_id is required")
+                if self.batch_size < 1:
+                    raise ValueError("batch_size must be positive")
+                if self.max_words_per_s <= 0:
+                    raise ValueError("max_words_per_s must be positive")
+
+
+        cfg = BaselineConfig()
+        cfg.validate()
+        WORK_DIR = Path(cfg.work_dir)
+        WORK_DIR.mkdir(parents=True, exist_ok=True)
+        print(json.dumps(asdict(cfg) | {"hf_token": "<set>"}, indent=2))
+        """
+    ),
+    markdown("## 3. Load and freeze the release-ready evaluation manifest"),
+    code(
+        r"""
+        from huggingface_hub import HfApi, hf_hub_download
+
+
+        def artifact(filename: str) -> Path:
+            return Path(hf_hub_download(
+                repo_id=cfg.manifest_repo_id,
+                filename=f"phase1/{filename}",
+                repo_type="dataset",
+                token=cfg.hf_token,
+                cache_dir=str(WORK_DIR / "hf_cache"),
+            ))
+
+
+        readiness = json.loads(artifact("readiness.json").read_text(encoding="utf-8"))
+        if not readiness.get("release_ready"):
+            raise RuntimeError(f"Phase 1 is not release-ready: {readiness}")
+
+        manifest = pd.read_parquet(artifact("accepted_manifest.parquet"))
+        waxal_test = manifest[
+            manifest["source"].eq("waxal_dag_asr") & manifest["split"].eq("test")
+        ].copy()
+        if "words_per_s" not in waxal_test:
+            waxal_test["words_per_s"] = (
+                waxal_test["transcript_eval"].fillna("").astype(str).str.split().str.len()
+                / pd.to_numeric(waxal_test["duration_s"], errors="coerce")
+            )
+        frozen_eval = waxal_test[
+            pd.to_numeric(waxal_test["duration_s"], errors="coerce").ge(cfg.min_duration_s)
+            & pd.to_numeric(waxal_test["words_per_s"], errors="coerce").le(cfg.max_words_per_s)
+        ].sort_values("sample_id").reset_index(drop=True)
+        if cfg.max_samples is not None:
+            frozen_eval = frozen_eval.head(cfg.max_samples).copy()
+        if frozen_eval.empty:
+            raise RuntimeError("No WAXAL test rows passed the WAXAL cleaning filter")
+
+        repo_info = HfApi(token=cfg.hf_token).repo_info(cfg.manifest_repo_id, repo_type="dataset")
+        phase1_repo_head = str(repo_info.sha)
+        manifest_revision = hashlib.sha256(
+            pd.util.hash_pandas_object(manifest, index=True).values.tobytes()
+        ).hexdigest()
+        eval_manifest_hash = hashlib.sha256(
+            pd.util.hash_pandas_object(
+                frozen_eval[["sample_id", "transcript_raw", "audio_hash"]], index=False
+            ).values.tobytes()
+        ).hexdigest()
+        frozen_eval.to_parquet(WORK_DIR / "frozen_eval_manifest.parquet", index=False)
+        print({
+            "phase1_repo_head": phase1_repo_head,
+            "phase1_manifest_hash": manifest_revision,
+            "sealed_test_rows": len(waxal_test),
+            "filtered_eval_rows": len(frozen_eval),
+            "speech_rate_rule": f"words_per_s <= {cfg.max_words_per_s}",
+            "eval_manifest_hash": eval_manifest_hash,
+        })
+        """
+    ),
+    markdown("## 4. Conservative metrics and audio decoding"),
+    code(
+        r"""
+        import jiwer
+
+        PUNCT_TRANSLATION = str.maketrans({char: " " for char in string.punctuation + "“”‘’…–—"})
+
+
+        def strict_text(value: Any) -> str:
+            return " ".join(unicodedata.normalize("NFC", str(value or "")).split())
+
+
+        def normalize_eval(value: Any) -> str:
+            return " ".join(strict_text(value).lower().translate(PUNCT_TRANSLATION).split())
+
+
+        def asr_metrics(references: list[str], hypotheses: list[str]) -> dict[str, float]:
+            if len(references) != len(hypotheses) or not references:
+                raise ValueError("References and hypotheses must be non-empty and aligned")
+            strict_refs = [strict_text(value) for value in references]
+            strict_hyps = [strict_text(value) for value in hypotheses]
+            norm_refs = [normalize_eval(value) for value in references]
+            norm_hyps = [normalize_eval(value) for value in hypotheses]
+            return {
+                "strict_wer": float(jiwer.wer(strict_refs, strict_hyps)),
+                "strict_cer": float(jiwer.cer(strict_refs, strict_hyps)),
+                "normalized_wer": float(jiwer.wer(norm_refs, norm_hyps)),
+                "normalized_cer": float(jiwer.cer(norm_refs, norm_hyps)),
+                "utterances": len(references),
+            }
+
+
+        def audio_payload(value: Any) -> tuple[np.ndarray, int]:
+            if hasattr(value, "get_all_samples"):
+                samples = value.get_all_samples()
+                array = samples.data.detach().cpu().numpy()
+                sample_rate = int(samples.sample_rate)
+            elif isinstance(value, dict) and value.get("array") is not None:
+                array = np.asarray(value["array"], dtype=np.float32)
+                sample_rate = int(value.get("sampling_rate") or 16_000)
+            elif isinstance(value, dict) and value.get("bytes"):
+                array, sample_rate = sf.read(io.BytesIO(value["bytes"]), dtype="float32", always_2d=False)
+            else:
+                raise ValueError("Unsupported WAXAL audio payload")
+            array = np.asarray(array, dtype=np.float32)
+            if array.ndim == 2:
+                array = array.mean(axis=0 if array.shape[0] <= 8 else 1)
+            return array.reshape(-1), sample_rate
+
+
+        def canonical_audio(array: np.ndarray, sample_rate: int) -> np.ndarray:
+            if sample_rate != 16_000:
+                import librosa
+                array = librosa.resample(array, orig_sr=sample_rate, target_sr=16_000)
+            return np.clip(array, -1.0, 1.0).astype(np.float32)
+
+
+        assert asr_metrics(["N nyɛla bɛ."], ["n nyɛla bɛ"])["normalized_wer"] == 0.0
+        print("Metric and glyph self-test passed.")
+        """
+    ),
+    markdown("## 5. Batched, resumable GPU inference"),
+    code(
+        r"""
+        import torch
+        from datasets import load_dataset
+        from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor
+
+        api = HfApi(token=cfg.hf_token)
+        eval_by_id = frozen_eval.set_index("sample_id")
+
+
+        def slug(model_id: str) -> str:
+            return model_id.replace("/", "__")
+
+
+        def remote_predictions_path(model_id: str) -> str:
+            mode = "full" if cfg.max_samples is None else f"pilot-{cfg.max_samples}"
+            return f"phase1/baselines/{cfg.protocol_id}/{mode}/{slug(model_id)}-predictions.parquet"
+
+
+        def load_existing_predictions(model_id: str) -> pd.DataFrame:
+            try:
+                path = hf_hub_download(
+                    repo_id=cfg.manifest_repo_id,
+                    filename=remote_predictions_path(model_id),
+                    repo_type="dataset",
+                    token=cfg.hf_token,
+                    cache_dir=str(WORK_DIR / "resume_cache"),
+                    force_download=True,
+                )
+            except Exception:
+                return pd.DataFrame(columns=[
+                    "sample_id", "reference", "hypothesis", "model_id",
+                    "manifest_revision", "eval_manifest_hash",
+                ])
+            table = pd.read_parquet(path)
+            if not table.empty and set(table["eval_manifest_hash"].astype(str)) != {eval_manifest_hash}:
+                raise RuntimeError("Remote predictions belong to a different frozen evaluation manifest")
+            return table
+
+
+        def upload_predictions(model_id: str, table: pd.DataFrame) -> Path:
+            path = WORK_DIR / f"{slug(model_id)}-predictions.parquet"
+            table.to_parquet(path, index=False)
+            api.upload_file(
+                repo_id=cfg.manifest_repo_id,
+                repo_type="dataset",
+                path_or_fileobj=str(path),
+                path_in_repo=remote_predictions_path(model_id),
+                commit_message=f"Checkpoint Dagbani ASR baseline: {model_id} ({len(table)}/{len(frozen_eval)})",
+            )
+            return path
+
+
+        def iter_pending_audio(pending_ids: set[str]) -> Iterator[dict[str, Any]]:
+            found: set[str] = set()
+            stream = load_dataset(
+                "google/WaxalNLP", "dag_asr", split="test", streaming=True, token=cfg.hf_token
+            )
+            for record in stream:
+                sample_id = str(record.get("id", ""))
+                if sample_id not in pending_ids:
+                    continue
+                array, sample_rate = audio_payload(record["audio"])
+                found.add(sample_id)
+                yield {
+                    "sample_id": sample_id,
+                    "reference": strict_text(eval_by_id.at[sample_id, "transcript_raw"]),
+                    "audio": canonical_audio(array, sample_rate),
+                }
+            missing = pending_ids - found
+            if missing:
+                raise RuntimeError(f"WAXAL stream did not yield {len(missing)} frozen IDs: {sorted(missing)[:10]}")
+
+
+        def require_compatible_gpu() -> None:
+            if not torch.cuda.is_available():
+                raise RuntimeError("Enable a Kaggle GPU before running baselines")
+            major, minor = torch.cuda.get_device_capability(0)
+            device_arch = f"sm_{major}{minor}"
+            supported_arches = set(torch.cuda.get_arch_list())
+            gpu_info = {
+                "gpu": torch.cuda.get_device_name(0),
+                "device_arch": device_arch,
+                "torch_supported_arches": sorted(supported_arches),
+                "memory_gib": round(torch.cuda.get_device_properties(0).total_memory / 2**30, 1),
+            }
+            print("GPU preflight:", gpu_info)
+            if supported_arches and device_arch not in supported_arches and f"compute_{major}{minor}" not in supported_arches:
+                raise RuntimeError(
+                    f"Kaggle's current PyTorch build does not support {device_arch}. "
+                    "Select T4 x2 instead of P100, restart the session, and rerun from the top."
+                )
+
+
+        def build_model(model_id: str):
+            require_compatible_gpu()
+            processor = AutoProcessor.from_pretrained(model_id, token=cfg.hf_token)
+            load_kwargs = {"token": cfg.hf_token, "low_cpu_mem_usage": True}
+            try:
+                model = AutoModelForSpeechSeq2Seq.from_pretrained(
+                    model_id, dtype=torch.float16, **load_kwargs
+                )
+            except TypeError:
+                model = AutoModelForSpeechSeq2Seq.from_pretrained(
+                    model_id, torch_dtype=torch.float16, **load_kwargs
+                )
+            model.to("cuda").eval()
+            model.generation_config.forced_decoder_ids = None
+            return processor, model
+
+
+        def transcribe_batch(processor, model, batch: list[dict[str, Any]]) -> list[str]:
+            inputs = processor.feature_extractor(
+                [item["audio"] for item in batch],
+                sampling_rate=16_000,
+                return_tensors="pt",
+                padding="max_length",
+                truncation=True,
+                max_length=30 * 16_000,
+                return_attention_mask=True,
+            )
+            generate_kwargs = {
+                "input_features": inputs.input_features.to("cuda", dtype=torch.float16),
+                "task": "transcribe",
+            }
+            if "attention_mask" in inputs:
+                generate_kwargs["attention_mask"] = inputs.attention_mask.to("cuda")
+            with torch.inference_mode():
+                generated_ids = model.generate(**generate_kwargs)
+            return [strict_text(text) for text in processor.batch_decode(generated_ids, skip_special_tokens=True)]
+
+
+        def evaluate_model(model_id: str) -> dict[str, Any]:
+            predictions = load_existing_predictions(model_id)
+            predictions = predictions.drop_duplicates("sample_id", keep="last")
+            expected_ids = set(frozen_eval["sample_id"].astype(str))
+            predictions = predictions[predictions["sample_id"].astype(str).isin(expected_ids)]
+            pending_ids = expected_ids - set(predictions["sample_id"].astype(str))
+            started = time.time()
+            processed_this_run = 0
+            stopped_for_budget = False
+
+            if pending_ids:
+                processor, model = build_model(model_id)
+                batch: list[dict[str, Any]] = []
+                for row in iter_pending_audio(pending_ids):
+                    batch.append(row)
+                    if len(batch) < cfg.batch_size:
+                        continue
+                    hypotheses = transcribe_batch(processor, model, batch)
+                    new_rows = [{
+                        "sample_id": item["sample_id"],
+                        "reference": item["reference"],
+                        "hypothesis": hypothesis,
+                        "model_id": model_id,
+                        "manifest_revision": manifest_revision,
+                        "eval_manifest_hash": eval_manifest_hash,
+                    } for item, hypothesis in zip(batch, hypotheses)]
+                    predictions = pd.concat([predictions, pd.DataFrame(new_rows)], ignore_index=True)
+                    processed_this_run += len(new_rows)
+                    batch = []
+                    completed = predictions["sample_id"].nunique()
+                    elapsed = max(time.time() - started, 1e-6)
+                    rate = processed_this_run / elapsed
+                    eta_min = (len(expected_ids) - completed) / max(rate, 1e-9) / 60
+                    if completed % 25 < cfg.batch_size:
+                        print(f"{model_id}: {completed}/{len(expected_ids)}; {rate:.2f} rows/s; ETA {eta_min:.1f}m")
+                    if completed % cfg.upload_every < cfg.batch_size:
+                        upload_predictions(model_id, predictions)
+                    if elapsed / 60 >= cfg.session_budget_minutes:
+                        stopped_for_budget = True
+                        break
+
+                if batch and not stopped_for_budget:
+                    hypotheses = transcribe_batch(processor, model, batch)
+                    predictions = pd.concat([predictions, pd.DataFrame([{
+                        "sample_id": item["sample_id"], "reference": item["reference"],
+                        "hypothesis": hypothesis, "model_id": model_id,
+                        "manifest_revision": manifest_revision, "eval_manifest_hash": eval_manifest_hash,
+                    } for item, hypothesis in zip(batch, hypotheses)])], ignore_index=True)
+                upload_predictions(model_id, predictions)
+                del model, processor
+                gc.collect()
+                torch.cuda.empty_cache()
+
+            completed_ids = set(predictions["sample_id"].astype(str))
+            if completed_ids != expected_ids:
+                return {
+                    "model_id": model_id, "status": "partial",
+                    "completed": len(completed_ids), "total": len(expected_ids),
+                    "resume_safe": True,
+                }
+
+            ordered = frozen_eval[["sample_id", "transcript_raw"]].merge(
+                predictions[["sample_id", "hypothesis"]], on="sample_id", how="left", validate="one_to_one"
+            )
+            metrics = asr_metrics(
+                ordered["transcript_raw"].astype(str).tolist(),
+                ordered["hypothesis"].astype(str).tolist(),
+            ) | {
+                "model_id": model_id,
+                "status": "complete",
+                "phase1_revision": manifest_revision,
+                "eval_manifest_hash": eval_manifest_hash,
+                "filter_min_duration_s": cfg.min_duration_s,
+                "filter_max_words_per_s": cfg.max_words_per_s,
+                "protocol_id": cfg.protocol_id,
+                "pilot_limit": cfg.max_samples,
+            }
+            return metrics
+
+
+        print("GPU runner loaded. It preserves Whisper suppression defaults and forces no foreign language token.")
+        """
+    ),
+    markdown("## 6. Run and publish metrics"),
+    code(
+        r"""
+        baseline_metrics = []
+        if cfg.run_baselines:
+            frozen_remote = WORK_DIR / "frozen_eval_manifest.parquet"
+            api.upload_file(
+                repo_id=cfg.manifest_repo_id,
+                repo_type="dataset",
+                path_or_fileobj=str(frozen_remote),
+                path_in_repo=(
+                    f"phase1/baselines/{cfg.protocol_id}/full/frozen_eval_manifest.parquet"
+                    if cfg.max_samples is None
+                    else f"phase1/baselines/{cfg.protocol_id}/pilot-{cfg.max_samples}/frozen_eval_manifest.parquet"
+                ),
+                commit_message="Freeze Dagbani WAXAL baseline evaluation manifest",
+            )
+            for model_id in cfg.model_ids:
+                result = evaluate_model(model_id)
+                baseline_metrics.append(result)
+                print(json.dumps(result, indent=2))
+                if result.get("status") != "complete":
+                    print("Session budget reached. Rerun this notebook to resume safely.")
+                    break
+
+            mode = "full" if cfg.max_samples is None else f"pilot-{cfg.max_samples}"
+            metrics_path = WORK_DIR / "baseline_metrics.json"
+            metrics_path.write_text(json.dumps(baseline_metrics, indent=2), encoding="utf-8")
+            api.upload_file(
+                repo_id=cfg.manifest_repo_id,
+                repo_type="dataset",
+                path_or_fileobj=str(metrics_path),
+                path_in_repo=f"phase1/baselines/{cfg.protocol_id}/{mode}/baseline_metrics.json",
+                commit_message=f"Publish Dagbani ASR {mode} baseline metrics",
+            )
+            print(
+                "Published private baseline evidence to "
+                f"{cfg.manifest_repo_id}/phase1/baselines/{cfg.protocol_id}/{mode}"
+            )
+        else:
+            print("Baseline execution is OFF. Set cfg.run_baselines=True after enabling one Kaggle GPU.")
+        """
+    ),
+]
+
+
 PHASE2_CELLS = [
     markdown(
         r"""
@@ -994,8 +1594,10 @@ PHASE2_CELLS = [
         1 readiness file is missing, when the test split leaks into training, or when
         the audited manifest contains undecoded supervised audio.
 
-        The notebook supports one GPU and genuine notebook-launched DDP. It never uses
-        `device_map="auto"` as a substitute for data parallelism.
+        The notebook's validated Kaggle path uses one GPU. It also contains a guarded
+        notebook-launched DDP experiment, but refuses to fork if the current kernel has
+        already initialized CUDA. It never uses `device_map="auto"` as a substitute
+        for data parallelism.
         """
     ),
     markdown("## 1. Install dependencies without replacing Kaggle's PyTorch/CUDA build"),
@@ -1092,8 +1694,10 @@ PHASE2_CELLS = [
             eval_generation_limit: int | None = None
             max_session_minutes: int = 540
             stop_buffer_minutes: int = 20
+            disk_stop_free_gib: float = 8.0
+            stream_shuffle_buffer: int = 512
             dataloader_workers: int = 2
-            use_ddp: str = "auto"  # auto | one | two
+            use_ddp: str = "one"  # one is the smoke/default path; two requires the DDP gate
             training_mode: str = "full"  # full | lora
             waxal_batch_share: float = 0.60
             pseudo_batch_share: float = 0.25
@@ -1151,13 +1755,33 @@ PHASE2_CELLS = [
         EVAL_DIR = WORK_DIR / "evaluations"
         for directory in (WORK_DIR, OUTPUT_DIR, CACHE_DIR, EVAL_DIR):
             directory.mkdir(parents=True, exist_ok=True)
+        startup_free_gib = shutil.disk_usage(WORK_DIR).free / 2**30
+        if cfg.run_training and startup_free_gib < cfg.disk_stop_free_gib:
+            raise RuntimeError(
+                f"Only {startup_free_gib:.1f} GiB disk is free; start a fresh Kaggle session "
+                f"with at least {cfg.disk_stop_free_gib:.1f} GiB free before training."
+            )
         os.environ["HF_HOME"] = str(CACHE_DIR)
         os.environ["HF_DATASETS_CACHE"] = str(CACHE_DIR / "datasets")
         os.environ["TRANSFORMERS_CACHE"] = str(CACHE_DIR / "models")
+        if cfg.hf_token:
+            os.environ["HF_TOKEN"] = cfg.hf_token
+        os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
         os.environ["TOKENIZERS_PARALLELISM"] = "false"
         os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+        # Ask Accelerate to reject a poisoned notebook fork explicitly instead of
+        # allowing child processes to hang silently during model construction.
+        os.environ["ACCELERATE_DEBUG_MODE"] = "yes"
+        if cfg.use_ddp == "one":
+            # Trainer otherwise sees both T4s and silently uses DataParallel,
+            # invalidating the effective-batch calculation for the one-GPU path.
+            os.environ["CUDA_VISIBLE_DEVICES"] = "0"
         print(json.dumps(asdict(cfg) | {"hf_token": "<set>" if cfg.hf_token else "<missing>"}, indent=2))
-        print("Training is OFF by default. Complete all preflight cells before setting run_training=True.")
+        print(
+            "Training action: ENABLED after preflight checks."
+            if cfg.run_training
+            else "Training action: OFF; this execution is a dry preflight."
+        )
         """
     ),
     markdown("## 3. Load and validate the Phase 1 evidence contract"),
@@ -1246,7 +1870,7 @@ PHASE2_CELLS = [
     code(
         r"""
         import requests
-        from datasets import Audio, Dataset, DatasetDict, concatenate_datasets, interleave_datasets, load_dataset
+        from datasets import Audio, Dataset, DatasetDict, IterableDataset, concatenate_datasets, interleave_datasets, load_dataset
 
         HF_SOURCE_REGISTRY = {
             "waxal_dag_asr": ("google/WaxalNLP", "dag_asr"),
@@ -1264,11 +1888,11 @@ PHASE2_CELLS = [
 
 
         def standardize_dataset(
-            dataset: Dataset,
+            dataset: Dataset | IterableDataset,
             source: str,
             text_override: dict[str, str] | None = None,
             accepted_ids: set[str] | None = None,
-        ) -> Dataset:
+        ) -> Dataset | IterableDataset:
             audio_col = pick_column(dataset.column_names, ("audio", "speech"))
             text_col = pick_column(dataset.column_names, ("transcription", "sentence", "text", "transcript"))
             id_col = pick_column(dataset.column_names, ("id", "sample_id", "path", "file", "filename"))
@@ -1282,26 +1906,24 @@ PHASE2_CELLS = [
                 dataset = dataset.rename_column(id_col, "sample_id")
             if accepted_ids is not None:
                 if not accepted_ids:
-                    return dataset.select([])
+                    return dataset.take(0) if isinstance(dataset, IterableDataset) else dataset.select([])
                 dataset = dataset.filter(
                     lambda sample_id: str(sample_id) in accepted_ids,
                     input_columns=["sample_id"],
-                    desc="Applying audited manifest IDs without decoding audio",
                 )
             if text_override is not None:
                 dataset = dataset.map(
                     lambda sample_id: {"sentence": text_override[str(sample_id)]},
                     input_columns=["sample_id"],
-                    desc="Attaching audited pseudo transcripts",
                 )
             elif text_col != "sentence":
                 dataset = dataset.rename_column(text_col, "sentence")
             dataset = dataset.map(
                 lambda sample_id: {"sample_id": str(sample_id), "source": source},
                 input_columns=["sample_id"],
-                desc="Standardizing sample IDs",
             )
-            return dataset.cast_column("audio", Audio(sampling_rate=16_000))
+            dataset = dataset.cast_column("audio", Audio(sampling_rate=16_000))
+            return dataset.select_columns(["sample_id", "source", "sentence", "audio"])
 
 
         def allowed_ids(source: str, split: str) -> set[str]:
@@ -1311,22 +1933,53 @@ PHASE2_CELLS = [
             return set(rows["sample_id"].astype(str))
 
 
-        def filter_to_ids(dataset: Dataset, ids: set[str]) -> Dataset:
+        def filter_to_ids(dataset: Dataset | IterableDataset, ids: set[str]) -> Dataset | IterableDataset:
             if not ids:
-                return dataset.select([])
+                return dataset.take(0) if isinstance(dataset, IterableDataset) else dataset.select([])
             return dataset.filter(
                 lambda sample_id: str(sample_id) in ids,
                 input_columns=["sample_id"],
-                desc="Applying audited manifest IDs without decoding audio",
             )
 
 
-        def load_waxal(split: str) -> Dataset:
-            dataset = load_dataset("google/WaxalNLP", "dag_asr", split=split, token=cfg.hf_token, cache_dir=str(CACHE_DIR))
+        SMOKE_DATASETS: tuple[Dataset, Dataset] | None = None
+
+
+        def canonical_training_audio(array: Any, sample_rate: int) -> tuple[np.ndarray, int]:
+            '''Return one finite, contiguous 16 kHz mono waveform.'''
+            waveform = np.asarray(array, dtype=np.float32)
+            waveform = np.squeeze(waveform)
+            if waveform.ndim == 2:
+                if waveform.shape[0] <= 8:
+                    waveform = waveform.mean(axis=0)
+                elif waveform.shape[1] <= 8:
+                    waveform = waveform.mean(axis=1)
+                else:
+                    raise ValueError(f"Ambiguous multi-channel audio shape: {waveform.shape}")
+            if waveform.ndim != 1 or waveform.size == 0:
+                raise ValueError(f"Expected non-empty mono audio, received shape {waveform.shape}")
+            if not np.isfinite(waveform).all():
+                raise ValueError("Audio contains NaN or infinite samples")
+            if int(sample_rate) != 16_000:
+                import librosa
+                waveform = librosa.resample(waveform, orig_sr=int(sample_rate), target_sr=16_000)
+            return np.ascontiguousarray(np.clip(waveform, -1.0, 1.0), dtype=np.float32), 16_000
+
+
+        def load_waxal(split: str) -> IterableDataset:
+            # WAXAL audio is larger than a Kaggle session disk. Streaming keeps
+            # shards remote and decodes only examples consumed by a batch.
+            dataset = load_dataset(
+                "google/WaxalNLP", "dag_asr", split=split, streaming=True,
+                token=cfg.hf_token, cache_dir=str(CACHE_DIR),
+            )
             ids = allowed_ids("waxal_dag_asr", split)
             if not ids and cfg.stage != "smoke":
                 raise RuntimeError(f"No audited WAXAL IDs for {split}")
-            return standardize_dataset(dataset, "waxal_dag_asr", accepted_ids=ids or None)
+            dataset = standardize_dataset(dataset, "waxal_dag_asr", accepted_ids=ids or None)
+            if split == "train":
+                dataset = dataset.shuffle(seed=cfg.seed, buffer_size=cfg.stream_shuffle_buffer)
+            return dataset
 
 
         def load_waxal_smoke(split: str, rows: int) -> Dataset:
@@ -1339,19 +1992,39 @@ PHASE2_CELLS = [
                 audio = record["audio"]
                 if hasattr(audio, "get_all_samples"):
                     samples = audio.get_all_samples()
-                    array = samples.data.detach().cpu().numpy().squeeze()
+                    array = samples.data.detach().cpu().numpy()
                     sample_rate = int(samples.sample_rate)
                 else:
-                    array = np.asarray(audio["array"], dtype=np.float32)
+                    array = audio["array"]
                     sample_rate = int(audio["sampling_rate"])
+                array, sample_rate = canonical_training_audio(array, sample_rate)
                 materialized.append({
                     "sample_id": str(record.get("id", f"{split}-{index}")),
                     "source": "waxal_dag_asr", "sentence": str(record.get("transcription", "")),
-                    "audio": {"array": array, "sampling_rate": sample_rate},
+                    # A plain variable-length sequence avoids a datasets v4 Audio
+                    # recast of heterogeneous nested NumPy shapes. The collator
+                    # converts this list back to one float32 waveform per example.
+                    "audio": {"array": array.tolist(), "sampling_rate": sample_rate},
                 })
             if not materialized:
                 raise RuntimeError(f"Unable to stream WAXAL {split} smoke rows")
-            return Dataset.from_list(materialized).cast_column("audio", Audio(sampling_rate=16_000))
+            dataset = Dataset.from_list(materialized)
+            if len(dataset) != rows:
+                raise RuntimeError(f"Expected {rows} WAXAL {split} smoke rows, received {len(dataset)}")
+            return dataset
+
+
+        def prepare_smoke_data(config: TrainConfig) -> tuple[Dataset, Dataset] | None:
+            '''Materialize and validate smoke data once per process.'''
+            global SMOKE_DATASETS
+            if config.stage != "smoke":
+                return None
+            if SMOKE_DATASETS is None:
+                SMOKE_DATASETS = (
+                    load_waxal_smoke("train", 64),
+                    load_waxal_smoke("validation", 32),
+                )
+            return SMOKE_DATASETS
 
 
         def load_domain_source(source: str, split: str) -> Dataset | None:
@@ -1409,9 +2082,11 @@ PHASE2_CELLS = [
             return Dataset.from_list(usable).cast_column("audio", Audio(sampling_rate=16_000))
 
 
-        def make_training_data(config: TrainConfig) -> tuple[Dataset, Dataset]:
+        def make_training_data(config: TrainConfig) -> tuple[Any, Any]:
             if config.stage == "smoke":
-                return load_waxal_smoke("train", 64), load_waxal_smoke("validation", 32)
+                prepared = prepare_smoke_data(config)
+                assert prepared is not None
+                return prepared
             train = load_waxal("train")
             validation = load_waxal("validation")
             if config.stage in {"supervised", "medium_pilot", "medium_full"}:
@@ -1432,6 +2107,8 @@ PHASE2_CELLS = [
                 if not extras:
                     raise RuntimeError("No audited domain-adaptation source is loadable")
                 extra = concatenate_datasets(extras).shuffle(seed=config.seed)
+                if isinstance(train, IterableDataset):
+                    extra = extra.to_iterable_dataset(num_shards=max(1, min(16, len(extra))))
                 mixed = interleave_datasets(
                     [train.shuffle(seed=config.seed), extra],
                     probabilities=[config.waxal_batch_share, 1.0 - config.waxal_batch_share],
@@ -1444,11 +2121,15 @@ PHASE2_CELLS = [
                 if pseudo.empty or (pseudo["split"] == "test").any():
                     raise RuntimeError("Pseudo manifest is empty or contains test rows")
                 pseudo_text = dict(zip(pseudo["sample_id"].astype(str), pseudo["transcript_raw"].astype(str)))
-                raw = load_dataset("google/WaxalNLP", "dag_asr", split="unlabeled", token=config.hf_token, cache_dir=str(CACHE_DIR))
+                raw = load_dataset(
+                    "google/WaxalNLP", "dag_asr", split="unlabeled", streaming=True,
+                    token=config.hf_token, cache_dir=str(CACHE_DIR),
+                )
                 raw = standardize_dataset(
                     raw, "waxal_dag_asr_pseudo", text_override=pseudo_text,
                     accepted_ids=set(pseudo_text),
                 )
+                raw = raw.shuffle(seed=config.seed, buffer_size=config.stream_shuffle_buffer)
                 mixed = interleave_datasets(
                     [train.shuffle(seed=config.seed), raw.shuffle(seed=config.seed)],
                     probabilities=[1.0 - config.pseudo_batch_share, config.pseudo_batch_share],
@@ -1468,13 +2149,20 @@ PHASE2_CELLS = [
 
         processor = AutoProcessor.from_pretrained(cfg.base_model_id, task="transcribe", cache_dir=str(CACHE_DIR), token=cfg.hf_token)
         glyph_probe = "n nyɛla bɛ paɣaŋa mini ɔ ka ʒɛm shɛli"
-        token_ids = processor.tokenizer(glyph_probe).input_ids
-        decoded_probe = processor.tokenizer.decode(token_ids, skip_special_tokens=True).strip()
+        # Whisper aliases unk/eos/pad to the same <|endoftext|> ID. With the
+        # tokenizer's default special tokens, testing for unk therefore mistakes
+        # the expected end token for an unknown Dagbani byte. Test only the raw
+        # byte-level encoding and then require an exact Unicode round-trip.
+        token_ids = processor.tokenizer(glyph_probe, add_special_tokens=False).input_ids
+        decoded_probe = processor.tokenizer.decode(
+            token_ids, skip_special_tokens=False, clean_up_tokenization_spaces=False
+        )
         if unicodedata.normalize("NFC", decoded_probe) != unicodedata.normalize("NFC", glyph_probe):
             raise RuntimeError(f"Whisper tokenizer damaged Dagbani glyphs: {decoded_probe!r}")
-        if getattr(processor.tokenizer, "unk_token_id", None) in token_ids:
+        unk_token_id = getattr(processor.tokenizer, "unk_token_id", None)
+        if unk_token_id is not None and unk_token_id in token_ids:
             raise RuntimeError("Unexpected <unk> token in Dagbani glyph probe")
-        print("Whisper byte-level tokenizer round-trip passed:", decoded_probe)
+        print("Whisper byte-level tokenizer round-trip passed:", decoded_probe, f"({len(token_ids)} tokens)")
         """
     ),
     markdown("## 6. Dynamic feature collation — no full-corpus mel cache"),
@@ -1487,6 +2175,7 @@ PHASE2_CELLS = [
         @dataclass
         class SpeechSeq2SeqCollator:
             processor: Any
+            decoder_start_token_id: int
 
             def __call__(self, features: list[dict[str, Any]]) -> dict[str, torch.Tensor]:
                 input_features = []
@@ -1495,25 +2184,48 @@ PHASE2_CELLS = [
                     audio = feature["audio"]
                     if hasattr(audio, "get_all_samples"):
                         samples = audio.get_all_samples()
-                        array = samples.data.detach().cpu().numpy().squeeze()
+                        array = samples.data.detach().cpu().numpy()
                         sample_rate = int(samples.sample_rate)
                     else:
-                        array = np.asarray(audio["array"], dtype=np.float32)
+                        array = audio["array"]
                         sample_rate = int(audio["sampling_rate"])
+                    array, sample_rate = canonical_training_audio(array, sample_rate)
                     inputs = self.processor.feature_extractor(array, sampling_rate=sample_rate)
                     input_features.append({"input_features": inputs.input_features[0]})
                     label_features.append({"input_ids": self.processor.tokenizer(str(feature["sentence"])).input_ids})
                 batch = self.processor.feature_extractor.pad(input_features, return_tensors="pt")
                 labels = self.processor.tokenizer.pad(label_features, return_tensors="pt")
                 label_ids = labels["input_ids"].masked_fill(labels["attention_mask"].ne(1), -100)
-                decoder_start = self.processor.tokenizer.bos_token_id
-                if decoder_start is not None and (label_ids[:, 0] == decoder_start).all().item():
+                if (label_ids[:, 0] == self.decoder_start_token_id).all().item():
                     label_ids = label_ids[:, 1:]
                 batch["labels"] = label_ids
                 return batch
 
 
-        collator = SpeechSeq2SeqCollator(processor)
+        decoder_start_token_id = processor.tokenizer.convert_tokens_to_ids("<|startoftranscript|>")
+        if decoder_start_token_id is None or decoder_start_token_id < 0:
+            raise RuntimeError("Whisper decoder-start token is unavailable")
+        collator = SpeechSeq2SeqCollator(processor, decoder_start_token_id)
+        if cfg.stage == "smoke" and cfg.use_ddp != "two":
+            smoke_train, smoke_validation = prepare_smoke_data(cfg)
+            probe_batch = collator([smoke_train[0], smoke_train[1]])
+            if probe_batch["input_features"].ndim != 3 or probe_batch["labels"].ndim != 2:
+                raise RuntimeError({key: tuple(value.shape) for key, value in probe_batch.items()})
+            if (probe_batch["labels"][:, 0] == decoder_start_token_id).any().item():
+                raise RuntimeError("Collator retained a duplicated Whisper decoder-start label")
+            print({
+                "smoke_train_rows": len(smoke_train),
+                "smoke_validation_rows": len(smoke_validation),
+                "collator_input_shape": tuple(probe_batch["input_features"].shape),
+                "collator_label_shape": tuple(probe_batch["labels"].shape),
+                "decoder_start_token_id": decoder_start_token_id,
+                "audio_contract": "contiguous mono float32 at 16 kHz",
+            })
+        elif cfg.stage == "smoke":
+            # Do not create PyTorch tensors in the notebook parent before
+            # notebook_launcher forks. Each DDP child runs this exact contract
+            # immediately after loading its tiny dataset.
+            print("DDP smoke collator gate deferred to each launched rank.")
         print("Dynamic collator ready; features are computed only for the current batch.")
         """
     ),
@@ -1544,6 +2256,7 @@ PHASE2_CELLS = [
                     "step": state.global_step, "max_steps": state.max_steps,
                     "elapsed_min": elapsed_min, "minutes_per_step": step_min,
                     "eta_min": eta_min, "projected_total_min": elapsed_min + eta_min,
+                    "disk_free_gib": shutil.disk_usage(self.output_dir).free / 2**30,
                 }
                 try:
                     query = subprocess.check_output(
@@ -1563,6 +2276,10 @@ PHASE2_CELLS = [
                         control.should_training_stop = True
                 if elapsed_min >= self.config.max_session_minutes - self.config.stop_buffer_minutes:
                     print("Wall-clock safety buffer reached; saving and stopping safely.")
+                    control.should_save = True
+                    control.should_training_stop = True
+                if payload["disk_free_gib"] < self.config.disk_stop_free_gib:
+                    print("Free-disk safety threshold reached; saving and stopping safely.")
                     control.should_save = True
                     control.should_training_stop = True
                 return control
@@ -1671,7 +2388,12 @@ PHASE2_CELLS = [
                 eval_steps=min(config.eval_steps, config.max_steps()), logging_steps=10,
                 save_total_limit=3, load_best_model_at_end=True, metric_for_best_model="eval_loss",
                 greater_is_better=False, predict_with_generate=False, report_to="none",
+                disable_tqdm=True,
                 seed=config.seed, data_seed=config.seed, ddp_find_unused_parameters=False,
+                # Exact sample skipping is prohibitively expensive for a remote
+                # streaming corpus. Optimizer/scheduler/RNG state still resume;
+                # the stream restarts from its deterministic epoch shuffle.
+                ignore_data_skip=True,
                 optim="adamw_bnb_8bit" if importlib.util.find_spec("bitsandbytes") else "adamw_torch_fused",
                 push_to_hub=bool(config.model_repo_id), hub_model_id=config.model_repo_id or None,
                 hub_private_repo=True, hub_token=config.hf_token, hub_strategy="end",
@@ -1682,11 +2404,25 @@ PHASE2_CELLS = [
 
 
         def build_model(config: TrainConfig):
-            start = model_starting_point(config)
-            model = AutoModelForSpeechSeq2Seq.from_pretrained(
-                start, torch_dtype=torch.float16, low_cpu_mem_usage=True,
-                cache_dir=str(CACHE_DIR), token=config.hf_token,
-            )
+            start = os.getenv("DAGBANI_MODEL_SNAPSHOT") or model_starting_point(config)
+            # Full AMP fine-tuning keeps trainable/master weights in FP32. Trainer
+            # autocast performs T4 compute in FP16; loading trainable weights as
+            # FP16 makes GradScaler reject their already-FP16 gradients.
+            load_dtype = torch.float32
+            load_kwargs = {
+                "low_cpu_mem_usage": True,
+                "cache_dir": str(CACHE_DIR),
+                "token": config.hf_token,
+                "local_files_only": bool(os.getenv("DAGBANI_MODEL_SNAPSHOT")),
+            }
+            try:
+                model = AutoModelForSpeechSeq2Seq.from_pretrained(
+                    start, dtype=load_dtype, **load_kwargs,
+                )
+            except TypeError:
+                model = AutoModelForSpeechSeq2Seq.from_pretrained(
+                    start, torch_dtype=load_dtype, **load_kwargs,
+                )
             model.config.forced_decoder_ids = None
             model.generation_config.forced_decoder_ids = None
             model.generation_config.task = "transcribe"
@@ -1700,6 +2436,10 @@ PHASE2_CELLS = [
                 )
                 model = get_peft_model(model, lora)
                 model.print_trainable_parameters()
+            trainable_dtypes = {parameter.dtype for parameter in model.parameters() if parameter.requires_grad}
+            if trainable_dtypes != {torch.float32}:
+                raise RuntimeError(f"AMP requires FP32 trainable weights, received {trainable_dtypes}")
+            print(f"Trainable-weight dtype gate passed: {trainable_dtypes}", flush=True)
             return model
 
 
@@ -1732,23 +2472,56 @@ PHASE2_CELLS = [
             config = TrainConfig(**config_dict)
             set_seed(config.seed)
             world_size = int(os.environ.get("WORLD_SIZE", "1"))
+            rank = int(os.environ.get("RANK", "0"))
+            print(f"[rank {rank}/{world_size}] preparing training data", flush=True)
             train_data, validation_data = make_training_data(config)
+            def size_label(dataset: Any) -> str:
+                try:
+                    return f"{len(dataset):,}"
+                except TypeError:
+                    return "streaming"
+            print(
+                f"[rank {rank}/{world_size}] data ready: "
+                f"train={size_label(train_data)}, validation={size_label(validation_data)}; loading model",
+                flush=True,
+            )
+            if config.stage == "smoke" and world_size > 1:
+                probe_batch = collator([train_data[0], train_data[1]])
+                if probe_batch["input_features"].ndim != 3 or probe_batch["labels"].ndim != 2:
+                    raise RuntimeError({key: tuple(value.shape) for key, value in probe_batch.items()})
+                if (probe_batch["labels"][:, 0] == decoder_start_token_id).any().item():
+                    raise RuntimeError("Collator retained a duplicated Whisper decoder-start label")
+                print(
+                    f"[rank {rank}/{world_size}] deferred collator gate passed: "
+                    f"inputs={tuple(probe_batch['input_features'].shape)}, "
+                    f"labels={tuple(probe_batch['labels'].shape)}",
+                    flush=True,
+                )
             model = build_model(config)
+            print(f"[rank {rank}/{world_size}] model ready; building Trainer", flush=True)
             telemetry = BudgetTelemetryCallback(config, OUTPUT_DIR)
             hub_checkpoints = PrivateHubCheckpointCallback(config, OUTPUT_DIR)
             args = training_args(config, world_size)
             trainer = Seq2SeqTrainer(
                 model=model, args=args, train_dataset=train_data, eval_dataset=validation_data,
-                data_collator=SpeechSeq2SeqCollator(processor), processing_class=processor,
+                data_collator=SpeechSeq2SeqCollator(processor, decoder_start_token_id),
+                processing_class=processor,
                 callbacks=[telemetry, hub_checkpoints],
             )
             resume_checkpoint = resumable_checkpoint(config, OUTPUT_DIR)
+            print(f"[rank {rank}/{world_size}] Trainer ready; starting optimizer steps", flush=True)
             result = trainer.train(resume_from_checkpoint=resume_checkpoint)
-            trainer.save_model(str(OUTPUT_DIR / "final_model"))
-            processor.save_pretrained(str(OUTPUT_DIR / "final_model"))
-            if trainer.is_world_process_zero() and config.model_repo_id:
-                trainer.push_to_hub(commit_message=f"Dagbani ASR {config.stage} completed at step {trainer.state.global_step}")
-                hub_checkpoints.wait()
+            # Synchronize both ranks before and after final persistence. Only rank
+            # zero may write/upload the shared final_model directory; otherwise
+            # two Kaggle workers can race while serializing processor files.
+            trainer.accelerator.wait_for_everyone()
+            if trainer.is_world_process_zero():
+                trainer.save_model(str(OUTPUT_DIR / "final_model"))
+                processor.save_pretrained(str(OUTPUT_DIR / "final_model"))
+                if config.model_repo_id:
+                    trainer.push_to_hub(commit_message=f"Dagbani ASR {config.stage} completed at step {trainer.state.global_step}")
+                    hub_checkpoints.wait()
+            trainer.accelerator.wait_for_everyone()
             return {"metrics": result.metrics, "global_step": trainer.state.global_step, "world_size": world_size}
 
 
@@ -1776,10 +2549,34 @@ PHASE2_CELLS = [
         training_result = None
         if cfg.run_training:
             from accelerate import notebook_launcher
-            from huggingface_hub import HfApi
+            from huggingface_hub import HfApi, snapshot_download
             api = HfApi(token=cfg.hf_token)
             api.create_repo(cfg.model_repo_id, repo_type="model", private=True, exist_ok=True)
             if world_size > 1:
+                if torch.cuda.is_initialized():
+                    raise RuntimeError(
+                        "Two-GPU notebook DDP is unsafe because this Kaggle kernel has already "
+                        "initialized CUDA. Use use_ddp='one'. A spawn-based standalone launcher "
+                        "is required for two GPUs in this environment."
+                    )
+                start_id = model_starting_point(cfg)
+                repo_files = api.list_repo_files(start_id, repo_type="model")
+                root_files = [name for name in repo_files if "/" not in name]
+                weight_files = [name for name in root_files if name.endswith(".safetensors")]
+                if not weight_files:
+                    weight_files = [name for name in root_files if name.endswith(".bin")]
+                metadata_files = [
+                    name for name in root_files
+                    if name.endswith((".json", ".txt", ".model", ".tiktoken"))
+                ]
+                if not weight_files:
+                    raise RuntimeError(f"No root model weights found in {start_id}")
+                model_snapshot = snapshot_download(
+                    repo_id=start_id, repo_type="model", token=cfg.hf_token,
+                    cache_dir=str(CACHE_DIR), allow_patterns=weight_files + metadata_files,
+                )
+                os.environ["DAGBANI_MODEL_SNAPSHOT"] = model_snapshot
+                print(f"DDP model snapshot prepared before fork: {model_snapshot}")
                 notebook_launcher(train_process, args=(asdict(cfg),), num_processes=world_size, mixed_precision="fp16")
                 training_result = {"status": "DDP child processes completed", "world_size": world_size}
             else:
@@ -1811,8 +2608,12 @@ PHASE2_CELLS = [
             }
 
 
-        def evaluation_dataset(source: str, split: str) -> Dataset:
+        def evaluation_dataset(source: str, split: str) -> Dataset | IterableDataset:
             if source == "waxal_dag_asr":
+                if cfg.stage == "smoke" and split == "validation":
+                    prepared = prepare_smoke_data(cfg)
+                    assert prepared is not None
+                    return prepared[1]
                 return load_waxal(split)
             candidate = (
                 load_domain_source(source, split)
@@ -1831,36 +2632,58 @@ PHASE2_CELLS = [
             source: str = "waxal_dag_asr",
         ) -> tuple[dict, pd.DataFrame]:
             from transformers import AutoModelForSpeechSeq2Seq
-            model = AutoModelForSpeechSeq2Seq.from_pretrained(
-                model_id_or_path, torch_dtype=torch.float16, low_cpu_mem_usage=True,
-                token=cfg.hf_token, cache_dir=str(CACHE_DIR),
-            ).to("cuda")
+            inference_kwargs = {
+                "low_cpu_mem_usage": True,
+                "token": cfg.hf_token,
+                "cache_dir": str(CACHE_DIR),
+            }
+            try:
+                model = AutoModelForSpeechSeq2Seq.from_pretrained(
+                    model_id_or_path, dtype=torch.float16, **inference_kwargs,
+                ).to("cuda")
+            except TypeError:
+                model = AutoModelForSpeechSeq2Seq.from_pretrained(
+                    model_id_or_path, torch_dtype=torch.float16, **inference_kwargs,
+                ).to("cuda")
             model.eval()
             model.generation_config.forced_decoder_ids = None
             model.generation_config.task = "transcribe"
             dataset = evaluation_dataset(source, split)
             if limit is not None:
-                dataset = dataset.select(range(min(limit, len(dataset))))
+                dataset = (
+                    dataset.take(limit)
+                    if isinstance(dataset, IterableDataset)
+                    else dataset.select(range(min(limit, len(dataset))))
+                )
             references, hypotheses, sample_ids = [], [], []
             started = time.time()
             for index, row in enumerate(dataset, 1):
                 audio = row["audio"]
                 if hasattr(audio, "get_all_samples"):
                     samples = audio.get_all_samples()
-                    array = samples.data.detach().cpu().numpy().squeeze()
+                    array = samples.data.detach().cpu().numpy()
                     sample_rate = int(samples.sample_rate)
                 else:
                     array, sample_rate = audio["array"], audio["sampling_rate"]
-                inputs = processor(array, sampling_rate=sample_rate, return_tensors="pt")
+                array, sample_rate = canonical_training_audio(array, sample_rate)
+                inputs = processor(
+                    array, sampling_rate=sample_rate, return_tensors="pt",
+                    return_attention_mask=True,
+                )
                 features = inputs.input_features.to(device=model.device, dtype=model.dtype)
+                attention_mask = inputs.attention_mask.to(model.device)
                 with torch.inference_mode():
-                    tokens = model.generate(features, task="transcribe", max_new_tokens=225)
+                    tokens = model.generate(
+                        input_features=features,
+                        attention_mask=attention_mask,
+                        max_length=225,
+                    )
                 hypothesis = processor.batch_decode(tokens, skip_special_tokens=True)[0]
                 sample_ids.append(str(row["sample_id"]))
                 references.append(strict_text(row["sentence"]))
                 hypotheses.append(strict_text(hypothesis))
                 if index % 50 == 0:
-                    print(f"Generated {index}/{len(dataset)} in {(time.time() - started) / 60:.1f} min")
+                    print(f"Generated {index} utterances in {(time.time() - started) / 60:.1f} min")
             metrics = asr_metrics(references, hypotheses) | {
                 "model": model_id_or_path, "source": source, "split": split,
                 "elapsed_s": time.time() - started,
@@ -1892,12 +2715,15 @@ PHASE2_CELLS = [
 
 
         generation_metrics = []
-        if cfg.run_full_generation_eval:
+        auto_smoke_generation = cfg.stage == "smoke" and training_result is not None
+        if cfg.run_full_generation_eval or auto_smoke_generation:
             final_local = OUTPUT_DIR / "final_model"
             targets = [str(final_local) if final_local.exists() else cfg.model_repo_id]
-            targets.extend(target for step in cfg.major_checkpoint_steps if (target := resolve_major_checkpoint(step)))
+            if not auto_smoke_generation:
+                targets.extend(target for step in cfg.major_checkpoint_steps if (target := resolve_major_checkpoint(step)))
             for target in targets:
-                metrics, predictions = evaluate_generation(target, limit=cfg.eval_generation_limit)
+                generation_limit = 8 if auto_smoke_generation and cfg.eval_generation_limit is None else cfg.eval_generation_limit
+                metrics, predictions = evaluate_generation(target, limit=generation_limit)
                 generation_metrics.append(metrics)
                 stem = Path(target).name
                 predictions.to_parquet(EVAL_DIR / f"{stem}_validation_predictions.parquet", index=False)
@@ -1950,11 +2776,17 @@ PHASE2_CELLS = [
 
 
         def decode_with_confidence(model, array: np.ndarray, sample_rate: int, num_beams: int) -> dict[str, Any]:
-            inputs = processor(array, sampling_rate=sample_rate, return_tensors="pt")
+            array, sample_rate = canonical_training_audio(array, sample_rate)
+            inputs = processor(
+                array, sampling_rate=sample_rate, return_tensors="pt",
+                return_attention_mask=True,
+            )
             features = inputs.input_features.to(device=model.device, dtype=model.dtype)
+            attention_mask = inputs.attention_mask.to(model.device)
             with torch.inference_mode():
                 output = model.generate(
-                    features, task="transcribe", max_new_tokens=cfg.pseudo_max_new_tokens,
+                    input_features=features, attention_mask=attention_mask,
+                    max_length=cfg.pseudo_max_new_tokens,
                     num_beams=num_beams, return_dict_in_generate=True, output_scores=True,
                 )
             beam_indices = getattr(output, "beam_indices", None)
@@ -1968,16 +2800,24 @@ PHASE2_CELLS = [
             return {"text": text, "average_logprob": average_logprob, "no_speech_probability": no_speech_probability}
 
 
-        def calibrate_pseudo_thresholds(model, validation: Dataset, rows: int) -> dict[str, float]:
+        def calibrate_pseudo_thresholds(
+            model, validation: Dataset | IterableDataset, rows: int,
+        ) -> dict[str, float]:
             scores = []
-            for row in validation.select(range(min(rows, len(validation)))):
+            calibration = (
+                validation.take(rows)
+                if isinstance(validation, IterableDataset)
+                else validation.select(range(min(rows, len(validation))))
+            )
+            for row in calibration:
                 audio = row["audio"]
                 if hasattr(audio, "get_all_samples"):
                     samples = audio.get_all_samples()
-                    array = samples.data.detach().cpu().numpy().squeeze()
+                    array = samples.data.detach().cpu().numpy()
                     sample_rate = int(samples.sample_rate)
                 else:
                     array, sample_rate = np.asarray(audio["array"]), int(audio["sampling_rate"])
+                array, sample_rate = canonical_training_audio(array, sample_rate)
                 greedy = decode_with_confidence(model, array, sample_rate, 1)
                 beam = decode_with_confidence(model, array, sample_rate, 3)
                 scores.append(greedy | {
@@ -1997,10 +2837,19 @@ PHASE2_CELLS = [
 
         def pseudo_label_unlabeled(model_id: str) -> pd.DataFrame:
             from transformers import AutoModelForSpeechSeq2Seq
-            model = AutoModelForSpeechSeq2Seq.from_pretrained(
-                model_id, torch_dtype=torch.float16, low_cpu_mem_usage=True,
-                token=cfg.hf_token, cache_dir=str(CACHE_DIR),
-            ).to("cuda").eval()
+            pseudo_kwargs = {
+                "low_cpu_mem_usage": True,
+                "token": cfg.hf_token,
+                "cache_dir": str(CACHE_DIR),
+            }
+            try:
+                model = AutoModelForSpeechSeq2Seq.from_pretrained(
+                    model_id, dtype=torch.float16, **pseudo_kwargs,
+                ).to("cuda").eval()
+            except TypeError:
+                model = AutoModelForSpeechSeq2Seq.from_pretrained(
+                    model_id, torch_dtype=torch.float16, **pseudo_kwargs,
+                ).to("cuda").eval()
             model.generation_config.forced_decoder_ids = None
             model.generation_config.task = "transcribe"
             thresholds = calibrate_pseudo_thresholds(model, load_waxal("validation"), cfg.pseudo_calibration_rows)
@@ -2011,10 +2860,11 @@ PHASE2_CELLS = [
                 audio = row["audio"]
                 if hasattr(audio, "get_all_samples"):
                     samples = audio.get_all_samples()
-                    array = samples.data.detach().cpu().numpy().squeeze()
+                    array = samples.data.detach().cpu().numpy()
                     sample_rate = int(samples.sample_rate)
                 else:
                     array, sample_rate = np.asarray(audio["array"]), int(audio["sampling_rate"])
+                array, sample_rate = canonical_training_audio(array, sample_rate)
                 duration = len(array) / max(1, sample_rate)
                 greedy = decode_with_confidence(model, array, sample_rate, 1)
                 if greedy["average_logprob"] < thresholds["average_logprob"] or greedy["no_speech_probability"] > thresholds["no_speech_probability"]:
@@ -2147,6 +2997,11 @@ PHASE2_CELLS = [
                 "phase1_readiness": readiness,
                 "manifest_sha256": hashlib.sha256(pd.util.hash_pandas_object(manifest_df, index=True).values.tobytes()).hexdigest() if not manifest_df.empty else None,
                 "metrics": metrics or [],
+                "data_access": {
+                    "waxal_supervised": "streaming",
+                    "shuffle_buffer": cfg.stream_shuffle_buffer,
+                    "resume_sample_skip": False,
+                },
                 "research_only": True,
             }
             (OUTPUT_DIR / "run_manifest.json").write_text(json.dumps(run_manifest, indent=2), encoding="utf-8")
@@ -2193,12 +3048,17 @@ def main() -> None:
         json.dumps(notebook(PHASE1_CELLS, "Dagbani ASR Phase 1 — Audit and Baselines"), ensure_ascii=False, indent=1),
         encoding="utf-8",
     )
-    # Phase 2 is appended below to keep both notebooks generated from one source.
+    BASELINE_PATH.write_text(
+        json.dumps(notebook(BASELINE_CELLS, "Dagbani ASR Phase 1B — Baseline Only", accelerator="gpu"), ensure_ascii=False, indent=1),
+        encoding="utf-8",
+    )
+    # Phase 2 is appended below to keep the notebooks generated from one source.
     PHASE2_PATH.write_text(
         json.dumps(notebook(PHASE2_CELLS, "Dagbani ASR Phase 2 — Budget-Aware Training", accelerator="gpu"), ensure_ascii=False, indent=1),
         encoding="utf-8",
     )
     print(f"Wrote {PHASE1_PATH}")
+    print(f"Wrote {BASELINE_PATH}")
     print(f"Wrote {PHASE2_PATH}")
 
 

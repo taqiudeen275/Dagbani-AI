@@ -1922,7 +1922,12 @@ PHASE2_CELLS = [
                 lambda sample_id: {"sample_id": str(sample_id), "source": source},
                 input_columns=["sample_id"],
             )
-            dataset = dataset.cast_column("audio", Audio(sampling_rate=16_000))
+            # Some datasets 4.x streaming builders expose column names but leave
+            # info.features unset. cast_column then crashes while trying to edit
+            # a None schema. Streaming audio is decoded explicitly in the
+            # collator; map-style datasets retain the convenient Audio feature.
+            if not isinstance(dataset, IterableDataset):
+                dataset = dataset.cast_column("audio", Audio(sampling_rate=16_000))
             return dataset.select_columns(["sample_id", "source", "sentence", "audio"])
 
 
@@ -1966,6 +1971,29 @@ PHASE2_CELLS = [
             return np.ascontiguousarray(np.clip(waveform, -1.0, 1.0), dtype=np.float32), 16_000
 
 
+        def decode_training_audio(audio: Any) -> tuple[np.ndarray, int]:
+            '''Decode HF Audio objects, decoded mappings, raw Parquet bytes, or local paths.'''
+            if hasattr(audio, "get_all_samples"):
+                samples = audio.get_all_samples()
+                array = samples.data.detach().cpu().numpy()
+                sample_rate = int(samples.sample_rate)
+            elif isinstance(audio, dict) and audio.get("array") is not None:
+                array = audio["array"]
+                sample_rate = int(audio["sampling_rate"])
+            else:
+                import soundfile as sf
+                if isinstance(audio, dict) and audio.get("bytes") is not None:
+                    source = io.BytesIO(audio["bytes"])
+                elif isinstance(audio, dict) and audio.get("path"):
+                    source = audio["path"]
+                elif isinstance(audio, (str, Path)):
+                    source = str(audio)
+                else:
+                    raise TypeError(f"Unsupported audio payload: {type(audio).__name__}")
+                array, sample_rate = sf.read(source, dtype="float32", always_2d=False)
+            return canonical_training_audio(array, sample_rate)
+
+
         def load_waxal(split: str) -> IterableDataset:
             # WAXAL audio is larger than a Kaggle session disk. Streaming keeps
             # shards remote and decodes only examples consumed by a batch.
@@ -1989,15 +2017,7 @@ PHASE2_CELLS = [
             for index, record in enumerate(stream):
                 if index >= rows:
                     break
-                audio = record["audio"]
-                if hasattr(audio, "get_all_samples"):
-                    samples = audio.get_all_samples()
-                    array = samples.data.detach().cpu().numpy()
-                    sample_rate = int(samples.sample_rate)
-                else:
-                    array = audio["array"]
-                    sample_rate = int(audio["sampling_rate"])
-                array, sample_rate = canonical_training_audio(array, sample_rate)
+                array, sample_rate = decode_training_audio(record["audio"])
                 materialized.append({
                     "sample_id": str(record.get("id", f"{split}-{index}")),
                     "source": "waxal_dag_asr", "sentence": str(record.get("transcription", "")),
@@ -2181,15 +2201,7 @@ PHASE2_CELLS = [
                 input_features = []
                 label_features = []
                 for feature in features:
-                    audio = feature["audio"]
-                    if hasattr(audio, "get_all_samples"):
-                        samples = audio.get_all_samples()
-                        array = samples.data.detach().cpu().numpy()
-                        sample_rate = int(samples.sample_rate)
-                    else:
-                        array = audio["array"]
-                        sample_rate = int(audio["sampling_rate"])
-                    array, sample_rate = canonical_training_audio(array, sample_rate)
+                    array, sample_rate = decode_training_audio(feature["audio"])
                     inputs = self.processor.feature_extractor(array, sampling_rate=sample_rate)
                     input_features.append({"input_features": inputs.input_features[0]})
                     label_features.append({"input_ids": self.processor.tokenizer(str(feature["sentence"])).input_ids})
@@ -2658,14 +2670,7 @@ PHASE2_CELLS = [
             references, hypotheses, sample_ids = [], [], []
             started = time.time()
             for index, row in enumerate(dataset, 1):
-                audio = row["audio"]
-                if hasattr(audio, "get_all_samples"):
-                    samples = audio.get_all_samples()
-                    array = samples.data.detach().cpu().numpy()
-                    sample_rate = int(samples.sample_rate)
-                else:
-                    array, sample_rate = audio["array"], audio["sampling_rate"]
-                array, sample_rate = canonical_training_audio(array, sample_rate)
+                array, sample_rate = decode_training_audio(row["audio"])
                 inputs = processor(
                     array, sampling_rate=sample_rate, return_tensors="pt",
                     return_attention_mask=True,
@@ -2810,14 +2815,7 @@ PHASE2_CELLS = [
                 else validation.select(range(min(rows, len(validation))))
             )
             for row in calibration:
-                audio = row["audio"]
-                if hasattr(audio, "get_all_samples"):
-                    samples = audio.get_all_samples()
-                    array = samples.data.detach().cpu().numpy()
-                    sample_rate = int(samples.sample_rate)
-                else:
-                    array, sample_rate = np.asarray(audio["array"]), int(audio["sampling_rate"])
-                array, sample_rate = canonical_training_audio(array, sample_rate)
+                array, sample_rate = decode_training_audio(row["audio"])
                 greedy = decode_with_confidence(model, array, sample_rate, 1)
                 beam = decode_with_confidence(model, array, sample_rate, 3)
                 scores.append(greedy | {
@@ -2857,14 +2855,7 @@ PHASE2_CELLS = [
             stream = load_dataset("google/WaxalNLP", "dag_asr", split="unlabeled", streaming=True, token=cfg.hf_token)
             accepted, accepted_seconds = [], 0.0
             for index, row in enumerate(stream, 1):
-                audio = row["audio"]
-                if hasattr(audio, "get_all_samples"):
-                    samples = audio.get_all_samples()
-                    array = samples.data.detach().cpu().numpy()
-                    sample_rate = int(samples.sample_rate)
-                else:
-                    array, sample_rate = np.asarray(audio["array"]), int(audio["sampling_rate"])
-                array, sample_rate = canonical_training_audio(array, sample_rate)
+                array, sample_rate = decode_training_audio(row["audio"])
                 duration = len(array) / max(1, sample_rate)
                 greedy = decode_with_confidence(model, array, sample_rate, 1)
                 if greedy["average_logprob"] < thresholds["average_logprob"] or greedy["no_speech_probability"] > thresholds["no_speech_probability"]:

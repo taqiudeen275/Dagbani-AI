@@ -13,6 +13,7 @@ GENERATOR = ROOT / "scratch" / "build_dagbani_asr_recovery_notebooks.py"
 PHASE1 = ROOT / "notebooks" / "01_Dagbani_ASR_Data_Audit_and_Baselines_Kaggle.ipynb"
 BASELINE = ROOT / "notebooks" / "01b_Dagbani_ASR_Baseline_Only_Kaggle.ipynb"
 PHASE2 = ROOT / "notebooks" / "02_Dagbani_ASR_Whisper_Small_Training_Kaggle.ipynb"
+BIBLE_REPAIR = ROOT / "notebooks" / "01d_Dagbani_ASR_Bible_Holdout_Repair_Kaggle.ipynb"
 
 
 def load_notebook(path: Path) -> dict:
@@ -41,9 +42,11 @@ class NotebookContracts(unittest.TestCase):
         cls.phase1 = load_notebook(PHASE1)
         cls.baseline = load_notebook(BASELINE)
         cls.phase2 = load_notebook(PHASE2)
+        cls.bible_repair = load_notebook(BIBLE_REPAIR)
         cls.phase1_code = code_source(cls.phase1)
         cls.baseline_code = code_source(cls.baseline)
         cls.phase2_code = code_source(cls.phase2)
+        cls.bible_repair_code = code_source(cls.bible_repair)
 
     def test_notebooks_are_valid_unexecuted_v4_documents(self) -> None:
         for document in (self.phase1, self.baseline, self.phase2):
@@ -58,10 +61,25 @@ class NotebookContracts(unittest.TestCase):
         self.assertEqual(self.phase2["metadata"]["kaggle"]["accelerator"], "gpu")
 
     def test_every_code_cell_compiles_independently(self) -> None:
-        for path, document in ((PHASE1, self.phase1), (BASELINE, self.baseline), (PHASE2, self.phase2)):
+        for path, document in ((PHASE1, self.phase1), (BASELINE, self.baseline), (PHASE2, self.phase2), (BIBLE_REPAIR, self.bible_repair)):
             for index, cell in enumerate(document["cells"]):
                 if cell["cell_type"] == "code":
                     compile("".join(cell["source"]), f"{path.name}:cell-{index}", "exec")
+
+    def test_bible_holdout_repair_is_versioned_and_seals_external_test(self) -> None:
+        for token in (
+            'SOURCE_REPO = "ats-tech/dagbani-asr-phase1-v2"',
+            'TARGET_REPO = "ats-tech/dagbani-asr-phase1-v3"',
+            '"train": 42_728',
+            '"validation": 5_341',
+            '"external_test": 5_341',
+            "contiguous_span_80_10_10_no_speaker_metadata",
+            "pd.testing.assert_frame_equal(waxal_before, waxal_after)",
+            '"validation_use": "model selection"',
+            '"external_test_use": "sealed final evaluation only"',
+        ):
+            self.assertIn(token, self.bible_repair_code)
+        self.assertEqual(self.bible_repair["metadata"]["kaggle"]["accelerator"], "none")
 
     def test_phase1_has_all_sources_and_canonical_contract(self) -> None:
         for token in (
@@ -123,10 +141,17 @@ class NotebookContracts(unittest.TestCase):
     def test_phase2_defaults_to_safe_smoke_from_whisper_small(self) -> None:
         self.assertIn('stage: str = "smoke"', self.phase2_code)
         self.assertIn('base_model_id: str = "openai/whisper-small"', self.phase2_code)
+        self.assertIn('starting_model_id: str = os.getenv("DAGBANI_STARTING_MODEL", "")', self.phase2_code)
         self.assertIn('use_ddp: str = "one"', self.phase2_code)
         self.assertIn("supervised_max_steps: int = 2_500", self.phase2_code)
         self.assertIn("run_training: bool = False", self.phase2_code)
         self.assertIn("waxal_batch_share: float = 0.60", self.phase2_code)
+        self.assertIn("starting_model_id and model_repo_id must be different", self.phase2_code)
+        self.assertIn("return config.model_starting_point()", self.phase2_code)
+        self.assertIn("targets.insert(0, cfg.model_starting_point())", self.phase2_code)
+        self.assertIn("external_targets.insert(0, cfg.model_starting_point())", self.phase2_code)
+        self.assertIn('external_eval_split: str = "validation"', self.phase2_code)
+        self.assertIn("external_eval_split must be validation", self.phase2_code)
 
     def test_phase2_preserves_whisper_tokenizer_and_real_ddp(self) -> None:
         self.assertNotIn('device_map="auto"', self.phase2_code)
@@ -146,7 +171,16 @@ class NotebookContracts(unittest.TestCase):
         self.assertIn("def decode_training_audio", self.phase2_code)
         self.assertIn('audio.get("bytes")', self.phase2_code)
         self.assertIn("sf.read(source", self.phase2_code)
-        self.assertIn("stream_shuffle_buffer: int = 512", self.phase2_code)
+        self.assertIn("generated_id_prefix: str | None = None", self.phase2_code)
+        self.assertIn('f"{generated_id_prefix}-{index:09d}"', self.phase2_code)
+        self.assertIn('"loader": "streaming"', self.phase2_code)
+        self.assertIn("class ScheduledStreamingMix(TorchIterableDataset)", self.phase2_code)
+        self.assertIn('"schedule_per_100": mixed.counts', self.phase2_code)
+        self.assertNotIn("interleave_datasets(", self.phase2_code)
+        self.assertIn("stream_shuffle_buffer: int = 128", self.phase2_code)
+        self.assertIn("dataloader_workers: int = 0", self.phase2_code)
+        self.assertIn("dataloader_pin_memory: bool = False", self.phase2_code)
+        self.assertIn("Continuation stages require dataloader_workers=0", self.phase2_code)
         self.assertIn("disk_stop_free_gib: float = 8.0", self.phase2_code)
         self.assertIn("ignore_data_skip=True", self.phase2_code)
         self.assertIn('"waxal_supervised": "streaming"', self.phase2_code)
@@ -172,6 +206,15 @@ class NotebookContracts(unittest.TestCase):
             "data_collator=SpeechSeq2SeqCollator(processor, decoder_start_token_id)",
             self.phase2_code,
         )
+        self.assertIn("def load_domain_source(", self.phase2_code)
+        self.assertIn("probe_audio: bool = True", self.phase2_code)
+        self.assertIn("load_domain_source(source, split, probe_audio=False)", self.phase2_code)
+        self.assertIn("EVALUATION_AUDIO_CACHE", self.phase2_code)
+        self.assertIn("paired_bootstrap_prediction_frames", self.phase2_code)
+        self.assertIn("split=origin_split, streaming=True", self.phase2_code)
+        self.assertNotIn("if len(part):", self.phase2_code)
+        self.assertNotIn("and len(candidate):", self.phase2_code)
+        self.assertNotIn("if candidate is None or not len(candidate):", self.phase2_code)
         self.assertNotIn("data_collator=SpeechSeq2SeqCollator(processor),", self.phase2_code)
         self.assertNotIn("self.processor.tokenizer.bos_token_id", self.phase2_code)
         self.assertNotIn('Dataset.from_list(materialized).cast_column("audio"', self.phase2_code)

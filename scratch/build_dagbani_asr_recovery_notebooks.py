@@ -1671,6 +1671,9 @@ PHASE2_CELLS = [
         class TrainConfig:
             stage: str = "smoke"  # smoke | supervised | domain_adaptation | pseudo_label | medium_pilot | medium_full
             base_model_id: str = "openai/whisper-small"
+            # Continuation stages must read the frozen parent model from a
+            # different repository than the one receiving new checkpoints.
+            starting_model_id: str = os.getenv("DAGBANI_STARTING_MODEL", "")
             manifest_repo_id: str = os.getenv("DAGBANI_MANIFEST_REPO", "")
             model_repo_id: str = os.getenv("DAGBANI_MODEL_REPO", "")
             hf_token: str | None = field(default_factory=lambda: kaggle_secret("HF_TOKEN"))
@@ -1695,8 +1698,11 @@ PHASE2_CELLS = [
             max_session_minutes: int = 540
             stop_buffer_minutes: int = 20
             disk_stop_free_gib: float = 8.0
-            stream_shuffle_buffer: int = 512
-            dataloader_workers: int = 2
+            stream_shuffle_buffer: int = 128
+            # Nested remote streams and torchcodec decoders are not safe to
+            # duplicate across Kaggle DataLoader worker processes.
+            dataloader_workers: int = 0
+            dataloader_pin_memory: bool = False
             use_ddp: str = "one"  # one is the smoke/default path; two requires the DDP gate
             training_mode: str = "full"  # full | lora
             waxal_batch_share: float = 0.60
@@ -1709,6 +1715,7 @@ PHASE2_CELLS = [
             run_training: bool = False
             run_full_generation_eval: bool = False
             run_external_generation_eval: bool = False
+            external_eval_split: str = "validation"  # validation for selection; external_test only after selection
             external_eval_limit: int | None = None
             run_pseudo_labelling: bool = False
             allow_remote_audio_downloads: bool = False
@@ -1721,8 +1728,16 @@ PHASE2_CELLS = [
                     raise ValueError("training_mode must be full or lora")
                 if self.use_ddp not in {"auto", "one", "two"}:
                     raise ValueError("use_ddp must be auto, one, or two")
+                if self.external_eval_split not in {"validation", "external_test", "test", "auto"}:
+                    raise ValueError("external_eval_split must be validation, external_test, test, or auto")
+                if self.stage in {"domain_adaptation", "pseudo_label"} and self.dataloader_workers != 0:
+                    raise ValueError("Continuation stages require dataloader_workers=0 for stable remote streaming")
                 if self.stage in {"supervised", "domain_adaptation", "pseudo_label", "medium_pilot", "medium_full"} and not self.manifest_repo_id and not self.manifest_local_dir:
                     raise ValueError("Full stages require DAGBANI_MANIFEST_REPO or DAGBANI_MANIFEST_DIR")
+                if self.stage in {"domain_adaptation", "pseudo_label"} and not self.starting_model_id:
+                    raise ValueError("Continuation stages require DAGBANI_STARTING_MODEL / starting_model_id")
+                if self.starting_model_id and self.starting_model_id == self.model_repo_id:
+                    raise ValueError("starting_model_id and model_repo_id must be different to preserve the frozen parent model")
                 if self.run_training and self.run_pseudo_labelling:
                     raise ValueError("Generate pseudo labels and train in separate runs; enable only one action")
                 if (self.run_training or self.run_pseudo_labelling) and not self.hf_token:
@@ -1745,6 +1760,13 @@ PHASE2_CELLS = [
                     "medium_pilot": self.medium_pilot_steps,
                     "medium_full": self.medium_full_max_steps,
                 }[self.stage]
+
+            def model_starting_point(self) -> str:
+                if self.stage in {"medium_pilot", "medium_full"}:
+                    return "openai/whisper-medium"
+                if self.stage in {"domain_adaptation", "pseudo_label"}:
+                    return self.starting_model_id
+                return self.base_model_id
 
 
         cfg = TrainConfig()
@@ -1870,7 +1892,8 @@ PHASE2_CELLS = [
     code(
         r"""
         import requests
-        from datasets import Audio, Dataset, DatasetDict, IterableDataset, concatenate_datasets, interleave_datasets, load_dataset
+        from datasets import Audio, Dataset, DatasetDict, IterableDataset, concatenate_datasets, load_dataset
+        from torch.utils.data import IterableDataset as TorchIterableDataset, get_worker_info
 
         HF_SOURCE_REGISTRY = {
             "waxal_dag_asr": ("google/WaxalNLP", "dag_asr"),
@@ -1892,12 +1915,26 @@ PHASE2_CELLS = [
             source: str,
             text_override: dict[str, str] | None = None,
             accepted_ids: set[str] | None = None,
+            generated_id_prefix: str | None = None,
         ) -> Dataset | IterableDataset:
             audio_col = pick_column(dataset.column_names, ("audio", "speech"))
             text_col = pick_column(dataset.column_names, ("transcription", "sentence", "text", "transcript"))
             id_col = pick_column(dataset.column_names, ("id", "sample_id", "path", "file", "filename"))
-            if not audio_col or not id_col:
-                raise ValueError(f"{source} does not expose auditable audio and id columns: {dataset.column_names}")
+            if not audio_col:
+                raise ValueError(f"{source} does not expose an auditable audio column: {dataset.column_names}")
+            if not id_col:
+                if generated_id_prefix is None:
+                    raise ValueError(f"{source} does not expose an auditable id column: {dataset.column_names}")
+                # Phase 1 assigns this exact deterministic ID when a source has
+                # no native identifier. Recreate it while streaming so accepted
+                # manifest IDs still select the same audited Bible rows.
+                dataset = dataset.map(
+                    lambda _record, index: {
+                        "sample_id": f"{generated_id_prefix}-{index:09d}"
+                    },
+                    with_indices=True,
+                )
+                id_col = "sample_id"
             if text_override is None and not text_col:
                 raise ValueError(f"{source} has no transcription column")
             if audio_col != "audio":
@@ -1994,6 +2031,65 @@ PHASE2_CELLS = [
             return canonical_training_audio(array, sample_rate)
 
 
+        class ScheduledStreamingMix(TorchIterableDataset):
+            '''Cycle remote streams with an exact, shuffled 100-example source schedule.
+
+            Hugging Face ``interleave_datasets`` resolves a PyArrow schema before
+            iteration. Datasets 4.x may expose lazy torchcodec AudioDecoder values,
+            which are intentionally decoded by our collator and cannot be converted
+            to Arrow. This PyTorch iterable keeps those values lazy and also makes
+            the WAXAL/domain proportion auditable.
+            '''
+
+            def __init__(self, datasets: list[Any], probabilities: list[float], seed: int):
+                super().__init__()
+                if not datasets or len(datasets) != len(probabilities):
+                    raise ValueError("ScheduledStreamingMix needs one probability per dataset")
+                weights = np.asarray(probabilities, dtype=np.float64)
+                if not np.isfinite(weights).all() or (weights <= 0).any():
+                    raise ValueError(f"Invalid streaming mixture probabilities: {probabilities}")
+                weights = weights / weights.sum()
+                raw_counts = weights * 100
+                counts = np.floor(raw_counts).astype(int)
+                for index in np.argsort(-(raw_counts - counts))[: 100 - int(counts.sum())]:
+                    counts[index] += 1
+                if (counts <= 0).any() or int(counts.sum()) != 100:
+                    raise ValueError(f"Unable to build 100-example schedule: {counts.tolist()}")
+                self.datasets = datasets
+                self.schedule = [index for index, count in enumerate(counts) for _ in range(int(count))]
+                self.counts = counts.tolist()
+                self.seed = int(seed)
+                self.epoch = 0
+
+            def set_epoch(self, epoch: int) -> None:
+                self.epoch = int(epoch)
+                for dataset in self.datasets:
+                    if hasattr(dataset, "set_epoch"):
+                        dataset.set_epoch(epoch)
+
+            def __iter__(self):
+                worker = get_worker_info()
+                worker_id = worker.id if worker is not None else 0
+                rng = random.Random(self.seed + 100_003 * self.epoch + worker_id)
+                iterators = [iter(dataset) for dataset in self.datasets]
+                while True:
+                    schedule = list(self.schedule)
+                    rng.shuffle(schedule)
+                    for source_index in schedule:
+                        try:
+                            yield next(iterators[source_index])
+                        except StopIteration:
+                            # Positive max_steps controls training length. Cycle a
+                            # finite source instead of silently changing its share.
+                            iterators[source_index] = iter(self.datasets[source_index])
+                            try:
+                                yield next(iterators[source_index])
+                            except StopIteration as exc:
+                                raise RuntimeError(
+                                    f"Streaming mixture source {source_index} is empty"
+                                ) from exc
+
+
         def load_waxal(split: str) -> IterableDataset:
             # WAXAL audio is larger than a Kaggle session disk. Streaming keeps
             # shards remote and decodes only examples consumed by a batch.
@@ -2047,7 +2143,9 @@ PHASE2_CELLS = [
             return SMOKE_DATASETS
 
 
-        def load_domain_source(source: str, split: str) -> Dataset | None:
+        def load_domain_source(
+            source: str, split: str, probe_audio: bool = True,
+        ) -> Dataset | IterableDataset | None:
             repo_id, config_name = HF_SOURCE_REGISTRY[source]
             rows = manifest_df[(manifest_df["source"] == source) & (manifest_df["split"] == split)].copy()
             if rows.empty:
@@ -2058,14 +2156,34 @@ PHASE2_CELLS = [
                 rows = rows.assign(_origin_split=origin_values.values)
                 for origin_split, origin_rows in rows.groupby("_origin_split"):
                     dataset = load_dataset(
-                        repo_id, config_name, split=origin_split,
+                        repo_id, config_name, split=origin_split, streaming=True,
                         token=cfg.hf_token, cache_dir=str(CACHE_DIR),
                     )
                     ids = set(origin_rows["sample_id"].astype(str))
-                    part = standardize_dataset(dataset, source, accepted_ids=ids)
-                    if len(part):
-                        parts.append(part)
-                return concatenate_datasets(parts) if parts else None
+                    part = standardize_dataset(
+                        dataset, source, accepted_ids=ids,
+                        generated_id_prefix=str(origin_split),
+                    )
+                    parts.append(part)
+                if not parts:
+                    return None
+                result = parts[0] if len(parts) == 1 else concatenate_datasets(parts)
+                # Training probes one item to fail early on bad audio. Evaluation
+                # disables this probe because taking one accepted Bible validation
+                # item would scan the 42,728-row training prefix, after which the
+                # actual evaluation iterator would scan that same prefix again.
+                if probe_audio:
+                    probe = list(result.take(1)) if isinstance(result, IterableDataset) else [result[0]]
+                    if not probe:
+                        raise RuntimeError(f"{source} stream contains no accepted rows")
+                    waveform, sample_rate = decode_training_audio(probe[0]["audio"])
+                    print({
+                        "domain_source": source,
+                        "probe_sample_id": probe[0]["sample_id"],
+                        "probe_duration_s": round(len(waveform) / sample_rate, 3),
+                        "loader": "streaming" if isinstance(result, IterableDataset) else "materialized",
+                    })
+                return result
             except Exception as exc:
                 print(f"Skipping {source}: {type(exc).__name__}: {exc}")
                 return None
@@ -2122,18 +2240,30 @@ PHASE2_CELLS = [
                         if source in HF_SOURCE_REGISTRY
                         else load_manifest_locator_source(source, "train")
                     )
-                    if candidate is not None and len(candidate):
+                    if candidate is not None:
+                        if isinstance(candidate, Dataset):
+                            candidate = candidate.shuffle(seed=config.seed).to_iterable_dataset(
+                                num_shards=max(1, min(16, len(candidate)))
+                            )
+                        elif isinstance(candidate, IterableDataset):
+                            candidate = candidate.shuffle(
+                                seed=config.seed, buffer_size=config.stream_shuffle_buffer
+                            )
                         extras.append(candidate)
                 if not extras:
                     raise RuntimeError("No audited domain-adaptation source is loadable")
-                extra = concatenate_datasets(extras).shuffle(seed=config.seed)
-                if isinstance(train, IterableDataset):
-                    extra = extra.to_iterable_dataset(num_shards=max(1, min(16, len(extra))))
-                mixed = interleave_datasets(
-                    [train.shuffle(seed=config.seed), extra],
-                    probabilities=[config.waxal_batch_share, 1.0 - config.waxal_batch_share],
-                    seed=config.seed, stopping_strategy="all_exhausted",
+                extra_share = (1.0 - config.waxal_batch_share) / len(extras)
+                mixed = ScheduledStreamingMix(
+                    [train, *extras],
+                    [config.waxal_batch_share, *([extra_share] * len(extras))],
+                    seed=config.seed,
                 )
+                print({
+                    "streaming_mix_sources": ["waxal_dag_asr", *[
+                        source for source in audited_sources if source != "waxal_dag_asr"
+                    ]],
+                    "schedule_per_100": mixed.counts,
+                })
                 return mixed, validation
             if config.stage == "pseudo_label":
                 pseudo_path = artifact_path("pseudo_manifest.parquet")
@@ -2150,10 +2280,10 @@ PHASE2_CELLS = [
                     accepted_ids=set(pseudo_text),
                 )
                 raw = raw.shuffle(seed=config.seed, buffer_size=config.stream_shuffle_buffer)
-                mixed = interleave_datasets(
-                    [train.shuffle(seed=config.seed), raw.shuffle(seed=config.seed)],
-                    probabilities=[1.0 - config.pseudo_batch_share, config.pseudo_batch_share],
-                    seed=config.seed, stopping_strategy="all_exhausted",
+                mixed = ScheduledStreamingMix(
+                    [train, raw],
+                    [1.0 - config.pseudo_batch_share, config.pseudo_batch_share],
+                    seed=config.seed,
                 )
                 return mixed, validation
             raise AssertionError(config.stage)
@@ -2167,7 +2297,10 @@ PHASE2_CELLS = [
         r"""
         from transformers import AutoProcessor
 
-        processor = AutoProcessor.from_pretrained(cfg.base_model_id, task="transcribe", cache_dir=str(CACHE_DIR), token=cfg.hf_token)
+        processor = AutoProcessor.from_pretrained(
+            cfg.model_starting_point(), task="transcribe",
+            cache_dir=str(CACHE_DIR), token=cfg.hf_token,
+        )
         glyph_probe = "n nyɛla bɛ paɣaŋa mini ɔ ka ʒɛm shɛli"
         # Whisper aliases unk/eos/pad to the same <|endoftext|> ID. With the
         # tokenizer's default special tokens, testing for unk therefore mistakes
@@ -2381,9 +2514,7 @@ PHASE2_CELLS = [
 
 
         def model_starting_point(config: TrainConfig) -> str:
-            if config.stage in {"smoke", "supervised", "medium_pilot", "medium_full"}:
-                return "openai/whisper-medium" if config.stage in {"medium_pilot", "medium_full"} else config.base_model_id
-            return config.model_repo_id
+            return config.model_starting_point()
 
 
         def training_args(config: TrainConfig, world_size: int) -> Seq2SeqTrainingArguments:
@@ -2395,7 +2526,8 @@ PHASE2_CELLS = [
                 warmup_steps=min(config.warmup_steps, max(1, config.max_steps() // 10)),
                 max_steps=config.max_steps(), lr_scheduler_type="linear", fp16=True,
                 gradient_checkpointing=True, remove_unused_columns=False,
-                dataloader_num_workers=config.dataloader_workers, dataloader_pin_memory=True,
+                dataloader_num_workers=config.dataloader_workers,
+                dataloader_pin_memory=config.dataloader_pin_memory,
                 save_strategy="steps", save_steps=min(config.save_steps, config.max_steps()),
                 eval_steps=min(config.eval_steps, config.max_steps()), logging_steps=10,
                 save_total_limit=3, load_best_model_at_end=True, metric_for_best_model="eval_loss",
@@ -2628,13 +2760,47 @@ PHASE2_CELLS = [
                     return prepared[1]
                 return load_waxal(split)
             candidate = (
-                load_domain_source(source, split)
+                load_domain_source(source, split, probe_audio=False)
                 if source in HF_SOURCE_REGISTRY
                 else load_manifest_locator_source(source, split)
             )
-            if candidate is None or not len(candidate):
+            if candidate is None:
                 raise RuntimeError(f"No resolvable audited rows for {source}/{split}")
             return candidate
+
+
+        EVALUATION_AUDIO_CACHE: dict[tuple[str, str, int | None], list[dict[str, Any]]] = {}
+
+
+        def cached_evaluation_rows(
+            source: str, split: str, limit: int | None,
+        ) -> tuple[list[dict[str, Any]], bool]:
+            '''Decode one frozen evaluation sample once and reuse it across models.'''
+            key = (source, split, limit)
+            if key in EVALUATION_AUDIO_CACHE:
+                print({"evaluation_cache": "hit", "source": source, "split": split, "rows": len(EVALUATION_AUDIO_CACHE[key])})
+                return EVALUATION_AUDIO_CACHE[key], True
+            dataset = evaluation_dataset(source, split)
+            if limit is not None:
+                dataset = (
+                    dataset.take(limit)
+                    if isinstance(dataset, IterableDataset)
+                    else dataset.select(range(min(limit, len(dataset))))
+                )
+            prepared = []
+            for row in dataset:
+                array, sample_rate = decode_training_audio(row["audio"])
+                prepared.append({
+                    "sample_id": str(row["sample_id"]),
+                    "sentence": strict_text(row["sentence"]),
+                    "array": np.ascontiguousarray(array, dtype=np.float32),
+                    "sampling_rate": int(sample_rate),
+                })
+            if not prepared:
+                raise RuntimeError(f"No evaluation rows resolved for {source}/{split}")
+            EVALUATION_AUDIO_CACHE[key] = prepared
+            print({"evaluation_cache": "created", "source": source, "split": split, "rows": len(prepared)})
+            return prepared, False
 
 
         def evaluate_generation(
@@ -2660,17 +2826,13 @@ PHASE2_CELLS = [
             model.eval()
             model.generation_config.forced_decoder_ids = None
             model.generation_config.task = "transcribe"
-            dataset = evaluation_dataset(source, split)
-            if limit is not None:
-                dataset = (
-                    dataset.take(limit)
-                    if isinstance(dataset, IterableDataset)
-                    else dataset.select(range(min(limit, len(dataset))))
-                )
+            prepare_started = time.time()
+            rows, cache_hit = cached_evaluation_rows(source, split, limit)
+            data_prepare_elapsed_s = time.time() - prepare_started
             references, hypotheses, sample_ids = [], [], []
             started = time.time()
-            for index, row in enumerate(dataset, 1):
-                array, sample_rate = decode_training_audio(row["audio"])
+            for index, row in enumerate(rows, 1):
+                array, sample_rate = row["array"], row["sampling_rate"]
                 inputs = processor(
                     array, sampling_rate=sample_rate, return_tensors="pt",
                     return_attention_mask=True,
@@ -2692,11 +2854,52 @@ PHASE2_CELLS = [
             metrics = asr_metrics(references, hypotheses) | {
                 "model": model_id_or_path, "source": source, "split": split,
                 "elapsed_s": time.time() - started,
+                "data_prepare_elapsed_s": data_prepare_elapsed_s,
+                "evaluation_cache_hit": cache_hit,
             }
             predictions = pd.DataFrame({"sample_id": sample_ids, "reference": references, "hypothesis": hypotheses})
             del model
             torch.cuda.empty_cache()
             return metrics, predictions
+
+
+        def paired_bootstrap_prediction_frames(
+            parent: pd.DataFrame, candidate: pd.DataFrame,
+            samples: int = 2_000, seed: int = 42,
+        ) -> dict[str, Any]:
+            '''Paired corpus-WER uncertainty on the exact same utterances.'''
+            merged = parent.merge(
+                candidate, on="sample_id", suffixes=("_parent", "_candidate"),
+                how="inner", validate="one_to_one",
+            )
+            if len(merged) != len(parent) or len(merged) != len(candidate):
+                raise RuntimeError("Parent and candidate prediction sets are not identical")
+            if not (merged["reference_parent"] == merged["reference_candidate"]).all():
+                raise RuntimeError("Parent and candidate references differ")
+            result: dict[str, Any] = {"utterances": int(len(merged)), "bootstrap_samples": samples}
+            views = {"strict_wer": strict_text, "normalized_wer": normalize_eval}
+            for offset, (name, transform) in enumerate(views.items()):
+                references = [transform(value) for value in merged["reference_parent"]]
+                parent_hypotheses = [transform(value) for value in merged["hypothesis_parent"]]
+                candidate_hypotheses = [transform(value) for value in merged["hypothesis_candidate"]]
+                observed = float(jiwer.wer(references, candidate_hypotheses) - jiwer.wer(references, parent_hypotheses))
+                rng = np.random.default_rng(seed + offset)
+                differences = np.empty(samples, dtype=np.float64)
+                for iteration in range(samples):
+                    indices = rng.integers(0, len(references), size=len(references))
+                    refs = [references[index] for index in indices]
+                    parent_hyps = [parent_hypotheses[index] for index in indices]
+                    candidate_hyps = [candidate_hypotheses[index] for index in indices]
+                    differences[iteration] = jiwer.wer(refs, candidate_hyps) - jiwer.wer(refs, parent_hyps)
+                low, high = np.quantile(differences, [0.025, 0.975])
+                result[name] = {
+                    "observed_candidate_minus_parent": observed,
+                    "bootstrap_mean": float(differences.mean()),
+                    "ci95_low": float(low),
+                    "ci95_high": float(high),
+                    "probability_candidate_worse": float((differences > 0.0).mean()),
+                }
+            return result
 
 
         def resolve_major_checkpoint(step: int) -> str | None:
@@ -2720,42 +2923,90 @@ PHASE2_CELLS = [
 
 
         generation_metrics = []
+        generation_predictions: list[tuple[str, pd.DataFrame]] = []
+        paired_comparisons: dict[str, Any] = {}
         auto_smoke_generation = cfg.stage == "smoke" and training_result is not None
         if cfg.run_full_generation_eval or auto_smoke_generation:
             final_local = OUTPUT_DIR / "final_model"
             targets = [str(final_local) if final_local.exists() else cfg.model_repo_id]
+            if not auto_smoke_generation and cfg.stage in {"domain_adaptation", "pseudo_label"}:
+                # Evaluate the frozen parent and candidate on the exact same
+                # WAXAL validation rows so continuation is rejected on regression.
+                targets.insert(0, cfg.model_starting_point())
             if not auto_smoke_generation:
                 targets.extend(target for step in cfg.major_checkpoint_steps if (target := resolve_major_checkpoint(step)))
             for target in targets:
                 generation_limit = 8 if auto_smoke_generation and cfg.eval_generation_limit is None else cfg.eval_generation_limit
                 metrics, predictions = evaluate_generation(target, limit=generation_limit)
                 generation_metrics.append(metrics)
+                generation_predictions.append((target, predictions))
                 stem = Path(target).name
                 predictions.to_parquet(EVAL_DIR / f"{stem}_validation_predictions.parquet", index=False)
                 print(json.dumps(metrics, indent=2))
             (EVAL_DIR / "generation_metrics.json").write_text(json.dumps(generation_metrics, indent=2), encoding="utf-8")
+            if cfg.stage in {"domain_adaptation", "pseudo_label"} and len(generation_predictions) >= 2:
+                paired_comparisons["waxal_validation"] = paired_bootstrap_prediction_frames(
+                    generation_predictions[0][1], generation_predictions[1][1],
+                )
+                print(json.dumps({"paired_waxal_bootstrap": paired_comparisons["waxal_validation"]}, indent=2))
+                (EVAL_DIR / "paired_comparisons.json").write_text(
+                    json.dumps(paired_comparisons, indent=2), encoding="utf-8",
+                )
         else:
             print("Generation evaluation disabled. Enable it for selected/major checkpoints, not every 250-step save.")
 
         external_metrics = []
         if cfg.run_external_generation_eval:
             final_target = str(OUTPUT_DIR / "final_model") if (OUTPUT_DIR / "final_model").exists() else cfg.model_repo_id
+            external_targets = [final_target]
+            if cfg.stage in {"domain_adaptation", "pseudo_label"}:
+                external_targets.insert(0, cfg.model_starting_point())
             external_sources = sorted(set(manifest_df[manifest_df["source"] != "waxal_dag_asr"]["source"].astype(str)))
             for source in external_sources:
+                source_predictions: list[tuple[str, pd.DataFrame]] = []
                 source_rows = manifest_df[manifest_df["source"] == source]
-                split = next((name for name in ("external_test", "test", "validation") if (source_rows["split"] == name).any()), None)
+                if cfg.external_eval_split == "auto":
+                    split = next((
+                        name for name in ("validation", "external_test", "test")
+                        if (source_rows["split"] == name).any()
+                    ), None)
+                else:
+                    split = cfg.external_eval_split if (source_rows["split"] == cfg.external_eval_split).any() else None
                 if not split:
+                    external_metrics.append({
+                        "source": source, "requested_split": cfg.external_eval_split,
+                        "status": "unavailable", "error": "Requested held-out split is absent",
+                    })
                     continue
-                try:
-                    metrics, predictions = evaluate_generation(
-                        final_target, split=split, limit=cfg.external_eval_limit, source=source,
+                for target in external_targets:
+                    try:
+                        metrics, predictions = evaluate_generation(
+                            target, split=split, limit=cfg.external_eval_limit, source=source,
+                        )
+                        external_metrics.append(metrics)
+                        source_predictions.append((target, predictions))
+                        model_stem = Path(target).name
+                        predictions.to_parquet(
+                            EVAL_DIR / f"external_{source}_{split}_{model_stem}.parquet",
+                            index=False,
+                        )
+                        print(json.dumps(metrics, indent=2))
+                    except Exception as exc:
+                        external_metrics.append({
+                            "model": target, "source": source, "split": split,
+                            "status": "unavailable", "error": f"{type(exc).__name__}: {exc}",
+                        })
+                if cfg.stage in {"domain_adaptation", "pseudo_label"} and len(source_predictions) >= 2:
+                    paired_comparisons[f"{source}_{split}"] = paired_bootstrap_prediction_frames(
+                        source_predictions[0][1], source_predictions[1][1],
                     )
-                    external_metrics.append(metrics)
-                    predictions.to_parquet(EVAL_DIR / f"external_{source}_{split}.parquet", index=False)
-                    print(json.dumps(metrics, indent=2))
-                except Exception as exc:
-                    external_metrics.append({"source": source, "split": split, "status": "unavailable", "error": f"{type(exc).__name__}: {exc}"})
+                    print(json.dumps({
+                        f"paired_{source}_{split}_bootstrap": paired_comparisons[f"{source}_{split}"]
+                    }, indent=2))
             (EVAL_DIR / "external_metrics.json").write_text(json.dumps(external_metrics, indent=2), encoding="utf-8")
+            (EVAL_DIR / "paired_comparisons.json").write_text(
+                json.dumps(paired_comparisons, indent=2), encoding="utf-8",
+            )
         else:
             print("External-domain evaluation disabled. Enable it before a release decision.")
         """
@@ -2899,7 +3150,7 @@ PHASE2_CELLS = [
         if cfg.run_pseudo_labelling:
             if cfg.stage != "pseudo_label":
                 raise RuntimeError("Set stage='pseudo_label' before generating pseudo labels")
-            pseudo_df = pseudo_label_unlabeled(cfg.model_repo_id)
+            pseudo_df = pseudo_label_unlabeled(cfg.model_starting_point())
             if pseudo_df.empty:
                 raise RuntimeError("No unlabeled rows passed calibrated confidence filters")
             pseudo_file = EVAL_DIR / "pseudo_manifest.parquet"
@@ -3007,7 +3258,7 @@ PHASE2_CELLS = [
 
             # Dagbani Whisper ASR — Research Model
 
-            Fine-tuned from `{cfg.base_model_id}` using the audited Dagbani manifest revision
+            Fine-tuned from `{cfg.model_starting_point()}` using the audited Dagbani manifest revision
             `{run_manifest['manifest_sha256']}`. The model is intended for research on
             conversational Dagbani ASR.
 
